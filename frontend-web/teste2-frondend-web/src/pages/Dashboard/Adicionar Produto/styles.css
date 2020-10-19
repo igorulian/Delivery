@@ -1,0 +1,119 @@
+.conteudo-adicionar-produtos{
+    align-items: center;
+    display: flex;
+    height: 100%;
+    min-height: 100vh;
+    justify-content: center;
+    width: 100%;
+    padding-left: 250px;
+}
+
+.btnVoltarAoCardapio {
+  margin-bottom: 500px; 
+  margin-right: 10px;
+  border: none;
+  background: none;
+  background-color: none;
+  cursor: pointer;
+}
+
+.container-adicionar-produtos{
+    background-color: #fff;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 100px;
+    margin-top: 40px;
+    max-width: 500px;
+    max-height: 5000px;
+    width: 400px;
+    justify-content: center;
+    /* margin-top: 100px; */
+}
+
+.form {
+    margin-top: 1em;
+    margin-bottom: -2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+}
+
+.form-group-ingredientes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+}
+
+.form-group-ingredientes input {
+  margin-top: 10px;
+  min-width: 8em;
+  height: 37px;
+  padding: 0px 10px;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  background-color: #f3f3f3;
+  border: 0;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  transition: all 250ms ease-in-out;
+}
+
+.form-group label {
+  font-size: 20px;
+}
+
+.form-group input {
+  margin-top: 2px;
+  min-width: 18em;
+  height: 37px;
+  padding: 0px 10px;
+  font-size: 16px;
+  font-family: "Open Sans", sans-serif;
+  background-color: #f3f3f3;
+  border: 0;
+  border-radius: 4px;
+  margin-bottom: 25px;
+  transition: all 250ms ease-in-out;
+}
+
+.btn {
+  font-size: 21px;
+  padding: 6px 20px;
+  border: 0;
+  background-color: #e3552f;
+  color: #fff;
+  border-radius: 3px;
+  transition: all 250ms ease-in-out;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.btnAdicionarIngredienete{
+  border: none;
+  background: none;
+  background-color: none;
+  cursor: pointer;
+}
+
+.imgInput{
+  background-color: #fff;
+  border: 1px solid #DDD;
+  border-radius: 5px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin-bottom: 10px;
+}

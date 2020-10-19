@@ -1,0 +1,11 @@
+.container-adicionar-categoria{
+    background-color: #fff;
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 50px;
+    width: 400px;
+    justify-content: center;
+    /* margin-top: 250px; */
+    /* padding-top: 400px; */
+}

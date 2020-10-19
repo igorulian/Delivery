@@ -1,0 +1,102 @@
+.product-list{
+    min-width: 200px;
+    min-height: 100px;
+    /* margin: 20px auto 0; */
+    padding: 0 20px;
+    align-items: center;
+}
+
+.product-list article{
+    background-color: #fff;
+    border: 1px solid #DDD;
+    border-radius: 20px;
+    /* padding: 20px; */
+    /* padding-top: 10px; */
+    padding-bottom: 10px;
+    /* padding: 20px; */
+    margin-top: 15px;
+    min-width: 200px;
+    max-width: 235px;
+    /* max-height: 450px; */
+    /* position: relative; */
+}
+
+.product-list article img{
+    height: 50px;
+    width: 50px;
+}
+
+.categoria{
+    border: 1px solid #DDD;
+    margin-left: 50px;
+    margin-top: 50px;
+    text-align: center;
+    height: fit-content;
+
+}
+
+.categoria p{
+    color: #000;
+    font-size: 25px;
+}
+
+.product-list article p{
+    font-size: 16px;
+    color: #999;
+    margin-top: 1px;
+    line-height: 24px;
+}
+
+.product-list article p.custo{
+    color: #000;
+}
+
+.product-list article a:hover{
+    background: #da552f;
+    color: #fff;
+}
+
+.product-list button{
+    border: none;
+    background: none;
+    background-color: none;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+.conteudo button{
+    border: none;
+    background: none;
+    background-color: none;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.product-list link{
+    margin-top: 30px;
+}
+
+.btnAdicionarProduto{
+    padding-top: 20px;
+    padding-bottom: 5px;
+}
+
+.btnAdicionarCategoria{
+    padding-left: 60px;
+    padding-top: 80px;
+}
+
+.divBtnExcluirProduto{
+    max-height: 10px;
+    /* max-width: 10px; */
+    margin-left: 92%;
+    margin-top: -1.5%;
+    orientation: row;
+}
+
+.divBtnExcluirCategoria{
+    max-height: 10px;
+    max-width: 10px;
+    margin-left: 100%;
+
+}

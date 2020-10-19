@@ -1,0 +1,129 @@
+.base-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .headerRegister {
+    font-size: 24px;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  .headerLogin {
+    font-size: 24px;
+    margin-bottom: 40px;
+    font-family: "Open Sans", sans-serif;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    margin-top: -10px;
+
+    .imageLogin {
+      width: 15em;
+      padding-left: 50px;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+    .imageRegister {
+      // width: 10em;
+      // padding-left: 0px;
+      // margin-left: 100px;
+      // margin-top: 2px;
+      margin-bottom: -140px;
+      img {
+        width: 50%;
+        height: 50%;
+      }
+    }
+
+    .form {
+      margin-top: 2em;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .form2 {
+      margin-top: 0.5em;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+    
+    .form-group-register {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: fit-content;
+      padding-right: 8px;
+      padding-left: 8px;
+      label {
+        font-size: 16px;
+      }
+      input {
+        margin-top: 2px;
+        max-width: 12em;
+        min-width: 12em;
+        height: 37px;
+        padding: 0px 10px;
+        font-size: 16px;
+        font-family: "Open Sans", sans-serif;
+        background-color: #f3f3f3;
+        border: 0;
+        border-radius: 4px;
+        margin-bottom: 25px;
+        transition: all 250ms ease-in-out;
+      }
+    }
+
+    .form-group-login {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: fit-content;
+      label {
+        font-size: 20px;
+      }
+      input {
+        margin-top: 2px;
+        min-width: 18em;
+        height: 37px;
+        padding: 0px 10px;
+        font-size: 16px;
+        font-family: "Open Sans", sans-serif;
+        background-color: #f3f3f3;
+        border: 0;
+        border-radius: 4px;
+        margin-bottom: 25px;
+        transition: all 250ms ease-in-out;
+      }
+    }
+
+
+    .form.validade-error{
+      animation: nono 500ms;
+    }
+  }
+
+  .footer {
+    margin-top: 2em;
+  }
+}
+
+@keyframes nono{
+  0%{
+    transform: translateX(0);
+  }
+  35%{
+    transform: translateX(-15%);
+  }
+  70%{
+    transform: translateX(15%);
+  }
+  100%{
+    transform: translateX(0)
+  }
+}
