@@ -8,6 +8,7 @@ import {IconContext} from 'react-icons'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import burgerImg  from '../../../img/hamburguer.svg'
 import {Link} from 'react-router-dom'
+import ReactLoading from 'react-loading';
 
 export default class Cardapio extends Component{
 
@@ -16,9 +17,15 @@ export default class Cardapio extends Component{
         categories: []
     }
 
-    componentDidMount(){
-        this.loadCategories()
-        this.loadProducts()
+    constructor() {
+        super()
+        this.state = { isLoading: true }
+    }
+
+    async componentDidMount(){
+        await this.loadCategories()
+        await this.loadProducts()
+        this.setState({isLoading: false})
     }
 
     loadProducts = async () =>{
@@ -95,6 +102,19 @@ export default class Cardapio extends Component{
     }
 
     render(){
+
+        if(this.state.isLoading){
+            return (
+                <div className='page'>
+                <NavBar/>
+                    <div className="conteudo">
+                        <div className="loading">
+                            <ReactLoading type={'spin'} color={'#e3552f'} height={1000} width={100} />
+                        </div>
+                    </div>
+                </div>
+            )
+        }
 
         return (
             <div className='page'>

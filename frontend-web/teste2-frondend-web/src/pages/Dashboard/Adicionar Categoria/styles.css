@@ -3,9 +3,18 @@
     border: 1px solid #DDD;
     border-radius: 5px;
     padding: 20px;
-    margin-bottom: 50px;
+    margin-bottom: 140px;
     width: 400px;
     justify-content: center;
     /* margin-top: 250px; */
     /* padding-top: 400px; */
+}
+
+.btnVoltarAoCardapio2{
+    margin-bottom: 300px;
+    margin-right: 10px;
+    border: none;
+    background: none;
+    background-color: none;
+    cursor: pointer;
 }

@@ -3,6 +3,7 @@ import './styles.css'
 import NavBar from '../components/NavBar'
 import {IconContext} from 'react-icons'
 import * as IoIcons from 'react-icons/io'
+import * as AiIcons from 'react-icons/ai'
 import {Link} from 'react-router-dom'
 import api from '../../../services/api'
 
@@ -45,6 +46,13 @@ export default class AddCategoria extends Component{
             <div className="page">
                 <NavBar/>
                 <div className="conteudo-adicionar-produtos">
+                    
+                    <button onClick={() => this.seguirParaDashborad()} className="btnVoltarAoCardapio2">
+                        <IconContext.Provider value={{color: '#e3552f ', size: 30}} >
+                            <AiIcons.AiOutlineArrowLeft/>
+                        </IconContext.Provider>
+                    </button>
+
                     <div className="container-adicionar-categoria">
                         <div className="form">
                             <div className="form-group">

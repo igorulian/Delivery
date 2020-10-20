@@ -13,13 +13,13 @@ export const SideBarData = [
     {
         title: 'Pedidos',
         path: '/dashboard/pedidos',
-        icon: <IoIcons.IoIosPaper />,
+        icon: <FaIcons.FaPaperPlane />,
         cName: 'nav-text'
     },
     {
         title: 'Pedidos Finalizados',
         path: '/dashboard/pedidos-finalizados',
-        icon: <FaIcons.FaPaperPlane />,
+        icon: <IoIcons.IoIosPaper />,
         cName: 'nav-text'
     },
     {

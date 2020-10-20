@@ -64,14 +64,6 @@
     margin-bottom: 30px;
 }
 
-.conteudo button{
-    border: none;
-    background: none;
-    background-color: none;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
 .product-list link{
     margin-top: 30px;
 }
@@ -99,4 +91,8 @@
     max-width: 10px;
     margin-left: 100%;
 
+}
+
+.loading{
+    margin-top: 300px;
 }
