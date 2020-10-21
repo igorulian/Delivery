@@ -193,12 +193,9 @@ module.exports = {
                 category,
                 ingredient
             }
+            
+            // N TEM AINDA
 
-            // const store = await Store.findById(req.params.id).select('+products')
-            // store.products.id(pid).set(newProduct)
-            // store.save()
-
-            // return res.json(store.products)
             return res.json(newProduct)
 
         }catch{

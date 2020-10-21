@@ -1,14 +1,13 @@
 .product-list{
     min-width: 200px;
     min-height: 100px;
-    /* margin: 20px auto 0; */
     padding: 0 20px;
     align-items: center;
 }
 
 .product-list article{
     background-color: #fff;
-    border: 1px solid #DDD;
+    border: 2px solid #DDD;
     border-radius: 20px;
     /* padding: 20px; */
     /* padding-top: 10px; */
@@ -17,6 +16,7 @@
     margin-top: 15px;
     min-width: 200px;
     max-width: 235px;
+    /* box-shadow: 1px 1px #888888; */
     /* max-height: 450px; */
     /* position: relative; */
 }
@@ -74,8 +74,26 @@
 }
 
 .btnAdicionarCategoria{
-    padding-left: 60px;
-    padding-top: 80px;
+    padding: 0 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    align-items: center;
+    justify-content: center;
+    display: flex; 
+    border: 1px solid #DDD;
+    margin-left: 50px;
+    margin-top: 50px;
+    text-align: center;
+    height: fit-content;
+    cursor: pointer;
+}
+
+.btnAdicionarCategoria p{
+    font-size: 18px;
+    color: #000;
+    font-style: normal;
+    padding-left: 10px;
+    
 }
 
 .divBtnExcluirProduto{

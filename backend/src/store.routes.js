@@ -5,6 +5,7 @@ const routes = express.Router()
 
 const StoreAuthController = require('./controllers/storeAuthController')
 const StoreController = require('./controllers/storeController')
+const StoreControllerPedidos = require('./controllers/storeControllerPedidos')
 
 routes.post('/auth/register', StoreAuthController.register)
 routes.post('/auth/authenticate', StoreAuthController.authenticate)
@@ -22,6 +23,11 @@ routes.delete('/categories/delete/:id/:category', StoreController.removeCategory
 routes.get('/products/list/:id/', StoreController.listProducts)
 routes.post('/products/add/:id/', StoreController.addProduct)
 routes.delete('/products/remove/:id/:productid', StoreController.removeProduct)
+
+routes.post('/requests/add/:id', StoreControllerPedidos.addRequest)
+routes.get('/requests/list/:id', StoreControllerPedidos.listRequests)
+routes.delete('/requests/remove/:id/:requestid', StoreControllerPedidos.removeRequest)
+routes.post('/requests/update/:id/:requestid', StoreControllerPedidos.updateRequest)
 
 
 // routes.get('/products/update/:category/:id/:productid', StoreController.updateProduct)

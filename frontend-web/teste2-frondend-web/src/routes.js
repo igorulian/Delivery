@@ -5,11 +5,11 @@ import Dashboard from './pages/Dashboard'
 import Authenticate from './pages/Authenticate'
 import PageNotFound from './pages/PageNotFound'
 import Main from './pages/Main'
-import Pedidos from './pages/Dashboard/Pedidos'
+import Pedidos from './pages/Dashboard/Pedidos/Pedidos'
 import PedidosFinalizados from './pages/Dashboard/PedidosFinalizados'
 import Cardapio from './pages/Dashboard/Cardapio/Cardapio'
-import AddProduto from './pages/Dashboard/Adicionar Produto'
-import AddCategoria from './pages/Dashboard/Adicionar Categoria'
+import AddProduto from './pages/Dashboard/Cardapio/Adicionar Produto'
+import AddCategoria from './pages/Dashboard/Cardapio/Adicionar Categoria'
 
 export default function MainRoutes(){
     return(

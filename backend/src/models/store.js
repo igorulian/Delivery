@@ -50,11 +50,11 @@ const productSchema = new mongoose.Schema({
     },
     category:{
         type: String,
-        required: true
+        required: false
     },
     ingredient:{
         type: [ingredientSchema],
-        required: true
+        required: false
     } 
 })
 
@@ -75,7 +75,7 @@ const requestSchema = new mongoose.Schema({
         required: true,
     },
     location:{
-        type: String,
+        type: addressSchema,
         required: true
     },
     progress:{
@@ -87,6 +87,10 @@ const requestSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    createdAt:{
+        type: Date,
+        default: Date.now
     }
 })
 
@@ -102,11 +106,6 @@ const finishedRequestSchema = new mongoose.Schema({
     location:{
         type: String,
         required: true
-    },
-    progress:{
-        type: Number,
-        required: false,
-        default: 0
     },
     cost:{
         type: Number,
@@ -190,6 +189,7 @@ storeSchema.pre('save', async function (next) {
 // mongoose.model('Ingredient', productSchema)
 // mongoose.model('Product', productSchema)
 mongoose.model('Store', storeSchema)
+mongoose.model('Request', requestSchema)
 // mongoose.model('StoreCategory', categoriesSchema)
 // mongoose.model('Address', addressSchema)categoriesSchema
 // mongoose.model('Request', requestSchema)

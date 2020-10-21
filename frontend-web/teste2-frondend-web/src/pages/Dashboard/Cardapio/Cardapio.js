@@ -185,13 +185,14 @@ export default class Cardapio extends Component{
                                 </div>
                             ))}
                         
-                        <div className="btnAdicionarCategoria">
-                            <Link to={'/dashboard/adicionar-categoria'}>
-                                <IconContext.Provider value={{color: '#008000 ', size: 40}}>
+                            <Link to={'/dashboard/adicionar-categoria'} className="btnAdicionarCategoria" style={{ textDecoration: 'none' }}>
+                                <IconContext.Provider value={{color: '#008000 ', size: 30}}>
                                     <IoIcons.IoMdAddCircle/>
                                 </IconContext.Provider>
+                                <div>
+                                <p> Adicionar categoria</p>
+                                </div>
                             </Link>
-                        </div>
                 </div>
             </div>
         )
