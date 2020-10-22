@@ -4,6 +4,7 @@ import api from '../../../services/api'
 import NavBar from '../components/NavBar'
 import './styles.css'
 import * as IoIcons from 'react-icons/io'
+import * as AiIcons from 'react-icons/ai'
 import {IconContext} from 'react-icons'
 import CircularProgress from '@material-ui/core/CircularProgress';
 import burgerImg  from '../../../img/hamburguer.svg'
@@ -148,7 +149,7 @@ export default class Cardapio extends Component{
 
                                                 <div className="divBtnExcluirProduto">  
                                                     <button onClick={ () => this.excluirProduto(product._id) }>
-                                                        <IconContext.Provider value={{color: '#ff0000', size: 20}}>
+                                                        <IconContext.Provider value={{color: '#ff0000', size: 25}}>
                                                             <IoIcons.IoMdCloseCircle/>
                                                         </IconContext.Provider>
                                                     </button>
@@ -186,8 +187,8 @@ export default class Cardapio extends Component{
                             ))}
                         
                             <Link to={'/dashboard/adicionar-categoria'} className="btnAdicionarCategoria" style={{ textDecoration: 'none' }}>
-                                <IconContext.Provider value={{color: '#008000 ', size: 30}}>
-                                    <IoIcons.IoMdAddCircle/>
+                                <IconContext.Provider value={{color: '#008000 ', size: 25}}>
+                                    <AiIcons.AiOutlinePlus/>
                                 </IconContext.Provider>
                                 <div>
                                 <p> Adicionar categoria</p>

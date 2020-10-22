@@ -19,6 +19,7 @@
     /* box-shadow: 1px 1px #888888; */
     /* max-height: 450px; */
     /* position: relative; */
+    background-color: #f9f9f9;
 }
 
 .product-list article img{
@@ -32,6 +33,7 @@
     margin-top: 50px;
     text-align: center;
     height: fit-content;
+    background-color: #fff;
 
 }
 
@@ -86,6 +88,11 @@
     text-align: center;
     height: fit-content;
     cursor: pointer;
+    background-color: #fafafa;
+}
+
+.btnAdicionarCategoria:hover{
+    background-color: #eeeeee;
 }
 
 .btnAdicionarCategoria p{
@@ -100,7 +107,7 @@
     max-height: 10px;
     /* max-width: 10px; */
     margin-left: 92%;
-    margin-top: -1.5%;
+    margin-top: -2%;
     orientation: row;
 }
 

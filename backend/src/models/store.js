@@ -70,6 +70,10 @@ const requestSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    clientID: {
+        type: String,
+        required:true
+    },
     products:{
         type: [productSchema],
         required: true,
@@ -77,6 +81,10 @@ const requestSchema = new mongoose.Schema({
     location:{
         type: addressSchema,
         required: true
+    },
+    obs:{
+        type: String,
+        required: false
     },
     progress:{
         type: Number,

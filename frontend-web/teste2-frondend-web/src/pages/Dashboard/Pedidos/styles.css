@@ -1,8 +1,9 @@
 /* @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Staatliches&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 
 .container-pedido{
-    background-color: #fff;
+    background-color: #f9f9f9;
     border: 1px solid #DDD;
     border-radius: 5px;
     /* padding: 5px; */
@@ -10,8 +11,32 @@
     margin-left: 40px;
     width: fit-content;
     height: fit-content;
+    min-width: 270px;
     justify-content: center;
+    /* padding-bottom: 20px; */
+    
+    /* background: border-box radial-gradient(#3a8334 0, #cf4a4a 4px, #f9f9f9 4px), padding-box #f9f9f9;
+    background-clip: padding-box #f9f9f9;
+    background-size: 12px 8px;
+    background-position: 6px 0;
+    border-bottom: 6px solid transparent;
+    position: relative; */
+    /* box-shadow: 2px 2px 15px 0px #AB9B0D; */
+
+    /* top: -5px;
+    background: radial-gradient(circle, transparent, transparent 50%, #ff0000 50%, #ff0000 100% ) -7px -8px / 16px 16px repeat-x; */
+/* 
+    bottom: -5px;
+    background: radial-gradient(circle, transparent, transparent 50%, #ff0000 50%, #ff0000 100% ) -7px -2px / 16px 16px repeat-x; */
+
+    /* background: border-box radial-gradient(#ff0000 0, #ff0000 4px, #3a8334 4px), padding-box #3a8334;
+    background-clip: padding-box #3a8334;
+    background-size: 12px 8px;
+    background-position: 6px 0;
+    border-bottom: 6px solid transparent; */
+    
 }
+
 
 .container-conteudo-pedido{
     display: flex;
@@ -22,6 +47,7 @@
 
 .conteudo-pedido-produtos{
     margin-top: 5px;
+    min-width: 100px;
 }
 
 .conteudo-pedido-produtos p{
@@ -31,7 +57,7 @@
 .conteudo-pedido-endereco{
     margin-top: 3px;
     margin-left: 20px;
-    margin-right: 10px;
+    margin-right: 5px;
     font-size: 16px;
     color: #999;
 }
@@ -53,7 +79,7 @@
 }
 
 .conteudo-pedido-preco{
-    margin-top: 10px;
+    margin-top: 5px;
     width: 100%;
     height: 100%;
     min-height: 20px;
@@ -65,51 +91,59 @@
     font-size: 18px;
 }
 
-.conteudo-pedido-botoes button.em-preparo{
-    font-size: 28px;
-    padding: 6px 20px;
+.conteudo-pedido-botoes button{
+    font-size: 23px;
+    /* padding: 6px 20px; */
     border: 0;
-    background-color: #4cac43;
     color: #fff;
-
-    /* background-color: #fff;
-    color: #379b2e;
-    border: 1px solid #379b2e; */
-
     min-height: 50px;
-    width: 80%;
+    width: 100%;
     transition: all 250ms ease-in-out;
     margin-top: 5px;
     cursor: pointer;
     float: left;
+    font-family: 'Staatliches', cursive;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+}
+
+.conteudo-pedido-obs{
+    margin-left: 5px;
+    margin-top: 10px;
+    color: rgba(80, 80, 80, 0.6);
+}
+
+.conteudo-pedido-botoes button.em-preparo{
+    width: 80%;
+    background-color: #4cac43;
 }
 .conteudo-pedido-botoes button.em-preparo:hover{
-    background-color: rgb(36, 122, 28);
-    /* background-color: #2a7423;
-    color: #fff; */
+    background-color: #3a8334;
 }
 
 .conteudo-pedido-botoes button.cancelar{
-    font-size: 21px;
-    padding: 6px 20px;
-
-    border: 0;
     background-color: #cf4a4a;
-    color: #fff;   
-    
-    /* background-color: #fff;
-    color: #df1e1e;
-    border: 1px solid #df1e1e; */
-
     min-height: 50px;
     width: 20%;
-    transition: all 250ms ease-in-out;
-    margin-top: 5px;
-    cursor: pointer;
-    float: right;
-    justify-content: center;
-    align-items: center;
 }
+.conteudo-pedido-botoes button.cancelar div{
+    margin-top: 5px;
+}
+
 .conteudo-pedido-botoes button.cancelar:hover{
     background-color: rgb(192, 28, 28);
+}
+
+.conteudo-pedido-botoes button.saiu-para-entrega{
+    background-color: #eebd1c;
+}
+.conteudo-pedido-botoes button.saiu-para-entrega:hover{
+    background-color: #daad19;
+}
+
+.conteudo-pedido-botoes button.entregue{
+    background-color: #4cac43;
+}
+.conteudo-pedido-botoes button.entregue:hover{
+    background-color: #3a8334;
 }

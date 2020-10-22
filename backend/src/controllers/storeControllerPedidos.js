@@ -20,6 +20,8 @@ module.exports = {
                     }
                 })
 
+                // Por enquanto o socket vai ser enviado por aqui, mas depos é bom fazer uma rota só para os usuarios
+
             return res.json(newRequest)
 
         }catch{
