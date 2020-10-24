@@ -52,65 +52,123 @@ export default class Pedidos extends Component{
         }
     }
 
-    atualizarProgresso = () => {
+    atualizarProgresso = async(request) => {
+        try{
+            const id = localStorage.getItem('id')
+            const token = localStorage.getItem('token')
+
+            if(request.progress >= 2){
+                // /store/finishedrequests/add/5f88f7a7fc2ae628408762b8/
+
+                await api.post(`/store/finishedrequests/add/${id}`,request,{
+                    headers: {
+                    'Authorization': `Bearer ${token}` 
+                    }
+                })
+
+                this.loadRequests()
+
+                alert("Pedido finalizado!")
+                return
+            }
+            
+            const newRequest = request
+            newRequest.progress = newRequest.progress + 1
+            
+            await api.post(`/store/requests/update/${id}/${request._id}`,newRequest,{
+                headers: {
+                'Authorization': `Bearer ${token}` 
+                }
+            })
+
+            // enviar socket para usuario
+
+            this.loadRequests()
+
+        }catch{
+            alert("Erro ao atualizar progresso do pedido!")
+            console.log("Erro ao atualizar progresso do pedido!")
+        }
 
     }
 
     // usuario
-    rejeitarPedido = async () =>{
-        const socket = await openSocket('http://localhost:3001')
+    efetuarPedido = async () =>{
+        try{
+            const socket = await openSocket('http://localhost:3001')
 
-        const id = localStorage.getItem('id')
-        const token = localStorage.getItem('token')
+            const id = localStorage.getItem('id')
+            const token = localStorage.getItem('token')
 
-        const newRequest = {
-            clientName: "Igao nóia",
-            clientID: "",
-            products: [
+            const newRequest = {
+                clientName: "Igao nóia",
+                clientID: "",
+                products: [
+                    
+                    {
+                        name: "X Tudo",
+                        cost: 23
+                    },
+                    {
+                        name: "X Salda",
+                        cost: 23
+                    },
+                    {
+                        name: "X Misto",
+                        cost: 23
+                    },
+                    {
+                        name: "Misto",
+                        cost: 23
+                    }
+                    
+                ],
                 
-                {
-                    name: "X Tudo",
-                    cost: 23
+                location: {
+                    rua: "Albino ",
+                    numero: 32,
+                    cep: "14955000",
+                    bairro: "Centro"
                 },
-                {
-                    name: "X Salda",
-                    cost: 23
-                },
-                {
-                    name: "X Misto",
-                    cost: 23
-                },
-                {
-                    name: "Misto",
-                    cost: 23
-                }
+                obs: "Tirar o picles do X Salada",
                 
-            ],
-            
-            location: {
-                rua: "Albino ",
-                numero: 32,
-                cep: "14955000",
-                bairro: "Centro"
-            },
-            obs: "Tirar o picles do X Salada",
-            
-            progress: 1,
-            cost: 23
-        }
-
-        const response = await api.post(`/store/requests/add/${id}`,newRequest,{
-            headers: {
-            'Authorization': `Bearer ${token}` 
+                progress: 0,
+                cost: 23
             }
-        })
 
-        const request = {
-            storeid: id,
-            request: true
+            const response = await api.post(`/store/requests/add/${id}`,newRequest,{
+                headers: {
+                'Authorization': `Bearer ${token}` 
+                }
+            })
+
+            const request = {
+                storeid: id,
+                request: true
+            }
+
+            socket.emit('request', request)
+    }catch{
+        alert("Erro ao efetuar o pedido!")
+    }
+    }
+
+    rejeitarPedido = async(reqid) =>{
+        if(!window.confirm("Deseja rejeitar o pedido?")) return
+        try{
+            const id = localStorage.getItem('id')
+            const token = localStorage.getItem('token')
+            await api.delete(`/store/requests/remove/${id}/${reqid}`,{
+                headers: {
+                'Authorization': `Bearer ${token}` 
+                }
+            })
+            this.loadRequests()
+        }catch{
+            alert("Erro ao remover o pedido")
+            console.log("Erro ao remover o pedido")
         }
 
-        socket.emit('request', request)
     }
 
 
@@ -185,17 +243,17 @@ export default class Pedidos extends Component{
                             <div className="conteudo-pedido-botoes">
                                 {request.progress === 0 &&
                                 <>
-                                    <button className="em-preparo" onClick={ () => {this.atualizarProgresso()}}> Em preparo</button>
-                                    <button className="cancelar" onClick={() => {this.rejeitarPedido()}}> <div> <AiContext.AiOutlineClose/>  </div> </button> 
+                                    <button className="em-preparo" onClick={ () => {this.atualizarProgresso(request)}}> Em preparo</button>
+                                    <button className="cancelar" onClick={() => {this.rejeitarPedido(request._id)}}> <div> <AiContext.AiOutlineClose/>  </div> </button> 
                                 </>
                                 }
 
                                 {request.progress === 1 &&
-                                    <button className="saiu-para-entrega" onClick={ () => {console.log("Saiu para entrega")}}> Saiu para entrega </button> 
+                                    <button className="saiu-para-entrega" onClick={ () => {this.atualizarProgresso(request)}}> Saiu para entrega </button> 
                                 }
 
-                                {request.progress === 2 &&
-                                    <button className="entregue" onClick={() => {this.atualizarProgresso()}}> Entregue! </button> 
+                                {request.progress >= 2 &&
+                                    <button className="entregue" onClick={() => {this.atualizarProgresso(request)}}> Entregue! </button> 
                                 }
 
                                 

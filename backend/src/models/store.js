@@ -68,19 +68,23 @@ const categoriesSchema = new mongoose.Schema({
 const requestSchema = new mongoose.Schema({
     clientName:{
         type: String,
-        required: true
+        required: true,
+        default: ""
     },
     clientID: {
         type: String,
-        required:true
+        required:true,
+        default: ""
     },
     products:{
         type: [productSchema],
         required: true,
+        default: []
     },
     location:{
         type: addressSchema,
-        required: true
+        required: true,
+        default: {}
     },
     obs:{
         type: String,
@@ -107,6 +111,11 @@ const finishedRequestSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    clientID: {
+        type: String,
+        required:true,
+        default: ""
+    },
     products:{
         type: [productSchema],
         required: true,
@@ -114,6 +123,10 @@ const finishedRequestSchema = new mongoose.Schema({
     location:{
         type: String,
         required: true
+    },
+    obs:{
+        type: String,
+        required: false
     },
     cost:{
         type: Number,

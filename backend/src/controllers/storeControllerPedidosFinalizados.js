@@ -7,35 +7,46 @@ module.exports = {
 
 //Categoria
 
-    async addRequest(req,res){
+    async addFinishedRequest(req,res){
         try{
-            const newRequest = req.body
+            if(!(req.storeId === req.params.id))
+            return res.status(400).send({error: 'Invalid store'})
+
+            const newFinishedRequest = req.body
+
+            // remover request 
+            
+            await Store.updateOne({
+                'requests._id': req.body._id
+              }, {
+                $pull: { requests: { _id: req.body._id } }
+            })
+
+            // adicionar nos finalizados
 
             await Store.findOneAndUpdate(
                 { _id: req.params.id }, 
-                {$addToSet: { requests: newRequest}},
+                {$addToSet: { finishedrequests: newFinishedRequest}},
                 function (error, success) {
                     if (error) {
                         console.log(error);
                     }
-                })
+            })
 
-                // Por enquanto o socket vai ser enviado por aqui, mas depos é bom fazer uma rota só para os usuarios
-
-            return res.json(newRequest)
+            return res.json(newFinishedRequest)
 
         }catch{
             return res.status(400).send({error: 'Error in create request'})
         }
     },
-    async listRequests(req,res){
+    async listFinishedRequests(req,res){
         try{
             if(!(req.storeId === req.params.id))
             return res.status(400).send({error: 'Invalid store'})
 
-            const store = await Store.findById(req.params.id).select('+requests')
+            const store = await Store.findById(req.params.id).select('+finishedrequests')
 
-            return res.json(store.requests)
+            return res.json(store.finishedrequests)
 
 
         }catch{
@@ -43,7 +54,7 @@ module.exports = {
         }
     },
 
-    async removeRequest(req,res){
+    async removeFinishedRequest(req,res){
         try{
             if(!(req.storeId === req.params.id))
             return res.status(400).send({error: 'Invalid store'})
@@ -63,7 +74,7 @@ module.exports = {
         }
     },
 
-    async updateRequest(req,res){
+    async updateFinishedRequest(req,res){
         try{
             if(!(req.storeId === req.params.id))
             return res.status(400).send({error: 'Invalid store'})

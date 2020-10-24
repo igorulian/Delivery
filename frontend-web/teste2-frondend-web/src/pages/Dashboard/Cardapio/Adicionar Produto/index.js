@@ -127,12 +127,14 @@ export default class AddProduto extends Component{
             <div className="page">
                 <NavBar/>
                 <div className="conteudo-adicionar-produtos">
-
-                    <button onClick={() => this.seguirParaDashborad()} className="btnVoltarAoCardapio">
-                        <IconContext.Provider value={{color: '#e3552f ', size: 30}} >
-                            <AiIcons.AiOutlineArrowLeft/>
-                        </IconContext.Provider>
-                    </button>
+                    
+                    <Link to={'/dashboard/cardapio'}>
+                        <button className="btnVoltarAoCardapio">
+                            <IconContext.Provider value={{color: '#e3552f ', size: 30}} >
+                                <AiIcons.AiOutlineArrowLeft/>
+                            </IconContext.Provider>
+                        </button>
+                    </Link>
 
                     <div className="container-adicionar-produtos">
                         <div className="form">

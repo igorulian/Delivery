@@ -1,0 +1,76 @@
+.container-mes{
+    background-color: #f9f9f9;
+    border: 1px solid #DDD;
+    border-radius: 10px;
+    /* padding: 5px; */
+    margin-top: 40px;
+    margin-left: 40px;
+    width: fit-content;
+    height: fit-content;
+    min-width: 240px;
+    min-height: 240px;
+    justify-content: center;
+    text-align: center;
+    position: relative;
+}
+
+.container-mes-header{
+    margin-top: 10px;
+    font-size: 20px;
+}
+
+.container-mes-bottom{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.container-mes-bottom button{
+    font-size: 23px;
+    /* padding: 6px 20px; */
+    border: 0;
+    color: #fff;
+    min-height: 50px;
+    width: 100%;
+    transition: all 250ms ease-in-out;
+    float: left;
+    font-family: 'Staatliches', cursive;
+    letter-spacing: 2px;
+    word-spacing: 4px;
+    outline:0px;
+}
+/* e3552f */
+.btnVizualizarPedidos{
+    background-color: #a1c5f5;
+    cursor: pointer;
+}
+.btnVizualizarPedidos:hover{
+    background-color: #78acf1;
+}
+
+.btnVizualizarPedidosOff{
+    background-color: #e2e2e2;
+}
+
+.btnGerarBoletoOn{
+    background-color: #e3552f;
+    border-radius: 0px 0px 10px 10px;
+    cursor: pointer;
+}
+
+.btnGerarBoletoOn:hover{
+    background-color: #c24a29;
+}
+
+.btnGerarBoletoOff{
+    background-color: #e2e2e2;
+    border-radius: 0px 0px 10px 10px;
+}
+.btnGerarBoletoOff:hover{
+    background-color: #e2e2e2;
+    border-radius: 0px 0px 10px 10px;
+}
+
+/* .container-mes-bottom button:hover{
+    background-color: #c24a29;
+} */

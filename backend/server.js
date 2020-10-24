@@ -32,5 +32,5 @@ io.on('connection', socket => {
     })
 })
 
-server.listen(3001)
-app.listen(3002)
+server.listen(3001) // socket
+app.listen(3002) // api

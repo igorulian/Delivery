@@ -34,6 +34,7 @@
     text-align: center;
     height: fit-content;
     background-color: #fff;
+    border-radius: 20px;
 
 }
 
@@ -64,6 +65,7 @@
     background-color: none;
     cursor: pointer;
     margin-bottom: 30px;
+    outline:0px;
 }
 
 .product-list link{
