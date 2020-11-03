@@ -5,6 +5,7 @@ import {Link} from 'react-router-dom'
 import { SideBarData} from './SideBarData'
 import './NavBar.css'
 import {IconContext} from 'react-icons'
+import loginImg from "../../../img/entrega-de-alimentos.svg";
 
 function NavBar(){
 
@@ -29,6 +30,14 @@ function NavBar(){
                            <AiIcons.AiOutlineClose /> 
                         </Link>
                     </li>
+
+                    <div className="navmenu-header">
+                        <div>
+                            <img src={loginImg}/>
+                        </div>
+                        <h3>{localStorage.getItem('name')}</h3>
+                        <p> Fechado</p>
+                    </div>
 
                     {SideBarData.map((item, index) => {
                         return (

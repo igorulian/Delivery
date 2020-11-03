@@ -132,6 +132,15 @@ const finishedRequestSchema = new mongoose.Schema({
         type: Number,
         required: true,
         default: 0
+    },
+    createdAt:{
+        type: Date,
+        required: true
+    },
+    mes:{
+        type: Number,
+        default: 3,
+        required: true
     }
 })
 
@@ -139,6 +148,16 @@ const storeSchema = new mongoose.Schema({
     name:{
         type: String,
         required: true
+    },
+    isOpen: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    isValid: {
+        type: Boolean,
+        required: false,
+        default: false
     },
     image:{
         type:String,
@@ -199,6 +218,7 @@ const storeSchema = new mongoose.Schema({
 })
 
 storeSchema.plugin(mongoosePaginate)
+finishedRequestSchema.plugin(mongoosePaginate)
 
 storeSchema.pre('save', async function (next) {
     const hash = await bcrypt.hash(this.password, 10)
@@ -214,4 +234,4 @@ mongoose.model('Request', requestSchema)
 // mongoose.model('StoreCategory', categoriesSchema)
 // mongoose.model('Address', addressSchema)categoriesSchema
 // mongoose.model('Request', requestSchema)
-// mongoose.model('FinishedRequest', finishedRequestSchema)
+mongoose.model('FinishedRequest', finishedRequestSchema)

@@ -26,6 +26,7 @@ export class Login extends React.Component {
       await api.post('/store/auth/authenticate', auth)
       .then(res => this.seguirParaDashborad(res))
       .catch(err => {
+        this.limparLocalStorage()
         alert(err.response.data.error)
         console.log(err.response.data.error)
       });
@@ -39,9 +40,16 @@ export class Login extends React.Component {
     this.setState({token: res.data.token,storeid: res.data.store._id})
     localStorage.setItem('token', res.data.token)
     localStorage.setItem('id',res.data.store._id)
+    localStorage.setItem('name', res.data.store.name)
     console.log(this.state.token)
     console.log(this.state.storeid)
     window.location.href = '/dashboard'
+  }
+
+  limparLocalStorage = () => {
+    localStorage.setItem('token', '')
+    localStorage.setItem('id','')
+    localStorage.setItem('name', '')
   }
 
   render() {

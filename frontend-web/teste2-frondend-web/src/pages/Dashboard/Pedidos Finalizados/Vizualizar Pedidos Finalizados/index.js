@@ -70,9 +70,11 @@ export default class VizualizarPedidosFinalizados extends Component {
         try{
             const id = localStorage.getItem('id')
             const token = localStorage.getItem('token')
-            const response = await api.get(`/store/finishedrequests/list/${id}`,{
+            const mes = window.location.href.replace('http://localhost:3000/dashboard/pedidos-finalizados/vizualizar-pedidos?mes=', '')
+
+            const response = await api.get(`/store/finishedrequests/list/${id}/${mes}`,{
                 headers: {
-                'Authorization': `Bearer ${token}` 
+                'Authorization': `Bearer ${token}`
                 }
             })
             this.setState({finishedRequests: response.data})
@@ -87,10 +89,29 @@ export default class VizualizarPedidosFinalizados extends Component {
         window.location.href = '/dashboard/pedidos-finalizados'
     }
 
+    tratarData = (data) => {
+        let d = '' + String(data).split('T')[0]
+
+        let dia = d.split('-')[2]
+        let mes = d.split('-')[1]
+        let ano = d.split('-')[0]
+
+        d = dia + '/' + mes + '/' + ano
+        
+        return d
+    }
+    
+    tratarHora = (data) => {
+        const h = String(data).split('T')[1]
+        return h
+    }
+
     render() {
         let t = 0
+        let total = 0
 
         return (
+            <>
             <div className='page'>
                 <NavBar/>
                 <div className="header">
@@ -105,7 +126,12 @@ export default class VizualizarPedidosFinalizados extends Component {
                 </div>
                 <div className='conteudo-pedidos'>
                     {this.state.finishedRequests.map(request =>{
+
+                        const mes = String(this.tratarData(request.createdAt)).split('/')[1]
+                        if(!(mes || mes === this.state.mesDaPagina)) return
+                        
                         t++
+                        {total = total + request.cost}
                         return(
                         <>
                         <div key={request._id} className="container-pedido">
@@ -125,7 +151,6 @@ export default class VizualizarPedidosFinalizados extends Component {
                                     </div>
                                 </div>
                                 <div className="conteudo-pedido-endereco">
-                                    {/* <p> {request.clientName} {this.state.requestsCount} </p>  */}
                                     <div>
     
                                         <>
@@ -143,6 +168,10 @@ export default class VizualizarPedidosFinalizados extends Component {
                                 <p> <b>OBS:</b> {request.obs} </p>
                             </div>
                             }
+                            <div className="conteudo-pedido-obs">
+                                <p> <b>Data:</b> {this.tratarData(request.createdAt)} </p>
+                                {/* <p> <b>Hora:</b> {this.tratarHora(request.createdAt)} </p> */}
+                            </div>
 
                             <div className="conteudo-pedido-preco">
                                 <p>Total: R${request.cost}</p>
@@ -155,7 +184,12 @@ export default class VizualizarPedidosFinalizados extends Component {
                     }
                     )}
                 </div> 
+                <div className="bottom-resumo-dos-pedidos">
+                    <h1>Total: R${total}</h1>
+                    <h3>5% de {total} = R${(total * 5 ) / 100}</h3>
+                </div>
             </div>
+            </>
         )
     }
 

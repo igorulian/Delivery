@@ -27,5 +27,11 @@ export const SideBarData = [
         path: '/dashboard/cardapio',
         icon: <AiIcons.AiOutlineMenu />,
         cName: 'nav-text'
+    },
+    {
+        title: 'Configurações',
+        path: '/dashboard/cardapio',
+        icon: <IoIcons.IoMdSettings />,
+        cName: 'nav-text'
     }
 ]

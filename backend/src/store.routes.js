@@ -31,7 +31,7 @@ routes.delete('/requests/remove/:id/:requestid', StoreControllerPedidos.removeRe
 routes.post('/requests/update/:id/:requestid', StoreControllerPedidos.updateRequest)
 
 routes.post('/finishedrequests/add/:id', StoreControllerPedidosFinalizados.addFinishedRequest)
-routes.get('/finishedrequests/list/:id', StoreControllerPedidosFinalizados.listFinishedRequests)
+routes.get('/finishedrequests/list/:id/:mes', StoreControllerPedidosFinalizados.listFinishedRequests)
 
 
 // routes.get('/products/update/:category/:id/:productid', StoreController.updateProduct)

@@ -2,10 +2,25 @@ const mongoose = require('mongoose')
 
 const Store = mongoose.model('Store')
 const Request = mongoose.model('Request')
+const FinishedRequest = mongoose.model('FinishedRequest')
+
+tratarData = (data) => {
+    let d = '' + String(data).split(' ')[0]
+
+    let dia = d.split('-')[2]
+    let mes = d.split('-')[1]
+    let ano = d.split('-')[0]
+
+    d = dia + '/' + mes + '/' + ano
+    
+    return d
+}
 
 module.exports = {
 
 //Categoria
+
+
 
     async addFinishedRequest(req,res){
         try{
@@ -13,6 +28,10 @@ module.exports = {
             return res.status(400).send({error: 'Invalid store'})
 
             const newFinishedRequest = req.body
+            
+            newFinishedRequest.mes = tratarData(req.body.createdAt).split('/')[1]
+
+            // console.log('O MES: ' + newFinishedRequest.mes)
 
             // remover request 
             
@@ -44,10 +63,14 @@ module.exports = {
             if(!(req.storeId === req.params.id))
             return res.status(400).send({error: 'Invalid store'})
 
+            const mes = req.params.mes
+
             const store = await Store.findById(req.params.id).select('+finishedrequests')
+ 
+            const filtrado = store.finishedrequests.filter( obj => (obj.mes == mes));  // DEU CERTO
 
-            return res.json(store.finishedrequests)
 
+            return res.json(filtrado)
 
         }catch{
             return res.status(400).send({error: 'Error in list requests'})

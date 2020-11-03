@@ -91,6 +91,7 @@
     height: fit-content;
     cursor: pointer;
     background-color: #fafafa;
+    border-radius: 10px;
 }
 
 .btnAdicionarCategoria:hover{

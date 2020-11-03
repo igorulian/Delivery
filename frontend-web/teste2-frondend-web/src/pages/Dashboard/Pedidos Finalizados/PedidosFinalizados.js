@@ -88,25 +88,26 @@ export default class PedidosFinalizados extends Component{
                                 </div>
 
                                 <div className="container-mes-bottom">
-                                    {console.log(new Date().getMonth())}
-                                    {mes.number <= new Date().getMonth() - 1 &&
+                                    {console.log('date now: ' + new Date().getMonth())}
+                                    {console.log('mes.number: ' + mes.number)}
+                                    {mes.number <= new Date().getMonth()+1 &&
                                     <Link to={`/dashboard/pedidos-finalizados/vizualizar-pedidos?mes=${mes.number}`}>
                                         <button className="btnVizualizarPedidos">
                                             Vizualizar Pedidos
                                         </button>
                                     </Link>
                                     }
-                                    {mes.number > new Date().getMonth() - 1 &&
+                                    {mes.number > new Date().getMonth()+1  &&
                                     <button className="btnVizualizarPedidosOff">
                                         Vizualizar Pedidos
                                     </button>
                                     }
-                                    {mes.number === new Date().getMonth() - 1 &&
+                                    {mes.number === new Date().getMonth() &&
                                     <button className="btnGerarBoletoOn">
                                         Gerar boleto
                                     </button>
                                     }
-                                    {mes.number !== new Date().getMonth() - 1 &&
+                                    {mes.number !== new Date().getMonth() &&
                                     <button className="btnGerarBoletoOff">
                                         Gerar boleto
                                     </button>

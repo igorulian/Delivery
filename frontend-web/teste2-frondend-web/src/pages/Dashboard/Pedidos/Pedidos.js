@@ -6,6 +6,7 @@ import './styles.css'
 import openSocket from 'socket.io-client'; 
 import * as AiContext from 'react-icons/ai'
 import {IconContext} from 'react-icons'
+import not from '../../../audio/not.mp3'
 
 export default class Pedidos extends Component{
 
@@ -25,13 +26,19 @@ export default class Pedidos extends Component{
     }
 
     conectarEOuvirSocker = async () =>{
-        const id = localStorage.getItem('id')
-        const socket = openSocket('http://localhost:3001')
-        socket.on(`${id}`, async data => {
-            console.log(data)
-            await this.loadRequests()
-            alert("NOVO PEDIDO!")
-        })
+        try{
+            const id = localStorage.getItem('id')
+            const socket = openSocket('http://localhost:3001')
+            const audio = new Audio(not)
+            socket.on(`${id}`, async data => {
+                console.log(data)
+                await this.loadRequests()
+                audio.play()
+                alert("NOVO PEDIDO!")
+            })
+        }catch{
+            alert("Erro ao conectar socket")
+        }
     }
 
 
@@ -265,6 +272,8 @@ export default class Pedidos extends Component{
 
                     }
                     )}
+                    
+                <button onClick={() => {this.efetuarPedido()}}> Efetuar Pedido </button>
                 </div>
             </div>
         )
