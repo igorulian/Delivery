@@ -28,6 +28,8 @@ module.exports = {
             return res.status(400).send({error: 'Invalid store'})
 
             const newFinishedRequest = req.body
+
+            // console.log(newFinishedRequest)
             
             newFinishedRequest.mes = tratarData(req.body.createdAt).split('/')[1]
 

@@ -1,0 +1,45 @@
+.container-config{
+    background-color: #fff;
+    border: 2px solid #DDD;
+    border-radius: 20px;
+    width: fit-content;
+    height: fit-content;
+    padding: 15px;
+    text-align: center;
+    align-content: center;
+}
+
+.linha{
+    display: inline;
+}
+
+.btnSalvar{
+    font-size: 25px;
+    padding: 6px 20px;
+    border: 0;
+    background-color: #e3552f;
+    color: #fff;
+    border-radius: 3px;
+    transition: all 250ms ease-in-out;
+    margin-top: 30px;
+    cursor: pointer;
+}
+
+.btnSalvar:hover{
+    background-color: #be4828;
+}
+
+/* .form {
+    margin-top: 1em;
+    margin-bottom: -2em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: fit-content;
+} */

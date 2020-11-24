@@ -29,8 +29,14 @@ export const SideBarData = [
         cName: 'nav-text'
     },
     {
+        title: 'Cupons',
+        path: '/dashboard/configuracao',
+        icon: <IoIcons.IoMdToday />,
+        cName: 'nav-text'
+    },
+    {
         title: 'Configurações',
-        path: '/dashboard/cardapio',
+        path: '/dashboard/configuracao',
         icon: <IoIcons.IoMdSettings />,
         cName: 'nav-text'
     }

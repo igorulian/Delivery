@@ -35,7 +35,11 @@ export class Register extends React.Component {
     .catch(err => {
       localStorage.setItem('token', '')
       localStorage.setItem('id','')
+      try{
       console.log(err.response.data.error)
+      }catch{
+        alert('Erro ao conectar ao servidor :/')
+      }
     });
 
   }

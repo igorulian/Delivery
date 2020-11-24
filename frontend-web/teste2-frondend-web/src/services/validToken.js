@@ -1,7 +1,11 @@
-
 import api from './api'
 
-export default async function validToken(){
+export const validarToken = async() =>{
+
+  if(!localStorage.getItem('token')){
+    return false
+  }
+
     const id = localStorage.getItem('id')
 
     const body = {
@@ -22,15 +26,19 @@ export default async function validToken(){
     .then((response) =>{
       console.log("Validado!")
       
-      if(window.location.href === 'http://localhost:3000/'){
-         window.location.href = '/dashboard'
-      }
+      // if(window.location.href === 'http://localhost:3000/'){
+      //    window.location.href = '/dashboard'
+      // }
       return true
     })
     .catch((err) => {
       console.log("Nao Validado :|")
-      console.log(err)
-      window.location.href = '/login'
+      // console.log(err)
+      // window.location.href = '/login'
       return false
     })
 }
+
+export default validarToken()
+
+

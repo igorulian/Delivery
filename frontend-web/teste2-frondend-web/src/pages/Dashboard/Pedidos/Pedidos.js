@@ -56,6 +56,7 @@ export default class Pedidos extends Component{
         }catch{
             console.log("Erro ao carregar produtos")
             alert("Erro ao carregar produtos")
+            localStorage.setItem('token', '')
         }
     }
 
@@ -66,7 +67,7 @@ export default class Pedidos extends Component{
 
             if(request.progress >= 2){
                 // /store/finishedrequests/add/5f88f7a7fc2ae628408762b8/
-
+                console.log(request)
                 await api.post(`/store/finishedrequests/add/${id}`,request,{
                     headers: {
                     'Authorization': `Bearer ${token}` 
@@ -200,7 +201,7 @@ export default class Pedidos extends Component{
             <div className='page'>
                 <NavBar/>
                 <div className='conteudo-pedidos'>
-                    {this.state.requests.map(request =>{
+                    {this.state.requests && this.state.requests.map(request =>{
                         t++
                         if(request.progress === 0){
 
@@ -236,6 +237,12 @@ export default class Pedidos extends Component{
                                     </div>
                                 </div>
                             </div>
+
+                            {request.paymentMethod != null && 
+                            <div className="conteudo-pedido-obs">
+                                <p> <b>Pagamento: </b> {request.paymentMethod === 0 ? 'Dinheiro' : 'Cartão'}</p>
+                            </div>
+                            }
 
                             {request.obs != null &&
                             <div className="conteudo-pedido-obs">

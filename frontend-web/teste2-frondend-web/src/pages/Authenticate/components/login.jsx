@@ -27,8 +27,12 @@ export class Login extends React.Component {
       .then(res => this.seguirParaDashborad(res))
       .catch(err => {
         this.limparLocalStorage()
+        try{
         alert(err.response.data.error)
         console.log(err.response.data.error)
+        }catch{
+          alert('Erro ao conectar ao servidor :/')
+        }
       });
     }
   }

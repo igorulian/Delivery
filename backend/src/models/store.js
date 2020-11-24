@@ -100,6 +100,11 @@ const requestSchema = new mongoose.Schema({
         required: true,
         default: 0
     },
+    paymentMethod: {
+        type: Number,
+        required: true,
+        default: 0
+    },
     createdAt:{
         type: Date,
         default: Date.now
@@ -121,8 +126,9 @@ const finishedRequestSchema = new mongoose.Schema({
         required: true,
     },
     location:{
-        type: String,
-        required: true
+        type: addressSchema,
+        required: true,
+        default: {}
     },
     obs:{
         type: String,
@@ -136,6 +142,11 @@ const finishedRequestSchema = new mongoose.Schema({
     createdAt:{
         type: Date,
         required: true
+    },
+    paymentMethod: {
+        type: Number,
+        required: true,
+        default: 0
     },
     mes:{
         type: Number,
