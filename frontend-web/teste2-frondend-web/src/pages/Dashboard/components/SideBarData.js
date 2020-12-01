@@ -2,6 +2,7 @@ import React from 'react'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import * as IoIcons from 'react-icons/io'
+import * as ImIcons from 'react-icons/im'
 
 export const SideBarData = [
     {
@@ -25,13 +26,13 @@ export const SideBarData = [
     {
         title: 'Cardápio',
         path: '/dashboard/cardapio',
-        icon: <AiIcons.AiOutlineMenu />,
+        icon: <IoIcons.IoMdToday />,
         cName: 'nav-text'
     },
     {
         title: 'Cupons',
-        path: '/dashboard/configuracao',
-        icon: <IoIcons.IoMdToday />,
+        path: '/dashboard/cupons',
+        icon: <ImIcons.ImTicket />,
         cName: 'nav-text'
     },
     {

@@ -88,6 +88,8 @@ export default class Cardapio extends Component{
     }
 
     excluirCategoria = async (catID) => {
+        if(!window.confirm('Deseja excluir essa categoria?')) return
+
         const id = localStorage.getItem('id')
         const token = localStorage.getItem('token')
 

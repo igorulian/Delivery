@@ -2,6 +2,7 @@ import React from "react";
 import loginImg from "../../../img/entrega-de-alimentos.svg";
 import api from '../../../services/api'
 import {useNavigate} from 'react-router-dom'
+import ReactLoading from 'react-loading';
 
 export class Login extends React.Component {
 
@@ -12,17 +13,25 @@ export class Login extends React.Component {
 
   state = {
     token: '',
+    isLoading: false,
   }
 
   logar = async () => {
     const email = this.textEmailInput.value
     const password = this.textPassInput.value
+    
+    if(!( email && password)){
+      alert('Preencha todos os campos!')
+      return
+    }
+
     if(email.length > 1 && password.length > 1){
       const auth = {
         email,
         password
       }
       console.log(auth)
+      this.setState({isLoading: true})
       await api.post('/store/auth/authenticate', auth)
       .then(res => this.seguirParaDashborad(res))
       .catch(err => {
@@ -78,7 +87,7 @@ export class Login extends React.Component {
         </div>
         <div className="footer">
           <button onClick={this.logar.bind(this)} type="button" className="btn">
-            Entrar
+            {this.state.isLoading ? <ReactLoading type={'spin'} color={'#fff'} height={25} width={25} /> : 'Entrar'}
           </button>
         </div>
       </div>

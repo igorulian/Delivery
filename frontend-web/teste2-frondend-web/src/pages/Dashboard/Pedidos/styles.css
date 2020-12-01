@@ -12,7 +12,9 @@
     width: fit-content;
     height: fit-content;
     min-width: 270px;
+    max-width: 310px;
     justify-content: center;
+    /* box-shadow: 2px 2px 2px rgb(179, 179, 179); */
     
 }
 
@@ -92,7 +94,11 @@
     margin-left: 5px;
     margin-top: 10px;
     margin-right: 5px;
-    color: rgba(80, 80, 80, 0.6);
+    color: #50505099;
+}
+
+.conteudo-pedido-obs p{
+    margin-top: 5px;
 }
 
 .conteudo-pedido-botoes button.em-preparo{
@@ -132,4 +138,8 @@
 }
 .conteudo-pedido-botoes button.entregue:hover{
     background-color: #3a8334;
+}
+.x{
+    font-size: 16px;
+    color: #50505099;
 }

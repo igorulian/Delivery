@@ -163,11 +163,25 @@ export default class VizualizarPedidosFinalizados extends Component {
                                 </div>
                             </div>
 
-                            {request.obs != null &&
+                            {/* {request.obs != null &&
                             <div className="conteudo-pedido-obs">
                                 <p> <b>OBS:</b> {request.obs} </p>
                             </div>
+                            } */}
+                            
+                            {request.paymentMethod != null && 
+                            <div className="conteudo-pedido-obs">
+                                <p> <b>Pagamento: </b> {request.paymentMethod === 0 ? 'Cartão 💳' : "Dinheiro 💵"}</p>
+                                {request.paymentMethod > 0 && 
+                                <p> <b>Troco: </b> {"R$" + request.paymentMethod}</p>
+                                }
+                                {request.obs != null &&
+                                
+                                <p> <b>OBS:</b> {request.obs} </p>
+                                }
+                            </div>
                             }
+
                             <div className="conteudo-pedido-obs">
                                 <p> <b>Data:</b> {this.tratarData(request.createdAt)} </p>
                                 {/* <p> <b>Hora:</b> {this.tratarHora(request.createdAt)} </p> */}

@@ -33,9 +33,25 @@ module.exports = {
             if(!(req.storeId === req.params.id))
             return res.status(400).send({error: 'Invalid store'})
 
-            const store = await Store.findById(req.params.id).select('+requests')
+            const store = await Store.findById(req.params.id).select('+requests').select('+finishedrequests')
 
-            return res.json(store.requests)
+            const mes =  new Date().getMonth() + 1
+            // console.log('mes = ' + mes)
+            const dia = new Date().toString().split(' ')[2]
+ 
+            const filtrado = store.finishedrequests.filter( obj => (obj.mes == mes)).filter( obj => (obj.createdAt.toString().split(' ')[2] == dia));  // DEU CERTO
+
+            const totalFinishedReqs = filtrado.length 
+
+            // console.log(totalFinishedReqs)
+
+            const requests = {
+                reqs: store.requests,
+                totalFinishedReqs
+            }
+
+            // return res.json(store.requests)
+            return res.json(requests)
 
 
         }catch{

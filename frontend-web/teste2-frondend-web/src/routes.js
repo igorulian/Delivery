@@ -4,7 +4,7 @@ import {Redirect} from 'react-router'
 
 import {validarToken} from './services/validToken'
 
-import Dashboard from './pages/Dashboard'
+import Dashboard from './pages/Dashboard/Home/Home'
 import Authenticate from './pages/Authenticate'
 import PageNotFound from './pages/PageNotFound'
 import Main from './pages/Main'
@@ -15,6 +15,8 @@ import Cardapio from './pages/Dashboard/Cardapio/Cardapio'
 import AddProduto from './pages/Dashboard/Cardapio/Adicionar Produto'
 import AddCategoria from './pages/Dashboard/Cardapio/Adicionar Categoria'
 import Configuracao from './pages/Dashboard/Configuracao'
+import Cupons from './pages/Dashboard/Cupons/Cupons'
+import PaoDeForma from './pages/PaoDeForma/PaoDeForma'
 import { Login } from './pages/Authenticate/components'
 
 
@@ -42,9 +44,11 @@ export default function MainRoutes(){
             <PrivateRoute path="/dashboard/configuracao" element={<Configuracao/>} />
             <PrivateRoute path="/dashboard/adicionar-produto/:catid" element={<AddProduto/>} />
             <PrivateRoute path="/dashboard/adicionar-categoria" element={<AddCategoria/>} /> 
+            <PrivateRoute path="/dashboard/cupons" element={<Cupons/>} /> 
             <Route path="/login" element={<Authenticate/>} />
             <Route path="/" element={<Main/>} />
             <Route path="*" element={<PageNotFound/>} />
+            <Route path="/paodeforma" element={<PaoDeForma/>} />
         </Routes>
     )
 }

@@ -11,7 +11,8 @@ import not from '../../../audio/not.mp3'
 export default class Pedidos extends Component{
 
     state = {
-        requests: []
+        requests: [],
+        totalFinishedReqs: 0,
     }
 
     constructor(){
@@ -51,7 +52,7 @@ export default class Pedidos extends Component{
                 'Authorization': `Bearer ${token}` 
                 }
             })
-            this.setState({requests: response.data})
+            this.setState({requests: response.data.reqs, totalFinishedReqs: response.data.totalFinishedReqs})
             console.log(response.data)
         }catch{
             console.log("Erro ao carregar produtos")
@@ -133,15 +134,16 @@ export default class Pedidos extends Component{
                 ],
                 
                 location: {
-                    rua: "Albino ",
+                    rua: "Albino Presotto",
                     numero: 32,
                     cep: "14955000",
                     bairro: "Centro"
                 },
-                obs: "Tirar o picles do X Salada",
+                obs: "Tirar o picles do X Salada essa é uma observação grande para ver como o trem se comporta :)",
                 
                 progress: 0,
-                cost: 23
+                cost: 23,
+                paymentMethod: 20
             }
 
             const response = await api.post(`/store/requests/add/${id}`,newRequest,{
@@ -211,7 +213,7 @@ export default class Pedidos extends Component{
                         <div key={request._id} className="container-pedido">
 
                             <div className="container-conteudo-header">
-                                <h3> Pedido #0{t}</h3>
+                                <h3> Pedido #0{t + this.state.totalFinishedReqs}</h3>
                                 <p> {request.clientName} </p>
                             </div>
 
@@ -220,7 +222,10 @@ export default class Pedidos extends Component{
                                     {/* <p> {request.clientName} {this.state.requestsCount} </p>  */}
                                     <div>
                                         {request.products.map(product => (
-                                            <p key={product._id}> 1x {product.name}</p>
+                                            <div key={product._id} style={{display: 'flex'}}>
+                                                <p className="x">-</p>
+                                                <p>{product.name}</p>
+                                            </div>
                                         ))}  
                                     </div>
                                 </div>
@@ -240,18 +245,19 @@ export default class Pedidos extends Component{
 
                             {request.paymentMethod != null && 
                             <div className="conteudo-pedido-obs">
-                                <p> <b>Pagamento: </b> {request.paymentMethod === 0 ? 'Dinheiro' : 'Cartão'}</p>
-                            </div>
-                            }
-
-                            {request.obs != null &&
-                            <div className="conteudo-pedido-obs">
+                                <p> <b>Pagamento: </b> {request.paymentMethod === 0 ? 'Cartão 💳' : "Dinheiro 💵"}</p>
+                                {request.paymentMethod > 0 && 
+                                <p> <b>Troco: </b> {"R$" + request.paymentMethod}</p>
+                                }
+                                {request.obs != null &&
+                                
                                 <p> <b>OBS:</b> {request.obs} </p>
+                                }
                             </div>
                             }
-
+                            
                             <div className="conteudo-pedido-preco">
-                                <p>Total: R${request.cost}</p>
+                                <p> <b>Total: R${request.cost}</b></p>
                             </div>
 
                             <div className="conteudo-pedido-botoes">
