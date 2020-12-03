@@ -23,6 +23,25 @@ const addressSchema = new mongoose.Schema({
     }
 })
 
+const ratingSchema = new mongoose.Schema({
+    clientName:{
+        type:String,
+        required:true
+    },
+    clientID:{
+        type: String,
+        required: true
+    },
+    texto:{
+        type: String,
+        required: true
+    },
+    rate:{
+        type: Number,
+        required: true
+    }
+})
+
 const ingredientSchema = new mongoose.Schema({
     name:{
         type: String,
@@ -162,12 +181,12 @@ const storeSchema = new mongoose.Schema({
     },
     isOpen: {
         type: Boolean,
-        required: false,
+        required: true,
         default: false
     },
     isValid: {
         type: Boolean,
-        required: false,
+        required: true,
         default: false
     },
     image:{
@@ -221,6 +240,16 @@ const storeSchema = new mongoose.Schema({
         type: [finishedRequestSchema],
         select: false,
         required: false
+    },
+    rating: {
+        type: [ratingSchema],
+        select: false,
+        required: false
+    },
+    autoClose: {
+        type: String,
+        required: true,
+        default: '23:00'
     },
     createdAt:{
         type: Date,

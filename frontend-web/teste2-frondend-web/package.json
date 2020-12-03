@@ -18,6 +18,7 @@
     "react-router": "^6.0.0-beta.0",
     "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "^3.4.4",
+    "react-simple-timefield": "^3.2.3",
     "socket.io-client": "^2.3.1"
   },
   "scripts": {

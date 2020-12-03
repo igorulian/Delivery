@@ -17,7 +17,7 @@ module.exports = {
     },
     async show(req,res){
         try{
-            const store = await Store.findById(req.params.id).select('+products').select('+address')
+            const store = await Store.findById(req.params.id).select('+address')
 
             return res.json(store) 
         }catch{
@@ -202,6 +202,33 @@ module.exports = {
             return res.status(400).send({error: 'Error in update product'})
         }
     },
+    async homeInfo(req,res){
+        try{
+            if(!(req.storeId === req.params.id))
+                return res.status(400).send({error: 'Invalid store'})
 
+            const store = await Store.findById(req.params.id).select('+rating').select('+finishedrequests')
+
+            const mes = new Date().getMonth()
+            console.log('MES: ' + mes)
+            const filtrado = store.finishedrequests.filter( obj => (obj.mes == mes));  // DEU CERTO
+            const vendaMes = filtrado.lenght()
+
+            const vendaCancelada = 4
+
+            const avaliacoes = store.rating
+            
+            const info = { 
+                vendaMes,
+                vendaCancelada,
+                avaliacoes
+            }
+
+            return res.json(info)
+
+        }catch{
+            return res.status(400).send({error: 'Error in show products'})
+        }
+    }
     //Pedidos
 }
