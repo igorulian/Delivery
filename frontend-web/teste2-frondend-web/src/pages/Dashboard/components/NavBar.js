@@ -36,7 +36,8 @@ function NavBar(){
                             <img src={loginImg}/>
                         </div>
                         <h3>{localStorage.getItem('name')}</h3>
-                        <p> {localStorage.getItem('isOpen') ? 'Aberto' : 'Fechado'}</p>
+                        {console.log(localStorage.getItem('isOpen'))}
+                        <p> {localStorage.getItem('isOpen') === true ? 'Aberto' : 'Fechado'}</p>
                     </div>
 
                     {SideBarData.map((item, index) => {

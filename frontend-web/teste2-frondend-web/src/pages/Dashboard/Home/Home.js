@@ -94,13 +94,12 @@ export default class Dashboard extends Component {
             })
 
             if(!window.confirm(`Deseja alterar o horario de fechamento automatico do restaurante?`)) return
+            this.loadInfo()
 
 
         }catch{
             alert('Erro ao abrir/fechar restaurante')
         }
-
-        this.loadInfo()
     }
 
 
@@ -171,14 +170,15 @@ export default class Dashboard extends Component {
                         value={this.state.info.autoClose}
                         onChange={this.onTimeChange}
                         style={{
-                        border: '1px solid #666',
+                        border: '2px solid #ddd',
                         fontSize: 30,
                         width: 107,
                         padding: '5px 7px',
                         color: '#333',
                         borderRadius: 3,
                         marginTop: 5,
-                        paddingLeft: '15px'
+                        paddingLeft: '15px',
+                        backgroundColor: '#f9f9f9'
                         }}
                     />
                     <button className="alterar" onClick={ () => this.alterarHorarioFechamento()}> alterar </button>
