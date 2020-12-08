@@ -8,14 +8,14 @@ const StoreAuthController = require('./controllers/storeAuthController')
 const StoreController = require('./controllers/storeController')
 const StoreControllerPedidos = require('./controllers/storeControllerPedidos')
 const StoreControllerPedidosFinalizados = require('./controllers/storeControllerPedidosFinalizados')
-const AdmAuthController = require('./controllers/admAuthController')
 
 
 routes.post('/auth/register', StoreAuthController.register)
 routes.post('/auth/authenticate', StoreAuthController.authenticate)
-routes.post('/auth/paodeforma/login', AdmAuthController.loginPaoDeForma)
+
 
 routes.use(authMiddleware)
+
 
 routes.post('/update/:id', StoreController.update)
 routes.get('/', StoreController.list)

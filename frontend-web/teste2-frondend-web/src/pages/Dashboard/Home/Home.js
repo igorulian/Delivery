@@ -120,7 +120,7 @@ export default class Dashboard extends Component {
         }
         
       return (
-        <>
+        <div className='page'>
           <NavBar/>
             <div className='conteudo-home-infos'>
                 <div className="container-home-infos">
@@ -193,7 +193,7 @@ export default class Dashboard extends Component {
                     <h3> Avaliações </h3>
                 </div>
             </div>
-        </>
+        </div>
       );
 
     }

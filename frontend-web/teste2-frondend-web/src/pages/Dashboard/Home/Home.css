@@ -1,5 +1,5 @@
 .container-home-abrir{
-    background-color: #f9f9f9;
+    background-color: #fff;
     border: 1px solid #DDD;
     border-radius: 10px;
     /* padding: 5px; */
@@ -16,6 +16,7 @@
     text-align: center;
     margin-bottom: 20px;
 }
+
 
 .container-home-abrir h3 {
     margin-top: 5px;
@@ -70,7 +71,7 @@
 }
 
 .container-home-infos{
-    background-color: #f9f9f9;
+    background-color: #fff; 
     border: 1px solid #DDD;
     border-radius: 10px;
     margin-top: 10px;
@@ -93,7 +94,7 @@
 }
 
 .container-home-grafico{
-    background-color: #f9f9f9;
+    background-color: #fff;
     border: 1px solid #DDD;
     border-radius: 10px;
     margin-top: 10px;
@@ -107,7 +108,7 @@
 }
 
 .container-home-avaliacoes{
-    background-color: #f9f9f9;
+    background-color: #fff;
     border: 1px solid #DDD;
     border-radius: 10px;
     margin-top: 10px;

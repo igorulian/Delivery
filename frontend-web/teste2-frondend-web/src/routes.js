@@ -17,6 +17,8 @@ import AddCategoria from './pages/Dashboard/Cardapio/Adicionar Categoria'
 import Configuracao from './pages/Dashboard/Configuracao'
 import Cupons from './pages/Dashboard/Cupons/Cupons'
 import PaoDeForma from './pages/PaoDeForma/PaoDeForma'
+import PaoDeFormaDashboard from './pages/PaoDeForma/PaoDeFormaDashboard/PaoDeFormaDashboard'
+import ListaDeRestaurantes from './pages/PaoDeForma/PaoDeFormaDashboard/ListaDeRestaurantes/ListaDeRestaurantes'
 import { Login } from './pages/Authenticate/components'
 
 
@@ -49,6 +51,8 @@ export default function MainRoutes(){
             <Route path="/" element={<Main/>} />
             <Route path="*" element={<PageNotFound/>} />
             <Route path="/paodeforma" element={<PaoDeForma/>} />
+            <Route path="/paodeforma/dashboard" element={<PaoDeFormaDashboard/>} />
+            <Route path="/paodeforma/dashboard/lista" element={<ListaDeRestaurantes/>} />
         </Routes>
     )
 }

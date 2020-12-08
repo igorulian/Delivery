@@ -19,6 +19,7 @@ mongoose.connect('mongodb://localhost:27018/deliveryapi',{ useUnifiedTopology: t
 requireDir('./src/models')
 
 app.use('/api/store', require('./src/store.routes'))
+app.use('/api/adm', require('./src/adm.routes'))
 
 io.on('connection', socket => {
     // console.log(`Socket conectado ${socket.id}`)

@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Staatliches&display=swap');
 
 .container-pedido{
-    background-color: #f9f9f9;
+    background-color: #fff;
     border: 1px solid #DDD;
     border-radius: 10px;
     /* padding: 5px; */
@@ -17,7 +17,6 @@
     /* box-shadow: 2px 2px 2px rgb(179, 179, 179); */
     
 }
-
 
 .container-conteudo-pedido{
     display: flex;

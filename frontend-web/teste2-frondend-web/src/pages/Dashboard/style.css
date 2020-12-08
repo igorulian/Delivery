@@ -8,6 +8,10 @@
     /* padding-left: 40px; */
 }
 
+.page{
+    background-color: #f6f6f6;
+}
+
 /* .home, .reports, .products{
     display: flex;
     height: 90vh;

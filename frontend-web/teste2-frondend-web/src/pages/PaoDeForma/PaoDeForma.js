@@ -8,7 +8,7 @@ import ReactLoading from 'react-loading';
 export default class PaoDeForma extends Component{
 
 
-    logar = () => {
+    logar = async () => {
         const email = this.textEmailInput.value
         const password = this.textPassInput.value
 
@@ -17,7 +17,23 @@ export default class PaoDeForma extends Component{
             return
         }
 
+        const request = {
+            email,
+            password
+        }
         
+        console.log(request)
+        await api.post(`/adm/auth/authenticate`,request, {})
+            .then(res => {this.seguirParaDashborad(res)})
+            .catch(err => {console.log(err)})
+    }
+
+    seguirParaDashborad = (res) => {
+        localStorage.setItem('admtoken', res.data.token)
+        alert('Logado com sucesso!')
+        console.log(localStorage.getItem('admtoken'))
+        window.location.href ='/paodeforma/dashboard'
+
     }
 
 
@@ -26,7 +42,7 @@ export default class PaoDeForma extends Component{
             <div className="conteudo-paodeforma">
                 <div className="container-login">
                     <h3> Painel do Administrador</h3> 
-                    <div className="form-group-login">
+                    <div className="form-group-login-pao-de-forma">
                         <label htmlFor="username">Email</label>
                         <input ref={input => this.textEmailInput = input} type="text" name="username" placeholder="Digite seu Email" />
                         <label htmlFor="password">Senha</label>
