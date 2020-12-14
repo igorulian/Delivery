@@ -24,13 +24,15 @@
 
 .bottom-resumo-dos-pedidos{
     border: 2px solid #DDD;
-    /* width: 100%; */
+    width: 87%;
     height: fit-content;
-    margin-left: 250px;
-    margin-top: 40px;
     align-items: center;
     text-align: center;
     bottom: 0;
+    position: absolute;
+    right:    0;
+    bottom:   0;
+    background-color: #fff;
 }
 
 .page{

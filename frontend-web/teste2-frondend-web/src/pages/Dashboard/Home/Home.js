@@ -87,13 +87,15 @@ export default class Dashboard extends Component {
                 autoClose: this.state.autoClose
             }
 
+            if(!window.confirm(`Deseja alterar o horario de fechamento automatico do restaurante?`)) return
+
             await api.post(`/store/update/${id}`,request,{
                 headers: {
                 'Authorization': `Bearer ${token}` 
                 }
             })
 
-            if(!window.confirm(`Deseja alterar o horario de fechamento automatico do restaurante?`)) return
+           
             this.loadInfo()
 
 
@@ -101,7 +103,41 @@ export default class Dashboard extends Component {
             alert('Erro ao abrir/fechar restaurante')
         }
     }
+// deliveryFee
+    alterarTaxaDeEntrega = async (taxa) => {
+        try{
 
+            const newFee = this.taxaEntrega.value
+
+            var er = /^[0-9]+$/;
+
+            if(!er.test(newFee)){
+                alert('Valor inválido')
+                return
+            }
+
+            const id = localStorage.getItem('id')
+            const token = localStorage.getItem('token')
+
+            const request = {
+                deliveryFee: newFee
+            }
+
+            if(!window.confirm(`Deseja alterar a taxa de entrega do restaurante?`)) return
+
+            await api.post(`/store/update/${id}`,request,{
+                headers: {
+                'Authorization': `Bearer ${token}` 
+                }
+            })
+
+            
+            this.loadInfo()
+
+        }catch{
+            alert('Erro ao alterar a taxa de entrega restaurante')
+        }
+    }
 
 
     render(){
@@ -144,19 +180,43 @@ export default class Dashboard extends Component {
             
             <div className='conteudo-home'>
                 <div className="container-home-abrir">
-                    <p> teste </p>
+                    <h3> Taxa de Entrega </h3>
+                    <p> Setar taxa de entrega do restaurante</p>
+                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                    <h3 style={{marginRight: '5px'}}> R$ </h3>
+                    <input
+                        type={'number'}
+                        ref={input => this.taxaEntrega = input}
+                        defaultValue={this.state.info.deliveryFee}
+                        max={'10'}
+                        maxlength="2"
+                        style={{
+                        border: '2px solid #ddd',
+                        fontSize: 30,
+                        width: 80,
+                        padding: '5px 7px',
+                        color: '#333',
+                        borderRadius: 3,
+                        marginTop: 5,
+                        paddingLeft: '15px',
+                        backgroundColor: '#f9f9f9',
+                        paddingRight: '2px',
+                        }}
+                    />
+                    </div>
+                    <button className="alterar" onClick={ () => this.alterarTaxaDeEntrega()}> alterar </button>
                 </div>
                 <div className="container-home-abrir">
                     {this.state.info.isOpen === true && 
                     <>
-                    <h3> Fechar Restaurante </h3>
+                    <h3> Restaurante Aberto  </h3>
                     <p> Ao clicar no botão abaixo o seu restaurante aparecerá na lista de restaurantes abertos (até abri-lo denovo)</p>
                     <button className="fechar" onClick={() => this.abrirFecharRestaurante()}> FECHAR </button>
                     </>
                     }
                     {this.state.info.isOpen === false && 
                     <>
-                    <h3> Abrir Restaurante </h3>
+                    <h3> Restaurante Fechado </h3>
                     <p> Ao clicar no botão abaixo o seu restaurante aparecerá na lista de restaurantes abertos e poderá receber pedidos a qualquer momento :)</p>
                     {/* <img src={padeiro} style={{width: '50px', height: '50px'}} /> */}
                     <button className="abrir" onClick={() => this.abrirFecharRestaurante()}> ABRIR </button>

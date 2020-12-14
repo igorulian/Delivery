@@ -9,10 +9,6 @@ import api from '../../../../services/api'
 
 export default class AddCategoria extends Component{
 
-    state = {
-
-    }
-
     salvarCategoria = async () =>{
         const name = this.textNameInput.value
         if(!name){
@@ -41,6 +37,11 @@ export default class AddCategoria extends Component{
         // console.log(res)
     }
 
+    swichPizzaChange = () => {
+        this.setState({modoPizza: !this.state.modoPizza})
+        alert(this.state.modoPizza)
+    }
+
     render(){
         return(
             <div className="page">
@@ -54,20 +55,18 @@ export default class AddCategoria extends Component{
                     </button>
 
                     <div className="container-adicionar-categoria">
-                        <div className="form">
+
+                        <div className="form" style={{width: '100%', padding: 5}}>
                             <div className="form-group">
                                 <label htmlFor="name">Categoria</label>
                                 <input ref={input => this.textNameInput = input} type="name" name="name" placeholder="Digite o nome da categoria" />
-
-                                {/* <label htmlFor="preco">Preço</label>
-                                <input ref={input => this.textCostInput = input} type="preco" name="preco" placeholder="Digite o preço" /> */}
-
                             </div>
 
                             <button onClick={() => this.salvarCategoria()} type="button" className="btn">
                                 Adicionar
                             </button>
                         </div>
+
                     </div>
                 </div>
             </div>

@@ -7,6 +7,8 @@ import * as AiIcons from 'react-icons/ai'
 import {Link} from 'react-router-dom'
 import api from '../../../../services/api'
 
+import Switch from "react-switch";
+
 export default class AddProduto extends Component{
 
     state = {
@@ -17,7 +19,8 @@ export default class AddProduto extends Component{
             }
         ],
         ingredientesParaAdicionar: [{}],
-        catID: ''
+        catID: '',
+        modoPizza: false
         
     }
 
@@ -121,6 +124,10 @@ export default class AddProduto extends Component{
         this.setState({ingredientCount: this.state.ingredientCount - 1})
     }
 
+    swichPizzaChange = () => {
+        this.setState({modoPizza: !this.state.modoPizza})
+    }
+
 
     render(){
         return(
@@ -137,12 +144,19 @@ export default class AddProduto extends Component{
                     </Link>
 
                     <div className="container-adicionar-produtos">
+                        {/* <button> TEste </button> */}
+                        <div className="switch">
+                            <p> Pizza: </p>
+                            <Switch onChange={() => this.swichPizzaChange() } onColor={'#e3552f'} width={40} height={20} checked={this.state.modoPizza} activeBoxShadow={null} />
+                        </div>
                         <div className="form">
                             <div className="imgInput"> 
                                 <a> Clique aqui </a>
                                 <a> para enviar </a>
                                 <a> a imagem </a>
                             </div>
+                            {this.state.modoPizza == false && 
+                            <>
                             <div className="form-group">
                                 <label htmlFor="name">Nome do produto</label>
                                 <input ref={input => this.textNameInput = input} type="name" name="name" placeholder="Digite o nome do produto" />
@@ -154,23 +168,68 @@ export default class AddProduto extends Component{
 
                             </div>
 
+                            
                             <div className="form-group-ingredientes">
                                 {this.state.ingredientes.map(ingrediente =>(
-                                    <div key={ingrediente.numero} className="form-group-ingredientes-item"> 
+                                   //<div key={ingrediente.numero} className="form-group-ingredientes-item"> 
 
                                     <input key={ingrediente.numero} ref={input => this.textIngredientInput = input} id={`ingrediente${ingrediente.numero}`} type="ingredient" name={`ingrediente + ${ingrediente.numero}`} placeholder={`Digite o ingredienete`} />
-                                    
-                                    {/* <button onClick={() => this.removerIngrediente(ingrediente.numero)} className="btnAdicionarIngredienete">
-                                    <IconContext.Provider value={{color: '#ff0000', size: 15}}>
-                                        <IoIcons.IoMdCloseCircle/>
-                                    </IconContext.Provider>
-                                    </button> */}
 
-                                    </div>
+                                    //</div>
 
                                 ))}
 
                             </div>
+                            </>
+                            }
+                            {this.state.modoPizza == true && 
+                                <>
+                                <div className="form-group">
+                                    <label htmlFor="name">Tipo da pizza</label>
+                                    <input ref={input => this.textNameInput = input} type="name" name="name" placeholder="Digite o nome do produto" />
+    
+                                    <label htmlFor="preco">Tamanhos:</label>
+                                    {/* <input ref={input => this.textCostInput = input} type="preco" name="preco" placeholder="Digite o preço" /> */}
+                                    <div style={{display: "flex", justifyContent: 'center', alignItems: 'center', width: '100%', marginBottom: '10px', marginTop:'10px'}}>
+                                        <div className={'switchTamanhos'}>
+                                            <p> Pequeno </p>
+                                            <p style={{height: 'Fitcontent'}}> R$ <input style={{padding: 0,paddingLeft: '10px', marginBottom: '5px'}} className={"inputNumber"} defaultValue={30} type={'number'} min="1" max={99}/> </p>
+                                            <Switch onChange={() => {} } onColor={'#e3552f'} width={40} height={20} checked={true} activeBoxShadow={null} />
+                                        </div>
+
+                                        <div className={'switchTamanhos'}>
+                                            <p> Médio </p>
+                                            <p style={{height: 'Fitcontent'}}> R$ <input style={{padding: 0,paddingLeft: '10px', marginBottom: '5px'}} className={"inputNumber"} defaultValue={40} type={'number'} min="1" max={99}/> </p>
+                                            <Switch onChange={() => {}} onColor={'#e3552f'} width={40} height={20} checked={true} activeBoxShadow={null} />
+                                        </div>
+
+                                        <div className={'switchTamanhos'}>
+                                            <p> Grande </p>
+                                            <p style={{height: 'Fitcontent'}}> R$ <input style={{padding: 0,paddingLeft: '10px', marginBottom: '5px'}} className={"inputNumber"} defaultValue={50} type={'number'} min="1" max={99}/> </p>
+                                            <Switch onChange={() => {}} onColor={'#e3552f'} width={40} height={20} checked={true} activeBoxShadow={null} />
+                                        </div>
+                                    </div>
+
+                                    <label htmlFor="ingredientes">Maximo de sabores: <input style={{padding: 0,paddingLeft: '10px'}} className={"inputNumber"} defaultValue={3} type={'number'} min="1" max="99"/> </label>
+
+                                    <label htmlFor="ingredientes">Sabores:</label>
+    
+                                </div>
+    
+                                
+                                <div className="form-group-ingredientes">
+                                    {this.state.ingredientes.map(ingrediente =>( 
+                                        //<div key={ingrediente.numero} className="form-group-ingredientes-item" style={{width: 'fitcontent'}}> 
+    
+                                        <input key={ingrediente.numero} ref={input => this.textIngredientInput = input} id={`ingrediente${ingrediente.numero}`} type="ingredient" name={`ingrediente + ${ingrediente.numero}`} placeholder={`Digite o sabor`} />
+    
+                                        //</div>
+    
+                                    ))}
+    
+                                </div>
+                                </>
+                            }
 
                             
                             <button onClick={() => this.adicionarIngrediente()} className="btnAdicionarIngredienete">

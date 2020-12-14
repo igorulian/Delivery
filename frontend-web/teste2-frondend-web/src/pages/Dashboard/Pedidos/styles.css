@@ -4,8 +4,8 @@
 
 .container-pedido{
     background-color: #fff;
-    border: 1px solid #DDD;
-    border-radius: 10px;
+    border: 1px solid #ccc;
+    /* border-radius: 10px; */
     /* padding: 5px; */
     margin-top: 40px;
     margin-left: 40px;
@@ -15,6 +15,7 @@
     max-width: 310px;
     justify-content: center;
     /* box-shadow: 2px 2px 2px rgb(179, 179, 179); */
+    box-shadow: 2px 2px 10px 3px #ccc;
     
 }
 
@@ -91,19 +92,23 @@
 
 .conteudo-pedido-obs{
     margin-left: 5px;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     margin-right: 5px;
     color: #50505099;
 }
 
-.conteudo-pedido-obs p{
+
+.conteudo-precos{
     margin-top: 5px;
+    width: 1%;
+    color: #50505099;
+    height: fit-content;
 }
 
 .conteudo-pedido-botoes button.em-preparo{
     width: 80%;
     background-color: #4cac43;
-    border-radius: 0px 0px 0px 10px;
+    /* border-radius: 0px 0px 0px 10px; */
 }
 .conteudo-pedido-botoes button.em-preparo:hover{
     background-color: #3a8334;
@@ -113,7 +118,7 @@
     background-color: #cf4a4a;
     min-height: 50px;
     width: 20%;
-    border-radius: 0px 0px 10px 0px;
+    /* border-radius: 0px 0px 10px 0px; */
 }
 .conteudo-pedido-botoes button.cancelar div{
     margin-top: 5px;

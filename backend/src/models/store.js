@@ -251,6 +251,11 @@ const storeSchema = new mongoose.Schema({
         required: true,
         default: '23:00'
     },
+    deliveryFee: {
+        type: Number,
+        required: true,
+        default: 4
+    },
     createdAt:{
         type: Date,
         default: Date.now

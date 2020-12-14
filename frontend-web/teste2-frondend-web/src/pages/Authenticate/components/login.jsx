@@ -49,8 +49,14 @@ export class Login extends React.Component {
 
   seguirParaDashborad = (res) =>{
     console.log("Seguindo para Dashboard...")
-    console.log(res)
+    // console.log(res)
+    if(!res.data.store.isValid){
+      alert('O Seu restaurante ainda não foi aprovado pela nossa equipe!')
+      return
+    }
     this.setState({token: res.data.token,storeid: res.data.store._id})
+    
+    localStorage.setItem('storeData', res.data)
     localStorage.setItem('token', res.data.token)
     localStorage.setItem('id',res.data.store._id)
     localStorage.setItem('name', res.data.store.name)

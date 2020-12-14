@@ -12,7 +12,7 @@ export default class Pedidos extends Component{
 
     state = {
         requests: [],
-        totalFinishedReqs: 0,
+        totalFinishedReqs: 0
     }
 
     constructor(){
@@ -243,22 +243,52 @@ export default class Pedidos extends Component{
                                 </div>
                             </div>
 
+                            <div style={{width: '100%', textAlign: 'center'}}>
+                                <p style={{color: '#50505099'}}> -------------------------------------- </p>
+                                </div>
+
                             {request.paymentMethod != null && 
                             <div className="conteudo-pedido-obs">
                                 <p> <b>Pagamento: </b> {request.paymentMethod === 0 ? 'Cartão 💳' : "Dinheiro 💵"}</p>
                                 {request.paymentMethod > 0 && 
                                 <p> <b>Troco: </b> {"R$" + request.paymentMethod}</p>
                                 }
-                                {request.obs != null &&
-                                
-                                <p> <b>OBS:</b> {request.obs} </p>
-                                }
                             </div>
                             }
-                            
-                            <div className="conteudo-pedido-preco">
-                                <p> <b>Total: R${request.cost}</b></p>
+
+                            <div style={{width: '100%', textAlign: 'center'}}>
+                                <p style={{color: '#50505099'}}> -------------------------------------- </p>
                             </div>
+
+                            <div className="conteudo-preco">
+                                <div style={{width: '100%', height: '20px'}}>
+                                    <p style={{float: 'left', marginLeft: '5px', color: '#50505099', fontSize: '15px'}}><b>Subtotal:</b></p>
+                                    <p style={{float: 'right', marginRight: '5px', color: '#50505099', fontSize: '15px'}}>R$ {request.cost},00</p>
+                                </div>
+    
+                                <div style={{width: '100%', height: '20px', marginTop: '3px'}}>
+                                    <p style={{float: 'left', marginLeft: '5px', color: '#50505099', fontSize: '15px'}}><b>Entrega:</b></p>
+                                    <p style={{float: 'right', marginRight: '5px', color: '#50505099', fontSize: '15px'}}>R$ 2</p> 
+                                </div>
+
+                                <div style={{width: '100%', height: '20px', marginTop: '3px'}}>
+                                    <p style={{float: 'left', marginLeft: '5px', color: '#50505099', fontSize: '17px'}}><b>Total:</b></p>
+                                    <p style={{float: 'right', marginRight: '5px', color: '#383838', fontSize: '17px'}}>R$ {request.cost + 5},00</p>
+                                </div>
+                            </div>
+                        
+
+                            {request.obs != null &&
+                            <>
+                                <div style={{width: '100%', textAlign: 'center'}}>
+                                <p style={{color: '#50505099'}}> -------------------------------------- </p>
+                                </div>
+
+                                <div className="conteudo-pedido-obs">
+                                    <p style={{marginBottom: '5px'}}> <b>OBS:</b> {request.obs} </p>
+                                </div>
+                                </>
+                            }
 
                             <div className="conteudo-pedido-botoes">
                                 {request.progress === 0 &&
@@ -286,7 +316,7 @@ export default class Pedidos extends Component{
                     }
                     )}
                     
-                <button onClick={() => {this.efetuarPedido()}}> Efetuar Pedido </button>
+                {/* <button onClick={() => {this.efetuarPedido()}}> Efetuar Pedido </button> */}
                 </div>
             </div>
         )

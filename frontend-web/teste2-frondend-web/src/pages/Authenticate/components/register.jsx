@@ -76,8 +76,14 @@ export class Register extends React.Component {
 
   seguirParaDashboard = async (res) =>{
     console.log("Seguindo para Dashboard...")
-    console.log(res)
+
+    if(!res.data.store.isValid){
+      alert('O Seu restaurante foi enviado para análise! Aguarde que dentro de algumas horas receberá um email com a confirmação de validação :)')
+      return
+    }
+
     this.setState({token: res.data.token,storeid: res.data.store._id})
+    localStorage.setItem('storeData', res.data)
     localStorage.setItem('token', res.data.token)
     localStorage.setItem('id',res.data.store._id)
     console.log(this.state.token)

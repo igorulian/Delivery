@@ -20,6 +20,7 @@
     /* max-height: 450px; */
     /* position: relative; */
     background-color: #f9f9f9;
+
 }
 
 .product-list article img{
@@ -34,7 +35,9 @@
     text-align: center;
     height: fit-content;
     background-color: #fff;
-    border-radius: 20px;
+    /* border-radius: 20px; */
+    
+    box-shadow: 2px 2px 4px 3px #ccc;
 
 }
 
@@ -90,8 +93,8 @@
     text-align: center;
     height: fit-content;
     cursor: pointer;
-    background-color: #fafafa;
-    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 2px 2px 4px 3px #ccc;
 }
 
 .btnAdicionarCategoria:hover{

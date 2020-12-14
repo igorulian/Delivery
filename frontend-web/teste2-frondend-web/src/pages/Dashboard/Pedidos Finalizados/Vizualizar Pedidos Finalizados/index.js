@@ -146,7 +146,7 @@ export default class VizualizarPedidosFinalizados extends Component {
                                     {/* <p> {request.clientName} {this.state.requestsCount} </p>  */}
                                     <div>
                                         {request.products.map(product => (
-                                            <p key={product._id}> 1x {product.name}</p>
+                                            <p key={product._id}> - {product.name}</p>
                                         ))}  
                                     </div>
                                 </div>
