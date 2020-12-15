@@ -91,9 +91,9 @@
 }
 
 .conteudo-pedido-obs{
-    margin-left: 5px;
+    margin-left: 6px;
     /* margin-top: 10px; */
-    margin-right: 5px;
+    margin-right: 6px;
     color: #50505099;
 }
 
@@ -103,6 +103,8 @@
     width: 1%;
     color: #50505099;
     height: fit-content;
+    margin-left: 6px;
+    margin-right: 6px;
 }
 
 .conteudo-pedido-botoes button.em-preparo{
@@ -130,7 +132,6 @@
 
 .conteudo-pedido-botoes button.saiu-para-entrega{
     background-color: #eebd1c;
-    border-radius: 0px 0px 10px 10px;
 }
 .conteudo-pedido-botoes button.saiu-para-entrega:hover{
     background-color: #daad19;
@@ -138,7 +139,6 @@
 
 .conteudo-pedido-botoes button.entregue{
     background-color: #4cac43;
-    border-radius: 0px 0px 10px 10px;
 }
 .conteudo-pedido-botoes button.entregue:hover{
     background-color: #3a8334;

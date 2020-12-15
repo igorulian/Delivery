@@ -9,6 +9,7 @@ import api from '../../../../services/api'
 
 import Switch from "react-switch";
 
+
 export default class AddProduto extends Component{
 
     state = {
@@ -20,7 +21,7 @@ export default class AddProduto extends Component{
         ],
         ingredientesParaAdicionar: [{}],
         catID: '',
-        modoPizza: false
+        modoPizza: true
         
     }
 
@@ -134,14 +135,15 @@ export default class AddProduto extends Component{
             <div className="page">
                 <NavBar/>
                 <div className="conteudo-adicionar-produtos">
-                    
-                    <Link to={'/dashboard/cardapio'}>
-                        <button className="btnVoltarAoCardapio">
+                
+                    <div style={{width: '100%', display: 'flex', justifyContent: 'center'}}>
+
+                    <Link to={'/dashboard/cardapio'} style={{height: 'justifyContent'}}>
                             <IconContext.Provider value={{color: '#e3552f ', size: 30}} >
                                 <AiIcons.AiOutlineArrowLeft/>
                             </IconContext.Provider>
-                        </button>
                     </Link>
+
 
                     <div className="container-adicionar-produtos">
                         {/* <button> TEste </button> */}
@@ -212,37 +214,63 @@ export default class AddProduto extends Component{
 
                                     <label htmlFor="ingredientes">Maximo de sabores: <input style={{padding: 0,paddingLeft: '10px'}} className={"inputNumber"} defaultValue={3} type={'number'} min="1" max="99"/> </label>
 
+                                    {this.state.modoPizza == false && 
                                     <label htmlFor="ingredientes">Sabores:</label>
+                                    }
     
                                 </div>
     
-                                
+                                {this.state.modoPizza == false && 
                                 <div className="form-group-ingredientes">
                                     {this.state.ingredientes.map(ingrediente =>( 
-                                        //<div key={ingrediente.numero} className="form-group-ingredientes-item" style={{width: 'fitcontent'}}> 
-    
+
                                         <input key={ingrediente.numero} ref={input => this.textIngredientInput = input} id={`ingrediente${ingrediente.numero}`} type="ingredient" name={`ingrediente + ${ingrediente.numero}`} placeholder={`Digite o sabor`} />
-    
-                                        //</div>
     
                                     ))}
     
                                 </div>
+                                }
+                                
                                 </>
                             }
 
-                            
+                            {this.state.modoPizza == false && 
                             <button onClick={() => this.adicionarIngrediente()} className="btnAdicionarIngredienete">
                                 <IconContext.Provider value={{color: '#008000 ', size: 30}} >
                                     <IoIcons.IoMdAddCircle/>
                                 </IconContext.Provider>
                             </button>
+                            }
 
                             <button onClick={() => this.salvarProduto()} type="button" className="btn">
                                 Salvar
                             </button>
                         </div>
                     </div>
+                    {this.state.modoPizza == true && 
+                        <div className="container-adicionar-produtos2" style={{justifyContent: 'center', alignItems: 'center', textAlign: 'center'}}>
+                            <label htmlFor="ingredientes">Sabores:</label>
+
+                            <div className="form-group-ingredientes">
+                                {this.state.ingredientes.map(ingrediente =>( 
+                                    <div style={{display: 'flex', marginTop: '15px'}}>
+                                            <div style={{ border: '1px solid #DDD',backgroundColor: '#fff', width: '50px', height: '50px', justifyContent: 'center', alignContent: 'center', alignItems: 'center', cursor: 'pointer', fontSize: '10px'}}> Cliquei aqui para enviar a imagem </div>
+                                            <input style={{marginLeft: '15px', marginTop: '5px', marginBottom: '0px'}} key={ingrediente.numero} ref={input => this.textIngredientInput = input} id={`ingrediente${ingrediente.numero}`} type="ingredient" name={`ingrediente + ${ingrediente.numero}`} placeholder={`Digite o sabor`} />
+                                    </div>
+                                ))}
+    
+                            </div>
+
+                            <button onClick={() => this.adicionarIngrediente()} className="btnAdicionarIngredienete">
+                                <IconContext.Provider value={{color: '#008000 ', size: 30}} >
+                                    <IoIcons.IoMdAddCircle/>
+                                </IconContext.Provider>
+                            </button>
+                        </div>
+                        }
+
+                    </div>
+
                 </div>
             </div>
         )

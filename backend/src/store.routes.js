@@ -1,5 +1,7 @@
 const express = require('express')
 const authMiddleware = require('./middlewares/auth')
+const multer = require('multer')
+const multerConfig = require('./config/multer')
 
 const routes = express.Router()
 
@@ -8,6 +10,7 @@ const StoreAuthController = require('./controllers/storeAuthController')
 const StoreController = require('./controllers/storeController')
 const StoreControllerPedidos = require('./controllers/storeControllerPedidos')
 const StoreControllerPedidosFinalizados = require('./controllers/storeControllerPedidosFinalizados')
+const storeController = require('./controllers/storeController')
 
 
 routes.post('/auth/register', StoreAuthController.register)
@@ -38,9 +41,14 @@ routes.post('/finishedrequests/add/:id', StoreControllerPedidosFinalizados.addFi
 routes.get('/finishedrequests/list/:id/:mes', StoreControllerPedidosFinalizados.listFinishedRequests)
 
 
+routes.get('/info/home/:id', StoreController.homeInfo)
+
+
 // routes.get('/products/update/:category/:id/:productid', StoreController.updateProduct)
 
 routes.post('/auth/validtoken', StoreAuthController.validToken)
+
+routes.post('/upload/image',multer(multerConfig).single('file'),storeController.uploadImagem)
 
 
 module.exports = routes

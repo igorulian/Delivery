@@ -223,7 +223,7 @@ export default class Pedidos extends Component{
                                     <div>
                                         {request.products.map(product => (
                                             <div key={product._id} style={{display: 'flex'}}>
-                                                <p className="x">-</p>
+                                                <p className="x">•</p>
                                                 <p>{product.name}</p>
                                             </div>
                                         ))}  
@@ -260,20 +260,20 @@ export default class Pedidos extends Component{
                                 <p style={{color: '#50505099'}}> -------------------------------------- </p>
                             </div>
 
-                            <div className="conteudo-preco">
+                            <div className="conteudo-preco" style={{marginRight: '6px', marginLeft: '6px'}}>
                                 <div style={{width: '100%', height: '20px'}}>
-                                    <p style={{float: 'left', marginLeft: '5px', color: '#50505099', fontSize: '15px'}}><b>Subtotal:</b></p>
-                                    <p style={{float: 'right', marginRight: '5px', color: '#50505099', fontSize: '15px'}}>R$ {request.cost},00</p>
+                                    <p style={{float: 'left', color: '#50505099', fontSize: '15px'}}><b>Subtotal:</b></p>
+                                    <p style={{float: 'right', color: '#50505099', fontSize: '15px'}}>R$ {request.cost},00</p>
                                 </div>
     
                                 <div style={{width: '100%', height: '20px', marginTop: '3px'}}>
-                                    <p style={{float: 'left', marginLeft: '5px', color: '#50505099', fontSize: '15px'}}><b>Entrega:</b></p>
-                                    <p style={{float: 'right', marginRight: '5px', color: '#50505099', fontSize: '15px'}}>R$ 2</p> 
+                                    <p style={{float: 'left', color: '#50505099', fontSize: '15px'}}><b>Entrega:</b></p>
+                                    <p style={{float: 'right', color: '#50505099', fontSize: '15px'}}>R$ 2</p> 
                                 </div>
 
                                 <div style={{width: '100%', height: '20px', marginTop: '3px'}}>
-                                    <p style={{float: 'left', marginLeft: '5px', color: '#50505099', fontSize: '17px'}}><b>Total:</b></p>
-                                    <p style={{float: 'right', marginRight: '5px', color: '#383838', fontSize: '17px'}}>R$ {request.cost + 5},00</p>
+                                    <p style={{float: 'left', color: '#50505099', fontSize: '17px'}}><b>Total:</b></p>
+                                    <p style={{float: 'right', color: '#383838', fontSize: '17px'}}>R$ {request.cost + 5},00</p>
                                 </div>
                             </div>
                         

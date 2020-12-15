@@ -108,8 +108,6 @@ module.exports = {
         }
     },
 
-
-
 // Produto
 
     async listProducts(req,res){
@@ -203,32 +201,38 @@ module.exports = {
         }
     },
     async homeInfo(req,res){
-        try{
+        // try{
             if(!(req.storeId === req.params.id))
                 return res.status(400).send({error: 'Invalid store'})
 
-            const store = await Store.findById(req.params.id).select('+rating').select('+finishedrequests')
+            const store = await Store.findById(req.params.id).select('+rating').select('+finishedrequests').select('+canceledrequests')
 
-            const mes = new Date().getMonth()
-            console.log('MES: ' + mes)
-            const filtrado = store.finishedrequests.filter( obj => (obj.mes == mes));  // DEU CERTO
-            const vendaMes = filtrado.lenght()
-
-            const vendaCancelada = 4
+            // const mes = new Date().getMonth()
+            // console.log('MES: ' + mes)
+            // const filtrado = store.finishedrequests.filter( obj => (obj.mes == mes));  // DEU CERTO
+            // const vendaMes = filtrado.lenght()
+            const vendaMes = store.finishedrequests.length
+            const vendaCanceladaMes = store.canceledrequests.length
 
             const avaliacoes = store.rating
+            const avaliacoesMes = 0
             
             const info = { 
-                vendaMes,
-                vendaCancelada,
-                avaliacoes
+                vendaMes: vendaMes,
+                vendaCanceladaMes: vendaCanceladaMes,
+                avaliacoes,
+                avaliacoesMes: avaliacoesMes
             }
 
             return res.json(info)
 
-        }catch{
-            return res.status(400).send({error: 'Error in show products'})
-        }
+        // }catch{
+        //     return res.status(400).send({error: 'Error in show home info'})
+        // }
+    },
+
+    async uploadImagem(req,res) {
+        console.log(req.file)
+        return res.json({Hello: 'teste'})
     }
-    //Pedidos
 }

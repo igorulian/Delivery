@@ -34,6 +34,10 @@ module.exports = {
             store.requests = undefined
             store.finishedrequests = undefined
 
+
+           // emailservice.enviarEmailCadastro
+
+
             return res.json({
                 store,
                 token: generateToken({id: store.id})

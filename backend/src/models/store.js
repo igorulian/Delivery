@@ -241,6 +241,11 @@ const storeSchema = new mongoose.Schema({
         select: false,
         required: false
     },
+    canceledrequests: {
+        type: [requestSchema],
+        select: false,
+        required: false
+    },
     rating: {
         type: [ratingSchema],
         select: false,

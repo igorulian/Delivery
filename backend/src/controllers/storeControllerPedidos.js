@@ -66,10 +66,23 @@ module.exports = {
 
             const reqId = req.params.requestid
 
+            const request = await Store.findById(req.storeId).select('+requests')
+
+            const removedrequest = request.requests.id(reqId)
+
             await Store.updateOne({
                 'requests._id': reqId
               }, {
                 $pull: { requests: { _id: reqId } }
+            })
+
+            await Store.findOneAndUpdate(
+                { _id: req.params.id }, 
+                {$addToSet: { canceledrequests: removedrequest}},
+                function (error, success) {
+                    if (error) {
+                        console.log(error);
+                }
             })
 
             return res.status(200).send("OK")

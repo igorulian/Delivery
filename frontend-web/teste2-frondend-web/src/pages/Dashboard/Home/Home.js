@@ -6,8 +6,10 @@ import './Home.css'
 import api from '../../../services/api'
 import ReactLoading from 'react-loading';
 import TimeField from 'react-simple-timefield';
-import padeiro from '../../../img/padeiro.svg'
+import padeiro from '../../../img/padeiro.svg' // MdAttachMoney    MdBlock
 //<ReactLoading type={'spin'} color={'#e3552f'} height={1000} width={100} />
+import * as MdIcons from 'react-icons/md'
+import {IconContext} from 'react-icons'
 
 export default class Dashboard extends Component {
 
@@ -38,8 +40,15 @@ export default class Dashboard extends Component {
                 }
             })
             this.setState({info: response.data})
-            console.log(this.state.info)
             localStorage.setItem('isOpen', response.data.isOpen)
+
+            const data = await api.get(`store/info/home/${id}`,{
+                headers: {
+                'Authorization': `Bearer ${token}` 
+                }
+            })
+
+            this.setState({data: data.data})
         }catch{
             alert('Erro ao carregar Informações')
         }
@@ -160,21 +169,62 @@ export default class Dashboard extends Component {
           <NavBar/>
             <div className='conteudo-home-infos'>
                 <div className="container-home-infos">
-                    <h3> 10000 </h3>
-                    <p> Vendas esse mês</p>
+                    <div style={{display: 'flex', height: '100%'}}>
+                        <div style={{marginTop: '14px'}}>
+                            <IconContext.Provider value={{color: '#e3552f ', size: 80}}>
+                                <MdIcons.MdAttachMoney/>  
+                            </IconContext.Provider>
+                        </div>
+                        <div>
+                            <h3> {this.state.data.vendaMes} </h3>
+                            <p> Vendas efetuadas esse mês</p>
+                        </div>
+
+                    </div>
                     {/* Colocar um icone daora */}
                 </div>
                 <div className="container-home-infos">
-                    <h3> 20 </h3>
-                    <p> Vendas Canceladas</p>
+                    <div style={{display: 'flex', height: '100%'}}>
+                        <div style={{marginTop: '18px'}}>
+                            <IconContext.Provider value={{color: '#e3552f ', size: 70}}>
+                                <MdIcons.MdBlock/>  
+                            </IconContext.Provider>
+                        </div>
+                        <div>
+                            <h3> {this.state.data.vendaCanceladaMes} </h3>
+                            <p> Vendas Canceladas esse mês</p>
+                        </div>
+
+                    </div>
+
                 </div>
                 <div className="container-home-infos">
-                    <h3> 3000 </h3>
-                    <p> Não sei oq é</p>
+                    <div style={{display: 'flex', height: '100%'}}>
+                        <div style={{marginTop: '18px'}}>
+                            <IconContext.Provider value={{color: '#e3552f ', size: 70}}>
+                                <MdIcons.MdAttachFile/>  
+                            </IconContext.Provider>
+                        </div>
+                        <div>
+                            <h3> {this.state.data.avaliacoesMes} </h3>
+                            <p> Novas avaliações esse mês</p>
+                        </div>
+
+                    </div>
                 </div>
                 <div className="container-home-infos">
-                    <h3> 30 </h3>
-                    <p> Ñ tenho a minima ideia</p>
+                <div style={{display: 'flex', height: '100%'}}>
+                        <div style={{marginTop: '18px'}}>
+                            <IconContext.Provider value={{color: '#e3552f ', size: 70}}>
+                                <MdIcons.MdStar/>  
+                            </IconContext.Provider>
+                        </div>
+                        <div>
+                            <h3> 4.5 </h3>
+                            <p> Pontuação média do restaurante</p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
             
@@ -226,6 +276,26 @@ export default class Dashboard extends Component {
                 <div className="container-home-abrir">
                     <h3> Fechamento Automatico </h3>
                     <p> Setar horário automático para o fechamento do restaurante</p>
+                    <TimeField
+                        value={this.state.info.autoClose}
+                        onChange={this.onTimeChange}
+                        style={{
+                        border: '2px solid #ddd',
+                        fontSize: 30,
+                        width: 107,
+                        padding: '5px 7px',
+                        color: '#333',
+                        borderRadius: 3,
+                        marginTop: 5,
+                        paddingLeft: '15px',
+                        backgroundColor: '#f9f9f9'
+                        }}
+                    />
+                    <button className="alterar" onClick={ () => this.alterarHorarioFechamento()}> alterar </button>
+                </div>
+                <div className="container-home-abrir">
+                    <h3> Tempo de entrega </h3>
+                    <p> Setar o tempo média de preparo e entrega do produto</p>
                     <TimeField
                         value={this.state.info.autoClose}
                         onChange={this.onTimeChange}
