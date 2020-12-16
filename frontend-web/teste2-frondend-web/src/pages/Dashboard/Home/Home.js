@@ -9,6 +9,8 @@ import TimeField from 'react-simple-timefield';
 import padeiro from '../../../img/padeiro.svg' // MdAttachMoney    MdBlock
 //<ReactLoading type={'spin'} color={'#e3552f'} height={1000} width={100} />
 import * as MdIcons from 'react-icons/md'
+import * as FaIcons from 'react-icons/fa'
+import * as IoIcons from 'react-icons/io'
 import {IconContext} from 'react-icons'
 
 export default class Dashboard extends Component {
@@ -28,6 +30,9 @@ export default class Dashboard extends Component {
             isOpen: false
         },
         isLoading: true,
+        taxaEntrega: 0,
+        fechamentoAutomatico: '00:00',
+        tempoEntrega: 0
     }
 
     loadInfo = async () => {
@@ -148,6 +153,31 @@ export default class Dashboard extends Component {
         }
     }
 
+    atualizarDados = async () => {
+        try{
+            const id = localStorage.getItem('id')
+            const token = localStorage.getItem('token')
+
+            const request = {
+                
+            }
+
+            await api.post(`/store/update/${id}`,request,{
+                headers: {
+                'Authorization': `Bearer ${token}` 
+                }
+            })
+
+            if(!window.confirm(`Deseja atulizar os dados do restaurante?`)) return
+
+
+        }catch{
+            alert('Erro ao ataulizar dados do restaurante')
+        }
+
+        this.loadInfo()
+    }
+
 
     render(){
         
@@ -228,96 +258,93 @@ export default class Dashboard extends Component {
                 </div>
             </div>
             
-            <div className='conteudo-home'>
-                <div className="container-home-abrir">
-                    <h3> Taxa de Entrega </h3>
-                    <p> Setar taxa de entrega do restaurante</p>
-                    <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                    <h3 style={{marginRight: '5px'}}> R$ </h3>
-                    <input
-                        type={'number'}
-                        ref={input => this.taxaEntrega = input}
-                        defaultValue={this.state.info.deliveryFee}
-                        max={'10'}
-                        maxlength="2"
-                        style={{
-                        border: '2px solid #ddd',
-                        fontSize: 30,
-                        width: 80,
-                        padding: '5px 7px',
-                        color: '#333',
-                        borderRadius: 3,
-                        marginTop: 5,
-                        paddingLeft: '15px',
-                        backgroundColor: '#f9f9f9',
-                        paddingRight: '2px',
-                        }}
-                    />
-                    </div>
-                    <button className="alterar" onClick={ () => this.alterarTaxaDeEntrega()}> alterar </button>
-                </div>
-                <div className="container-home-abrir">
-                    {this.state.info.isOpen === true && 
-                    <>
-                    <h3> Restaurante Aberto  </h3>
-                    <p> Ao clicar no botão abaixo o seu restaurante aparecerá na lista de restaurantes abertos (até abri-lo denovo)</p>
-                    <button className="fechar" onClick={() => this.abrirFecharRestaurante()}> FECHAR </button>
-                    </>
-                    }
-                    {this.state.info.isOpen === false && 
-                    <>
-                    <h3> Restaurante Fechado </h3>
-                    <p> Ao clicar no botão abaixo o seu restaurante aparecerá na lista de restaurantes abertos e poderá receber pedidos a qualquer momento :)</p>
-                    {/* <img src={padeiro} style={{width: '50px', height: '50px'}} /> */}
-                    <button className="abrir" onClick={() => this.abrirFecharRestaurante()}> ABRIR </button>
-                    </>
-                    }
-                </div>
-                <div className="container-home-abrir">
-                    <h3> Fechamento Automatico </h3>
-                    <p> Setar horário automático para o fechamento do restaurante</p>
-                    <TimeField
-                        value={this.state.info.autoClose}
-                        onChange={this.onTimeChange}
-                        style={{
-                        border: '2px solid #ddd',
-                        fontSize: 30,
-                        width: 107,
-                        padding: '5px 7px',
-                        color: '#333',
-                        borderRadius: 3,
-                        marginTop: 5,
-                        paddingLeft: '15px',
-                        backgroundColor: '#f9f9f9'
-                        }}
-                    />
-                    <button className="alterar" onClick={ () => this.alterarHorarioFechamento()}> alterar </button>
-                </div>
-                <div className="container-home-abrir">
-                    <h3> Tempo de entrega </h3>
-                    <p> Setar o tempo média de preparo e entrega do produto</p>
-                    <TimeField
-                        value={this.state.info.autoClose}
-                        onChange={this.onTimeChange}
-                        style={{
-                        border: '2px solid #ddd',
-                        fontSize: 30,
-                        width: 107,
-                        padding: '5px 7px',
-                        color: '#333',
-                        borderRadius: 3,
-                        marginTop: 5,
-                        paddingLeft: '15px',
-                        backgroundColor: '#f9f9f9'
-                        }}
-                    />
-                    <button className="alterar" onClick={ () => this.alterarHorarioFechamento()}> alterar </button>
-                </div>
-            </div>
-
             <div className='conteudo-home-graficos'>
                 <div className="container-home-grafico">
-                    <h3> Grafico Foda </h3>
+                    <div style={{width: '100%', textAlign: 'center', marginBottom: '40px'}}>
+                        <h2> <IconContext.Provider value={{color: '#e3552f'}}> <FaIcons.FaTools/> Configurações <FaIcons.FaTools/> </IconContext.Provider> </h2> 
+                    </div>
+
+                    <div className="config-section">
+                        <p className="config-title"> Taxa de entrega: </p>
+                        <p className="config-cfg"> R$4.00 </p>
+                        <div className="config-buttons">
+                            <button> 
+                                <IconContext.Provider value={{color: '#e3552f ', size: 30}}> 
+                                    <IoIcons.IoMdArrowDropupCircle/> 
+                                </IconContext.Provider> 
+                            </button> 
+
+                            <button> 
+                                <IconContext.Provider value={{color: '#F0C910 ', size: 30}}> 
+                                    <IoIcons.IoMdArrowDropdownCircle/>  
+                                </IconContext.Provider>
+                            </button> 
+                        </div>
+                    </div>
+                    
+                    <div className="line">&nbsp;</div>
+
+                    <div className="config-section">
+                        <p className="config-title"> Fechamento automatico: </p>
+                        <p className="config-cfg"> 22:00h </p>
+                        <div className="config-buttons">
+                            <button> 
+                                <IconContext.Provider value={{color: '#e3552f ', size: 30}}> 
+                                    <IoIcons.IoMdArrowDropupCircle/> 
+                                </IconContext.Provider> 
+                            </button> 
+
+                            <button> 
+                                <IconContext.Provider value={{color: '#F0C910 ', size: 30}}> 
+                                    <IoIcons.IoMdArrowDropdownCircle/>  
+                                </IconContext.Provider>
+                            </button> 
+                        </div>
+                    </div>
+
+                    <div className="line">&nbsp;</div>
+
+                    <div className="config-section">
+                        <p className="config-title"> Tempo de entrega: </p>
+                        <p className="config-cfg"> 00:40m </p>
+                        <div className="config-buttons">
+                            <button> 
+                                <IconContext.Provider value={{color: '#e3552f ', size: 30}}> 
+                                    <IoIcons.IoMdArrowDropupCircle/> 
+                                </IconContext.Provider> 
+                            </button> 
+
+                            <button> 
+                                <IconContext.Provider value={{color: '#F0C910 ', size: 30}}> 
+                                    <IoIcons.IoMdArrowDropdownCircle/>  
+                                </IconContext.Provider>
+                            </button> 
+                        </div>
+                    </div>
+
+                    <div className="line">&nbsp;</div>
+
+                    <div className="config-section">
+                        <p className="config-title"> Não tenho idéia: </p>
+                        <p className="config-cfg"> 00.00 </p>
+                        <div className="config-buttons">
+                            <button> 
+                                <IconContext.Provider value={{color: '#e3552f ', size: 30}}> 
+                                    <IoIcons.IoMdArrowDropupCircle/> 
+                                </IconContext.Provider> 
+                            </button> 
+
+                            <button> 
+                                <IconContext.Provider value={{color: '#F0C910 ', size: 30}}> 
+                                    <IoIcons.IoMdArrowDropdownCircle/>  
+                                </IconContext.Provider>
+                            </button> 
+                        </div>
+                    </div>
+
+                    <div className="div-btn-atualizar">
+                        <button> Atualizar </button>
+                    </div>
                 </div>
                 <div className="container-home-avaliacoes">
                     <h3> Avaliações </h3>
