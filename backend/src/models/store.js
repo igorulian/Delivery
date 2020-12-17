@@ -61,7 +61,8 @@ const productSchema = new mongoose.Schema({
     },
     imageUrl:{
         type:String,
-        required: false
+        required: false,
+        default: ''
     },
     cost:{
         type: Number,

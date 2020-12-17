@@ -161,7 +161,8 @@ export default class Cardapio extends Component{
                                                 <strong> {product.name} </strong>
 
                                                 <div>
-                                                    <img src={burgerImg}/>
+                                                    {console.log(product.imageUrl)}
+                                                    <img src={product.imageUrl === '' ?  burgerImg : product.imageUrl}/>
                                                 </div>
 
                                                 <p> {this.pegarIngrediente(product.ingredient)} </p>

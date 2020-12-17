@@ -134,7 +134,7 @@ module.exports = {
             if(!(req.storeId === req.params.id))
             return res.status(400).send({error: 'Invalid store'}) 
 
-            const {name,cost,category,ingredient} = req.body
+            const {name,cost,category,ingredient, imageUrl} = req.body
             // console.log(req.body)
 
             const newProduct = {
@@ -142,7 +142,8 @@ module.exports = {
                 cost,
                 category,
                 ingredient,
-                category
+                category,
+                imageUrl
             }
 
             await Store.findOneAndUpdate(
@@ -238,31 +239,41 @@ module.exports = {
     },
 
     async uploadImagem(req,res) {
-        // console.log(req.file)
+        try{
+        if(!(req.storeId === req.params.id))
+        return res.status(400).send({error: 'Invalid store'}) 
+
         return res.json(req.file)
+        
+        }catch{
+            return res.status(400).send({error: 'Error in upload file'})
+        }
     },
     async deleteImage(req,res) {  // depois vincular a key (nome) com o id do restaurabte para poder deletar apenas se for do restaurante
         try{
-        const imageKey = req.params.imageid
-        console.log('IMG: ' + imageKey)
+            if(!(req.storeId === req.params.id))
+            return res.status(400).send({error: 'Invalid store'}) 
 
-        var params = {
-            Bucket: 'upload-delivery', 
-            Delete: { // required
-              Objects: [ // required
-                {
-                  Key: imageKey // required
-                }
-              ],
-            },
-        };
+            const imageKey = req.params.imageid
+            // console.log('IMG: ' + imageKey)
 
-        s3.deleteObjects(params, function(err, data) {
-            if (err) console.log(err, err.stack); // an error occurred
-            // else  console.log(data);           // successful response
-        });
+            var params = {
+                Bucket: 'upload-delivery', 
+                Delete: { // required
+                Objects: [ // required
+                    {
+                    Key: imageKey // required
+                    }
+                ],
+                },
+            };
 
-        return res.status(200).send('OK')
+            s3.deleteObjects(params, function(err, data) {
+                if (err) console.log(err, err.stack); // an error occurred
+                // else  console.log(data);           // successful response
+            });
+
+            return res.status(200).send('OK')
         }catch{
             return res.status(400).send({error: 'Error in delete image'})
         }
