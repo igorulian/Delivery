@@ -48,7 +48,8 @@ routes.get('/info/home/:id', StoreController.homeInfo)
 
 routes.post('/auth/validtoken', StoreAuthController.validToken)
 
-routes.post('/upload/image',multer(multerConfig).single('file'),storeController.uploadImagem)
+routes.post('/upload/image',multer(multerConfig).single('file'),StoreController.uploadImagem)
+routes.delete('/upload/image/delete/:imageid', StoreController.deleteImage)
 
 
 module.exports = routes

@@ -6,7 +6,7 @@
 }
 
 .product-list article{
-    background-color: #fff;
+    background-color: #f9f9f9;
     border: 2px solid #DDD;
     border-radius: 20px;
     /* padding: 20px; */
@@ -19,7 +19,6 @@
     /* box-shadow: 1px 1px #888888; */
     /* max-height: 450px; */
     /* position: relative; */
-    background-color: #f9f9f9;
 
 }
 

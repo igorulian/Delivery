@@ -5,8 +5,6 @@ import '../page-style.css'
 import './Home.css'
 import api from '../../../services/api'
 import ReactLoading from 'react-loading';
-import TimeField from 'react-simple-timefield';
-import padeiro from '../../../img/padeiro.svg' // MdAttachMoney    MdBlock
 //<ReactLoading type={'spin'} color={'#e3552f'} height={1000} width={100} />
 import * as MdIcons from 'react-icons/md'
 import * as FaIcons from 'react-icons/fa'
@@ -19,20 +17,11 @@ export default class Dashboard extends Component {
         super()
     }
 
-    onTimeChange = (event,value) =>{
-
-        this.setState({autoClose: value})
-
-    }
-
     state = {
         info: {
             isOpen: false
         },
         isLoading: true,
-        taxaEntrega: 0,
-        fechamentoAutomatico: '00:00',
-        tempoEntrega: 0
     }
 
     loadInfo = async () => {
@@ -54,6 +43,7 @@ export default class Dashboard extends Component {
             })
 
             this.setState({data: data.data})
+
         }catch{
             alert('Erro ao carregar Informações')
         }
@@ -92,65 +82,59 @@ export default class Dashboard extends Component {
 
     }
 
-    alterarHorarioFechamento = async (horario) => {
+    alterarHorarioFechamento = async (maisoumenos) => {
         try{
-            const id = localStorage.getItem('id')
-            const token = localStorage.getItem('token')
+            if( maisoumenos >= 1 && this.state.info.autoClose >= 23) return
+            if( maisoumenos < 1 && this.state.info.autoClose <= 0) return
 
-            const request = {
-                autoClose: this.state.autoClose
-            }
-
-            if(!window.confirm(`Deseja alterar o horario de fechamento automatico do restaurante?`)) return
-
-            await api.post(`/store/update/${id}`,request,{
-                headers: {
-                'Authorization': `Bearer ${token}` 
-                }
-            })
-
-           
-            this.loadInfo()
-
+            this.setState({info: {
+                autoClose: this.state.info.autoClose + maisoumenos,
+                deliveryFee: this.state.info.deliveryFee,
+                deliveryTime: this.state.info.deliveryTime,
+                isOpen: this.state.info.isOpen
+            }})
 
         }catch{
             alert('Erro ao abrir/fechar restaurante')
         }
     }
 // deliveryFee
-    alterarTaxaDeEntrega = async (taxa) => {
+    alterarTaxaDeEntrega = async (maisoumenos) => {
         try{
 
-            const newFee = this.taxaEntrega.value
+            if(maisoumenos <= 0 && this.state.info.deliveryFee <= 0) return
 
-            var er = /^[0-9]+$/;
+            this.setState({info: {
+                deliveryFee: this.state.info.deliveryFee + maisoumenos,
+                autoClose: this.state.info.autoClose,
+                deliveryTime: this.state.info.deliveryTime,
+                isOpen: this.state.info.isOpen
+            }})
 
-            if(!er.test(newFee)){
-                alert('Valor inválido')
-                return
-            }
-
-            const id = localStorage.getItem('id')
-            const token = localStorage.getItem('token')
-
-            const request = {
-                deliveryFee: newFee
-            }
-
-            if(!window.confirm(`Deseja alterar a taxa de entrega do restaurante?`)) return
-
-            await api.post(`/store/update/${id}`,request,{
-                headers: {
-                'Authorization': `Bearer ${token}` 
-                }
-            })
-
-            
-            this.loadInfo()
 
         }catch{
             alert('Erro ao alterar a taxa de entrega restaurante')
         }
+    }
+
+    alterarTempoDeEntrega = async (maisoumenos) => {
+        try{
+
+        if(maisoumenos <= 0 && this.state.info.deliveryTime <= 1) return
+
+        if(maisoumenos > 0 && this.state.info.deliveryTime >= 60) return
+
+        this.setState({info: {
+            deliveryFee: this.state.info.deliveryFee,
+            autoClose: this.state.info.autoClose,
+            deliveryTime: this.state.info.deliveryTime + maisoumenos,
+            isOpen: this.state.info.isOpen
+        }})
+
+        }catch{
+            alert('Erro ao alterar tempo de entrega ')
+        }
+
     }
 
     atualizarDados = async () => {
@@ -159,7 +143,8 @@ export default class Dashboard extends Component {
             const token = localStorage.getItem('token')
 
             const request = {
-                
+                deliveryFee: this.state.info.deliveryFee,
+                autoClose: this.state.info.autoClose
             }
 
             await api.post(`/store/update/${id}`,request,{
@@ -257,7 +242,22 @@ export default class Dashboard extends Component {
                     </div>
                 </div>
             </div>
-            
+            <div className='conteudo-home-infos'>
+                <div className="container-home-infos" style={{textAlign: 'center'}}>
+                    <div>
+                        <div style={{width: '100%', display: 'flex', textAlign: 'center', alignItems: 'center', justifyContent: 'center'}}>
+                            <h2 style={{marginRight: '8px'}}> Status: </h2>
+                            <div> {this.state.info.isOpen ? <h2 style={{color: '#4cac43'}}>Aberto</h2> : <h2 style={{color: '#cf4a4a'}}>Fechado</h2>} </div>
+                        </div>
+                        
+                        <p> Ao abrir o restaurante você poderá </p>
+                        <p> receber pedidos de clientes</p>
+                    </div>
+                    <div className="div-btn-atualizar">
+                        <button style={{fontSize: '30px'}}onClick={() => this.abrirFecharRestaurante()}> {this.state.info.isOpen ? 'Fechar' : 'Abrir'} </button>
+                    </div>
+                </div>
+            </div>
             <div className='conteudo-home-graficos'>
                 <div className="container-home-grafico">
                     <div style={{width: '100%', textAlign: 'center', marginBottom: '40px'}}>
@@ -266,15 +266,15 @@ export default class Dashboard extends Component {
 
                     <div className="config-section">
                         <p className="config-title"> Taxa de entrega: </p>
-                        <p className="config-cfg"> R$4.00 </p>
+                        <p className="config-cfg"> R${this.state.info.deliveryFee}.00</p>
                         <div className="config-buttons">
-                            <button> 
+                            <button onClick={() => this.alterarTaxaDeEntrega(1)}> 
                                 <IconContext.Provider value={{color: '#e3552f ', size: 30}}> 
                                     <IoIcons.IoMdArrowDropupCircle/> 
                                 </IconContext.Provider> 
                             </button> 
 
-                            <button> 
+                            <button onClick={() => this.alterarTaxaDeEntrega(-1)}> 
                                 <IconContext.Provider value={{color: '#F0C910 ', size: 30}}> 
                                     <IoIcons.IoMdArrowDropdownCircle/>  
                                 </IconContext.Provider>
@@ -286,15 +286,15 @@ export default class Dashboard extends Component {
 
                     <div className="config-section">
                         <p className="config-title"> Fechamento automatico: </p>
-                        <p className="config-cfg"> 22:00h </p>
+                        <p className="config-cfg"> {this.state.info.autoClose}:00h </p>
                         <div className="config-buttons">
-                            <button> 
+                            <button onClick={() => this.alterarHorarioFechamento(1)}> 
                                 <IconContext.Provider value={{color: '#e3552f ', size: 30}}> 
                                     <IoIcons.IoMdArrowDropupCircle/> 
                                 </IconContext.Provider> 
                             </button> 
 
-                            <button> 
+                            <button onClick={() => this.alterarHorarioFechamento(-1)}> 
                                 <IconContext.Provider value={{color: '#F0C910 ', size: 30}}> 
                                     <IoIcons.IoMdArrowDropdownCircle/>  
                                 </IconContext.Provider>
@@ -306,15 +306,15 @@ export default class Dashboard extends Component {
 
                     <div className="config-section">
                         <p className="config-title"> Tempo de entrega: </p>
-                        <p className="config-cfg"> 00:40m </p>
+                        <p className="config-cfg"> 00:{this.state.info.deliveryTime}m </p>
                         <div className="config-buttons">
-                            <button> 
+                            <button onClick={() => this.alterarTempoDeEntrega(1)}> 
                                 <IconContext.Provider value={{color: '#e3552f ', size: 30}}> 
                                     <IoIcons.IoMdArrowDropupCircle/> 
                                 </IconContext.Provider> 
                             </button> 
 
-                            <button> 
+                            <button onClick={() => this.alterarTempoDeEntrega(-1)}> 
                                 <IconContext.Provider value={{color: '#F0C910 ', size: 30}}> 
                                     <IoIcons.IoMdArrowDropdownCircle/>  
                                 </IconContext.Provider>
@@ -343,7 +343,7 @@ export default class Dashboard extends Component {
                     </div>
 
                     <div className="div-btn-atualizar">
-                        <button> Atualizar </button>
+                        <button onClick={() => this.atualizarDados()}> Atualizar </button>
                     </div>
                 </div>
                 <div className="container-home-avaliacoes">

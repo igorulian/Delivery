@@ -21,7 +21,8 @@ export default class AddProduto extends Component{
         ],
         ingredientesParaAdicionar: [{}],
         catID: '',
-        modoPizza: true
+        modoPizza: false,
+        ativarIngrediente: false
         
     }
 
@@ -129,6 +130,10 @@ export default class AddProduto extends Component{
         this.setState({modoPizza: !this.state.modoPizza})
     }
 
+    ativarDesativarIngrediente = () => {
+
+        this.setState({ativarIngrediente: !this.state.ativarIngrediente})
+    }
 
     render(){
         return(
@@ -166,22 +171,26 @@ export default class AddProduto extends Component{
                                 <label htmlFor="preco">Preço</label>
                                 <input ref={input => this.textCostInput = input} type="preco" name="preco" placeholder="Digite o preço" />
 
-                                <label htmlFor="ingredientes">Ingredientes</label>
+                                <div style={{display: 'flex', width: '100%'}}>
+                                <label htmlFor="ingredientes">Ingredientes: </label>
+                                <div style={{marginTop: '4px', marginLeft: '5px'}}>
+                                <Switch onChange={() => this.ativarDesativarIngrediente() } onColor={'#e3552f'} width={40} height={20} checked={this.state.ativarIngrediente} activeBoxShadow={null} />
+                                </div>
+
+                                </div>
 
                             </div>
 
-                            
+                            {this.state.ativarIngrediente == true &&
                             <div className="form-group-ingredientes">
                                 {this.state.ingredientes.map(ingrediente =>(
-                                   //<div key={ingrediente.numero} className="form-group-ingredientes-item"> 
 
                                     <input key={ingrediente.numero} ref={input => this.textIngredientInput = input} id={`ingrediente${ingrediente.numero}`} type="ingredient" name={`ingrediente + ${ingrediente.numero}`} placeholder={`Digite o ingredienete`} />
-
-                                    //</div>
 
                                 ))}
 
                             </div>
+                            }
                             </>
                             }
                             {this.state.modoPizza == true && 
@@ -234,12 +243,16 @@ export default class AddProduto extends Component{
                                 </>
                             }
 
+                            {this.state.ativarIngrediente == true && 
+                            <>
                             {this.state.modoPizza == false && 
                             <button onClick={() => this.adicionarIngrediente()} className="btnAdicionarIngredienete">
                                 <IconContext.Provider value={{color: '#008000 ', size: 30}} >
                                     <IoIcons.IoMdAddCircle/>
                                 </IconContext.Provider>
                             </button>
+                            }
+                            </>
                             }
 
                             <button onClick={() => this.salvarProduto()} type="button" className="btn">

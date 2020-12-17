@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One&family=Staatliches&display=swap');
 
 .container-home-infos{
     background-color: #fff; 
@@ -7,7 +8,8 @@
     padding: 10px;
     min-width: 335px;
     min-height: 130px;
-    margin: 20px;
+    margin: 15px;
+    margin-bottom: 10px;
     justify-content: center;
     box-shadow: 2px 2px 10px 3px #ccc;
 }
@@ -45,7 +47,7 @@
     margin-top: 10px;
     padding: 10px;
     min-width: 400px;
-    min-height: 600px;
+    min-height: 500px;
     justify-content: center;
     box-shadow: 2px 2px 4px 3px #ccc;
     margin-right: 20px;
@@ -66,7 +68,6 @@
 .conteudo-home-graficos{
     width: 100%;
     padding-left: 250px;
-    margin-top: 30px;
     align-items: initial;
     height: fit-content;
     display: flex;
@@ -135,6 +136,8 @@
     font-size: 40px;
     margin-top: 20px;
     cursor: pointer;
+    font-family: 'Staatliches', cursive;
+    letter-spacing: 4px;
 }
 
 .div-btn-atualizar button:hover{

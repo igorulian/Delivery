@@ -59,7 +59,7 @@ const productSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    image:{
+    imageUrl:{
         type:String,
         required: false
     },
@@ -189,7 +189,7 @@ const storeSchema = new mongoose.Schema({
         required: true,
         default: false
     },
-    image:{
+    imageUrl:{
         type:String,
         required: false
     },
@@ -252,14 +252,19 @@ const storeSchema = new mongoose.Schema({
         required: false
     },
     autoClose: {
-        type: String,
+        type: Number,
         required: true,
-        default: '23:00'
+        default: 23
     },
     deliveryFee: {
         type: Number,
         required: true,
         default: 4
+    },
+    deliveryTime: {
+        type: Number,
+        required: true,
+        default: 20
     },
     createdAt:{
         type: Date,

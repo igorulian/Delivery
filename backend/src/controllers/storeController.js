@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 
 const Store = mongoose.model('Store')
 
+const aws = require('aws-sdk')
+
+const s3 = new aws.S3()
+
 module.exports = {
 
 // Loja
@@ -169,6 +173,8 @@ module.exports = {
                 $pull: { products: { _id: pid } }
             })
 
+            // remover a imagem da aws que esta vinculada no produto
+
             return res.status(200).send("OK")
 
         }catch(erru){
@@ -232,7 +238,33 @@ module.exports = {
     },
 
     async uploadImagem(req,res) {
-        console.log(req.file)
-        return res.json({Hello: 'teste'})
+        // console.log(req.file)
+        return res.json(req.file)
+    },
+    async deleteImage(req,res) {  // depois vincular a key (nome) com o id do restaurabte para poder deletar apenas se for do restaurante
+        try{
+        const imageKey = req.params.imageid
+        console.log('IMG: ' + imageKey)
+
+        var params = {
+            Bucket: 'upload-delivery', 
+            Delete: { // required
+              Objects: [ // required
+                {
+                  Key: imageKey // required
+                }
+              ],
+            },
+        };
+
+        s3.deleteObjects(params, function(err, data) {
+            if (err) console.log(err, err.stack); // an error occurred
+            // else  console.log(data);           // successful response
+        });
+
+        return res.status(200).send('OK')
+        }catch{
+            return res.status(400).send({error: 'Error in delete image'})
+        }
     }
 }
