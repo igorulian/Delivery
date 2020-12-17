@@ -166,15 +166,45 @@ module.exports = {
 
             if(!(req.storeId === req.params.id))
             return res.status(400).send({error: 'Invalid store'})
+
+            const produtos = await Store.findById(req.storeId).select('+products')
+
             const pid = req.params.productid
 
-            await Store.update({
+            const produto = produtos.products.id(pid)
+            
+
+            await Store.updateOne({
                 'products._id': pid
               }, {
                 $pull: { products: { _id: pid } }
             })
 
-            // remover a imagem da aws que esta vinculada no produto
+            const imageUrl = produto.imageUrl
+
+            // console.log('imagekey: ' + imageUrl)
+
+            if(imageUrl != '' && imageUrl.includes('amazonaws') && imageUrl.includes('m/') ){
+                const imageKey = imageUrl.split('m/')[1]
+                // console.log(imageKey)
+
+            var params = {
+                Bucket: 'upload-delivery', 
+                Delete: { // required
+                Objects: [ // required
+                    {
+                    Key: imageKey // required
+                    }
+                ],
+                },
+            };
+
+            s3.deleteObjects(params, function(err, data) {
+                if (err) console.log(err, err.stack); // an error occurred
+                // else  console.log(data);           // successful response
+            });
+            }
+
 
             return res.status(200).send("OK")
 

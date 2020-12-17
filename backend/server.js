@@ -14,6 +14,7 @@ const io = require('socket.io')(server)
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useCreateIndex', true);
+mongoose.set('useFindAndModify', false);
 
 
 mongoose.connect('mongodb://localhost:27018/deliveryapi',{ useUnifiedTopology: true })

@@ -272,14 +272,16 @@ export default class AddProduto extends Component{
                                 }
 
                             {this.state.isUploadingImage == true  &&
-                            <div Style={{width: '100%', height: '140px', display:'flex', justifyContent: 'center', alignItems: 'center'}}>
-                                <img style={{width: '140px', height: '140px', marginBottom: '30px'}} src={URL.createObjectURL(this.state.uploadingFile)}></img>
-                                <button onClick={() => this.cancelarEnvioDaImagem()} style={{width: '20px', height: '20px', borderStyle: 'none', color: '#fff', backgroundColor: '#cf4a4a', borderRadius: '30px', cursor: 'pointer'}}> X </button>
+                            <div style={{width: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
+                                <img style={{width: '140px', height: '140px', marginBottom: '10px', opacity: this.state.imageUploaded ? '100%' : '50%'}} src={URL.createObjectURL(this.state.uploadingFile)}></img>
+                                <button onClick={() => this.cancelarEnvioDaImagem()} style={{position: 'absolute',width: '20px', height: '20px', borderStyle: 'none', color: '#fff', backgroundColor: '#cf4a4a', borderRadius: '30px', cursor: 'pointer' , marginBottom: '160px', marginLeft: '140px'}}> X </button>
                             </div>
                             }
 
                             {this.state.imageUploaded == false && this.state.isUploadingImage == true &&
-                             <ReactLoading type={'bars'} color={'#e3552f'} height={30} width={30} />
+                            <div style={{position: 'absolute', marginTop: '70px'}}>
+                                <ReactLoading type={'bars'} color={'#e3552f'} height={30} width={30} />
+                             </div>
                             }
 
                             <div className="form-group">
