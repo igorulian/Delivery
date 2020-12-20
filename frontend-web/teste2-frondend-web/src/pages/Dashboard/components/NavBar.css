@@ -1,5 +1,5 @@
 .navbar{
-    background-color: #525252;   /*###e3552f;*/
+    background-color: #474747;   /*###e3552f;*/
     /* height: 60px; */
     height: 0px;
     display: flex;
@@ -14,7 +14,7 @@
 }
 
 .nav-menu{
-    background-color: #525252;
+    background-color: #474747;
     width: 250px;
     height: 100vh;
     display: flex;
@@ -60,7 +60,7 @@
 }
 
 .navbar-toggle{
-    background-color: #525252;
+    background-color: #474747;
     width: 100%;
     height: 80px;
     display: flex;
@@ -83,20 +83,23 @@ span{
 }
 
 .navmenu-header div{
-    background-color: #fff;
-    border: 3px solid #fff;
+    /* background-color: #fff; */
+    border: 1px solid #fff;
     width: 100px;
     height: 100px;
     margin-left: 60px;
     margin-bottom: 15px;
-    border-radius: 30px;
+    /* border-radius: 30px; */
     cursor: pointer;
 }
-.navmenu-header div img{
-    width: 80%;
-    height: 80%;
+.navmenu-header img{
+    width: 100px;
+    height: 100px;
     margin-top: 10px;
     margin-left: 2px;
+    margin-bottom: 10px;
+    border: 1px solid #fff;
+    border-radius: 20px;
 }
 .navmenu-header h3{
     color: #fff;

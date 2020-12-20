@@ -218,6 +218,11 @@ const storeSchema = new mongoose.Schema({
         required: true,
         select: false,
     },
+    phoneNumber:{
+        type: String,
+        required: true,
+        default: ''
+    },
     description:{
         type: String,
         required: false

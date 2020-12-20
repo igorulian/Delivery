@@ -289,7 +289,7 @@ export default class AddProduto extends Component{
                                 <input ref={input => this.textNameInput = input} type="name" name="name" placeholder="Digite o nome do produto" />
 
                                 <label htmlFor="preco">Preço</label>
-                                <input ref={input => this.textCostInput = input} type="preco" name="preco" placeholder="Digite o preço" />
+                                <input ref={input => this.textCostInput = input} type="number" onkeyup="value=isNaN(parseFloat(value))?1000:value" name="preco" placeholder="Digite o preço" />
 
                                 <div style={{display: 'flex', width: '100%'}}>
                                 <label htmlFor="ingredientes">Ingredientes: </label>

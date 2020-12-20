@@ -111,6 +111,10 @@
     cursor: pointer;
 }
 
+.config-buttons button:hover{
+    opacity: 60%;
+}
+
 .line {
     right: 0;
     height: 1px;

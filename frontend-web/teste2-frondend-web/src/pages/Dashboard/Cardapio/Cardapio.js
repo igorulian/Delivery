@@ -42,6 +42,7 @@ export default class Cardapio extends Component{
             console.log(response.data)
         }catch{
             console.log("Erro ao carregar produtos")
+            localStorage.setItem('token', '')
             alert("Erro ao carregar produtos")
         }
     }
@@ -59,6 +60,7 @@ export default class Cardapio extends Component{
             // console.log(response.data)
         }catch{
             console.log("Erro ao carregar categorias")
+            localStorage.setItem('token', '')
             alert("Erro ao carregar categorias")
         }
     }

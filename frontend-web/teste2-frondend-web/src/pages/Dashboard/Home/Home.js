@@ -33,8 +33,16 @@ export default class Dashboard extends Component {
                 'Authorization': `Bearer ${token}` 
                 }
             })
+
             this.setState({info: response.data})
-            localStorage.setItem('isOpen', response.data.isOpen)
+            // console.log(response.data.isOpen)
+            
+            if(response.data.isOpen === true){
+                localStorage.setItem('isOpen', true)
+            }else{
+                localStorage.setItem('isOpen', false)
+            }
+
 
             const data = await api.get(`store/info/home/${id}`,{
                 headers: {
@@ -43,8 +51,11 @@ export default class Dashboard extends Component {
             })
 
             this.setState({data: data.data})
+            console.log(data)
+            
 
         }catch{
+            localStorage.setItem('token', '')
             alert('Erro ao carregar Informações')
         }
     }
@@ -65,13 +76,20 @@ export default class Dashboard extends Component {
                 isOpen: !isOpenInfo
             }
 
+            if(!window.confirm(`Deseja ${isOpenInfo === true ? 'Fechar' : 'Abrir' } o restaurante?`)) return
+
             await api.post(`/store/update/${id}`,request,{
                 headers: {
                 'Authorization': `Bearer ${token}` 
                 }
             })
 
-            if(!window.confirm(`Deseja ${isOpenInfo === true ? 'Fechar' : 'Abrir' } o restaurante?`)) return
+            if(isOpenInfo === true){
+                localStorage.setItem('isOpen', false)
+            }else{
+                localStorage.setItem('isOpen', true)
+            }
+
 
 
         }catch{

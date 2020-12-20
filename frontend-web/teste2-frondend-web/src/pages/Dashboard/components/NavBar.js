@@ -32,12 +32,12 @@ function NavBar(){
                     </li>
 
                     <div className="navmenu-header">
-                        <div>
-                            <img src={loginImg}/>
-                        </div>
+
+                        <img src={localStorage.getItem('imageUrl') ? localStorage.getItem('imageUrl') : loginImg}/>
+
                         <h3>{localStorage.getItem('name')}</h3>
                         {console.log(localStorage.getItem('isOpen'))}
-                        <p> {localStorage.getItem('isOpen') === true ? 'Aberto' : 'Fechado'}</p>
+                        <p> {localStorage.getItem('isOpen') == 'true' ? 'Aberto' : 'Fechado'}</p>
                     </div>
 
                     {SideBarData.map((item, index) => {
