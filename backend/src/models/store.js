@@ -192,7 +192,8 @@ const storeSchema = new mongoose.Schema({
     },
     imageUrl:{
         type:String,
-        required: false
+        required: false,
+        default: ''
     },
     email:{
         type: String,

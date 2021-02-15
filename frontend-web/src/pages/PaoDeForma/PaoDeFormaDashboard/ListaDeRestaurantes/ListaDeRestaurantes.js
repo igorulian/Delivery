@@ -56,29 +56,35 @@ export default class ListaDeRestaurantes extends Component{
                 <Sidebar/>
                 <h3> Lista de restaurantes</h3>
                 <div className="container-restaurantes-para-checkar">
-                    {this.state.requests.map(requests => (
+                    {this.state.requests.map(requests => requests.isValid == true ? (
                         <>
+                        
                         <div className="div-que-divide-no-meio">
                             <>
                             <div className="conteudo-restaurantes-para-checkar">
-                                <h3> {requests.name} </h3>  
+                                <p><b>Nome: </b> {requests.name}</p>
                                 <p><b>Email: </b> {requests.email}</p>
                                 <p><b>CNPJ: </b> {requests.cnpj}</p>
                                 <p><b>Rua: </b> {requests.address.rua} {requests.address.numero}</p>
                                 <p><b>Bairro: </b> {requests.address.bairro}</p>
                                 <p><b>Craido: </b> {requests.createdAt}</p>
+                                <p><b>Telefone: </b> {requests.phoneNumber}</p>
                             </div>
                             </>
-                            {/* <div className="conteudo-botoes">
-                                <button onClick={() => this.validarRestaurante(requests._id)} className="verificar"> <GoContext.GoCheck color={'white'} size={40}/> </button> 
-                                <button onClick={() => this.excluirRestaurante(requests._id)} className="excluir"> <GoContext.GoX color={'white'} size={40}/></button>
-                            </div> */}
-                            
+                            <div className="conteudo-botoes">
+                                <button style={{backgroundColor: '#3F3F3F'}} onClick={() => this.validarRestaurante(requests._id)} className="verificar"> <GoContext.GoCheck color={'white'} size={40}/> </button> 
+                                <button style={{backgroundColor: '#333'}} onClick={() => this.excluirRestaurante(requests._id)} className="excluir"> <GoContext.GoX color={'white'} size={40}/></button>
+                            </div>
+
                         </div>
                         
-                        <div className="linha-horizontal"></div>
+                        {this.state.requests.length > 1 ? 
+                        <div className="linha-horizontal"></div> 
+                        : <></>
+                        }
+
                         </>
-                    ))}
+                    ) : <></>)}
                 </div>
             </div>
         )

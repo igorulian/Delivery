@@ -3,6 +3,8 @@ import loginImg from "../../../img/entrega-de-alimentos.svg";
 import api from '../../../services/api'
 import {useNavigate} from 'react-router-dom'
 import ReactLoading from 'react-loading';
+import ConfirBox, { ConfirmBox } from '../../components/confirmBox';
+import AlertBox from '../../components/alertBox';
 
 export class Login extends React.Component {
 
@@ -14,6 +16,11 @@ export class Login extends React.Component {
   state = {
     token: '',
     isLoading: false,
+    alert:{
+      open: false,
+      message: '',
+      title: ''
+    }
   }
 
   logar = async () => {
@@ -21,7 +28,7 @@ export class Login extends React.Component {
     const password = this.textPassInput.value
     
     if(!( email && password)){
-      alert('Preencha todos os campos!')
+      this.alertar('Preencha todos os campos', 'Você precisa preencher todos os campos corretamente para efeturar o login')
       return
     }
 
@@ -37,13 +44,20 @@ export class Login extends React.Component {
       .catch(err => {
         this.limparLocalStorage()
         try{
-        alert(err.response.data.error)
+        // alert(err.response.data.error)
+        this.setState({alert:{open: true, title: err.response.data.error, message: 'Tente novamente'}})
         console.log(err.response.data.error)
+        this.setState({isLoading: false})
         }catch{
-          alert('Erro ao conectar ao servidor :/')
+          this.setState({isLoading: false})
+          this.alertar('Erro ao conectar com o servidor', 'Nossos servidores provavelmente estão fora do ar, lamentamos a incoveniencia :/')
         }
       });
     }
+  }
+
+  alertar = (title, message) => {
+    this.setState({alert:{open: true, title, message}})
   }
   
 
@@ -51,7 +65,8 @@ export class Login extends React.Component {
     console.log("Seguindo para Dashboard...")
     // console.log(res)
     if(!res.data.store.isValid){
-      alert('O Seu restaurante ainda não foi aprovado pela nossa equipe!')
+
+      this.alertar('Restaurente em fase de avaliação', 'O Seu estabelecimente ainda está em fase de avaliação, assim que possivel mandaremos um e-mail confirmando o cadastro!')
       return
     }
     this.setState({token: res.data.token,storeid: res.data.store._id})
@@ -75,6 +90,7 @@ export class Login extends React.Component {
 
     return (
       <div className="base-container" ref={this.props.containerRef}>
+        {this.state.alert.open && <AlertBox title={this.state.alert.title} message={this.state.alert.message} open={true} onClick={ () => { this.setState({alert: {open: false}})}}/>}
         <div className="headerLogin">Entrar</div>
         <div className="content">
           <div className="imageLogin">

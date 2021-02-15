@@ -56,10 +56,10 @@ module.exports = {
             const store = await Store.findOne({email}).select('+password')
 
             if(! store) // se o usuario n existir
-            return res.status(400).send({error: 'User not found'})
+            return res.status(400).send({error: 'Usuário não encontrado'})
 
             if(! await bcrypt.compare(password, store.password)) // se a senha estiver errada
-            return res.status(400).send({error: 'Ivalid password'})
+            return res.status(400).send({error: 'Senha Inválida'})
             
             store.password = undefined
             store.products = undefined
@@ -74,7 +74,7 @@ module.exports = {
                 store, 
                 token: generateToken({id: store.id})})
         }catch{
-            res.status(400).send({error: 'Authentication failed'})
+            res.status(400).send({error: 'Falha ao autenticar'})
         }
             
     },

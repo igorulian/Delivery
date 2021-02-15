@@ -36,7 +36,7 @@ function NavBar(){
                         <img src={localStorage.getItem('imageUrl') ? localStorage.getItem('imageUrl') : loginImg}/>
 
                         <h3>{localStorage.getItem('name')}</h3>
-                        {console.log(localStorage.getItem('isOpen'))}
+                        {/* {console.log(localStorage.getItem('isOpen'))} */}
                         <p> {localStorage.getItem('isOpen') == 'true' ? 'Aberto' : 'Fechado'}</p>
                     </div>
 

@@ -221,7 +221,6 @@ export default class Configuracao extends Component{
                 <div className='conteudo'>
                 <div className='container-config' style={{marginBottom: '100px'}}>
                     <h2 style={{marginBottom: '15px'}}> Configurações </h2>
-
                     {this.state.dados.imageUrl == '' && 
                     <div style={{width: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
                         <Dropzone accept="image/*" onDropAccepted={(file) => this.enviarImagem(file)}>

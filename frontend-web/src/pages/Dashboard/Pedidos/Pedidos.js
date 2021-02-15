@@ -7,6 +7,7 @@ import openSocket from 'socket.io-client';
 import * as AiContext from 'react-icons/ai'
 import {IconContext} from 'react-icons'
 import not from '../../../audio/not.mp3'
+import { confirmAlert } from 'react-confirm-alert';
 
 export default class Pedidos extends Component{
 
@@ -31,11 +32,35 @@ export default class Pedidos extends Component{
             const id = localStorage.getItem('id')
             const socket = openSocket('http://localhost:3001')
             const audio = new Audio(not)
+            const options = {
+                title: 'Title',
+                message: 'Message',
+                buttons: [
+                  {
+                    label: 'Yes',
+                    onClick: () => alert('Click Yes')
+                  },
+                  {
+                    label: 'No',
+                    onClick: () => alert('Click No')
+                  }
+                ],
+                childrenElement: () => <div />,
+                customUI: ({ onClose }) => <div>Custom UI</div>,
+                closeOnEscape: true,
+                closeOnClickOutside: true,
+                willUnmount: () => {},
+                afterClose: () => {},
+                onClickOutside: () => {},
+                onKeypressEscape: () => {},
+                overlayClassName: "overlay-custom-class-name"
+              };
             socket.on(`${id}`, async data => {
                 console.log(data)
                 await this.loadRequests()
                 audio.play()
-                alert("NOVO PEDIDO!")
+                confirmAlert(options);
+                // alert("NOVO PEDIDO!")
             })
         }catch{
             alert("Erro ao conectar socket")
@@ -202,8 +227,9 @@ export default class Pedidos extends Component{
         return (
             <div className='page'>
                 <NavBar/>
+                {this.state.requests.length > 0 ? 
                 <div className='conteudo-pedidos'>
-                    {this.state.requests && this.state.requests.map(request =>{
+                    {this.state.requests.map(request =>{
                         t++
                         if(request.progress === 0){
 
@@ -316,8 +342,16 @@ export default class Pedidos extends Component{
                     }
                     )}
                     
-                {/* <button onClick={() => {this.efetuarPedido()}}> Efetuar Pedido </button> */}
+                <button onClick={() => {this.efetuarPedido()}}> Efetuar Pedido </button>
                 </div>
+                : 
+                
+                <div style={{width: '100%', height: '100%', paddingLeft: '250px', textAlign: 'center'}}>
+                    <h2 style={{marginTop: '10%'}}> Você ainda não possui nenhum pedido em andamento :)</h2>
+                    <img style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto'}} src="https://www.flaticon.com/svg/vstatic/svg/3823/3823855.svg?token=exp=1613338193~hmac=1e3d8719d9416e6a2e5f920f6569ad5d"/>
+                    <button onClick={() => {this.efetuarPedido()}}> Efetuar Pedido </button>
+                
+                </div>}
             </div>
         )
     }

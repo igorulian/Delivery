@@ -1,7 +1,6 @@
 // PaoDeForma
 import React, {Component} from 'react';
 import api from '../../../services/api'
-import './PaoDeFormaDashboard.css'
 import {Link} from 'react-router-dom'
 import ReactLoading from 'react-loading';
 import Sidebar from './Sidebar'
@@ -100,22 +99,26 @@ export default class PaoDeFormaDashboard extends Component{
                         <div className="div-que-divide-no-meio">
                             <>
                             <div className="conteudo-restaurantes-para-checkar">
-                                <h3> {requests.name} </h3>  
+                                <p><b>Nome: </b> {requests.name}</p>
                                 <p><b>Email: </b> {requests.email}</p>
                                 <p><b>CNPJ: </b> {requests.cnpj}</p>
                                 <p><b>Rua: </b> {requests.address.rua} {requests.address.numero}</p>
                                 <p><b>Bairro: </b> {requests.address.bairro}</p>
                                 <p><b>Craido: </b> {requests.createdAt}</p>
+                                <p><b>Telefone: </b> {requests.phoneNumber}</p>
                             </div>
                             </>
                             <div className="conteudo-botoes">
                                 <button onClick={() => this.validarRestaurante(requests._id)} className="verificar"> <GoContext.GoCheck color={'white'} size={40}/> </button> 
                                 <button onClick={() => this.excluirRestaurante(requests._id)} className="excluir"> <GoContext.GoX color={'white'} size={40}/></button>
                             </div>
-                            
+
                         </div>
-                        
-                        <div className="linha-horizontal"></div>
+
+                        {this.state.requests.length > 1 ? 
+                        <div className="linha-horizontal"></div> 
+                        : <></>
+                        }
                         </>
                     ))}
                 </div>

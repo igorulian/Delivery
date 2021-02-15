@@ -3,6 +3,10 @@ import loginImg from "../../../img/hamburguer.svg";
 import api from '../../../services/api'
 // import Popup from 'reactjs-popup';
 import ReactLoading from 'react-loading';
+import PhoneInput, {isValidPhoneNumber}from 'react-phone-number-input'
+import Input from 'react-phone-number-input/input'
+import { FormattedInput } from "@buttercup/react-formatted-input";
+import AlertBox from '../../components/alertBox';
 
 export class Register extends React.Component {
   constructor(props) {
@@ -10,40 +14,68 @@ export class Register extends React.Component {
   }
 
   state = { 
-    isLoading: false
+    isLoading: false,
+    dados: {
+      cnpj: '',
+      cep: '',
+      phoneNumber: '',
+      numero: ''
+    },
+    alert:{
+      open: false,
+      message: '',
+      title: ''
+    }
   }
 
-  validarCnpj = async (cnpj) => {
+  isCNPJvalid = async (cnpj) => {
 
     return true
   }
 
 // de74446625d122e5d6281a478f3ca8136b84ba2d58dfcc8dcbe1a871a38ebac8
 
+  isCEPvalid = async (cep) => {
+    return true
+  }
+
   registrar = async () => {
-    const name = this.textNameInput.value
-    const email = this.textEmailInput.value
-    const password = this.textPassInput.value
-    const confirmpassword = this.textConfirmPassInput.value
-    const rua = this.textRuaInput.value
-    const numero = this.textNumeroInput.value
-    const bairro = this.textBairroInput.value
-    const cnpj = this.textCnpjInput.value
-    const cep = this.textCepInput.value
+    const name = this.textNameInput.value.trim()
+    const email = this.textEmailInput.value.trim()
+    const password = this.textPassInput.value.trim()
+    const confirmpassword = this.textConfirmPassInput.value.trim()
+    const rua = this.textRuaInput.value.toLowerCase().replace('rua', '').trim()
+    const numero = this.state.dados.numero.trim()
+    const bairro = this.textBairroInput.value.trim()
+    const cnpj = this.state.dados.cnpj.trim()
+    const cep = this.state.dados.cep.trim()
+    const phoneNumber = this.state.dados.phoneNumber
+
+    this.setState({isLoading: true})
 
     if(!(name && email && password && rua && numero && bairro && cnpj && cep)){
-      alert('Preencha todos os campos')
+      this.alertar('Preencha todos os campos','É necessario preencher todos os campos para efetuar o cadastro corretamente')
       return
     }
     if (!(password === confirmpassword)){
-      alert('Senhas não correspondem')
+      this.alertar('Senhas não correspondem','É necessario digitar a mesma senha nos dois campos')
       return
     }
-    
-    this.setState({isLoading: true})
-    const validarCNPJ = await this.validarCnpj(cnpj)
 
-    if( ! validarCNPJ ){ alert('CNPJ Inválido'); return; }
+    if(!isValidPhoneNumber(phoneNumber)){
+      this.alertar('Numedo de telefone inválido','É necessario preencher o campo com um número de telefone válido')
+      return
+  }
+
+    if(!await this.isCEPvalid(cep)){
+      this.alertar('CEP inválido', 'É Necessario preencher o campo com um CEP válido')
+      return
+    }
+
+    if(! await this.isCNPJvalid(cnpj)){
+      this.alertar('CNPJ Inválido','É necessario preencher o campo com um CNPJ válido')
+      return
+    }
 
     const auth = {
       name,
@@ -55,8 +87,10 @@ export class Register extends React.Component {
         bairro,
         cep
       },
-      cnpj
+      cnpj,
+      phoneNumber
     }
+
     console.log(auth)
     await api.post('/store/auth/register', auth)
     .then(res => this.seguirParaDashboard(res))
@@ -66,9 +100,10 @@ export class Register extends React.Component {
       this.setState({isLoading: false})
       try{
       console.log(err.response.data.error)
-      alert(err.response.data.erro)
+
+      this.alertar(err.response.data.error, '')
       }catch{
-        alert('Erro ao conectar ao servidor :/')
+        this.alertar('Erro ao conectar com o servidor', 'Nossos servidores provavelmente estão fora do ar, lamentamos a incoveniencia :/')
       }
     });
 
@@ -78,7 +113,9 @@ export class Register extends React.Component {
     console.log("Seguindo para Dashboard...")
 
     if(!res.data.store.isValid){
-      alert('O Seu restaurante foi enviado para análise! Aguarde que dentro de algumas horas receberá um email com a confirmação de validação :)')
+      this.setState({isLoading: false})
+      this.alertar('Restaurante enviado para análise','Aguarde que dentro de algumas horas receberá um email com a confirmação de validação :)')
+      window.location.href = '/'
       return
     }
 
@@ -91,14 +128,17 @@ export class Register extends React.Component {
     window.location.href = '/dashboard'
   }
 
+  alertar = (title, message) => {
+    this.setState({alert:{open: true, title, message}})
+  }
 
 
   render() {
     return (
       <div className="base-container" ref={this.props.containerRef}>
-        {/* <Popup trigger={this.registrar} position="right center">
-          <div>Popup content here !!</div>  
-        </Popup> */}
+
+        {this.state.alert.open && <AlertBox title={this.state.alert.title} message={this.state.alert.message} open={true} onClick={ () => { this.setState({alert: {open: false}})}}/>}
+        
         <div className="headerRegister">Registre-se</div>
         <div className="content">
           {/* <div className="imageRegister">
@@ -108,7 +148,7 @@ export class Register extends React.Component {
             <div className="form2">
               <div className="form-group-register">
                 <label htmlFor="username">Restaurante</label>
-                <input ref={input => this.textNameInput = input} type="text" name="username" placeholder="Digite o nome " />
+                <input ref={input => this.textNameInput = input} type="text" name="username" placeholder="Digite o nome do restaurante" />
               </div>
               <div className="form-group-register">
                 <label htmlFor="email">Email</label>
@@ -118,41 +158,70 @@ export class Register extends React.Component {
             <div className="form2">
               <div className="form-group-register">
                 <label htmlFor="password">Senha</label>
-                <input ref={input => this.textPassInput = input} type="text" name="password" placeholder="Digite sua senha" />
+                <input ref={input => this.textPassInput = input} type="password" name="password" placeholder="Digite sua senha" />
               </div>
               <div className="form-group-register">
                 <label htmlFor="password">Repitir Senha</label>
-                <input ref={input => this.textConfirmPassInput = input} type="text" name="password" placeholder="Digite sua senha" />
+                <input ref={input => this.textConfirmPassInput = input} type="password" name="password" placeholder="Digite sua senha" />
               </div>
             </div>
             <div className="form2">
               <div className="form-group-register">
                 <label htmlFor="rua">Rua</label>
-                <input ref={input => this.textRuaInput = input} type="text" name="rua" placeholder="Digite a rua" />
+                <input ref={input => this.textRuaInput = input} type="text" name="rua" placeholder="Digite a rua do restaurante" />
               </div>
               <div className="form-group-register">
                 <label htmlFor="numero">Numero</label>
-                <input ref={input => this.textNumeroInput = input} type="text" name="numero" placeholder="Digite o numero" />
+                {/* <input ref={input => this.textNumeroInput = input} type="text" name="numero" placeholder="Digite o numero" /> */}
+                <FormattedInput
+                className="formatted-input"
+                format={[ { char: /\d/, repeat: 6 } ]}
+                onChange={(formattedValue, raw) => { this.setState({dados:{...this.state.dados, numero: raw}}) }}
+                placeholder="Digite o numero"
+                />
               </div>
             </div>
             <div className="form2">
               <div className="form-group-register">
                 <label htmlFor="bairro">Bairro</label>
-                <input ref={input => this.textBairroInput = input} type="text" name="bairro" placeholder="Digite o bairro" />
+                <input ref={input => this.textBairroInput = input} type="text" name="bairro" placeholder="Digite o bairro do restaurante" />
               </div>
               <div className="form-group-register">
                 <label htmlFor="cep">CEP</label>
-                <input ref={input => this.textCepInput = input} type="text" name="cep" placeholder="Digite o cep" />
+                <FormattedInput
+                className="formatted-input"
+                format={[
+                  { char: /\d/, repeat: 5 },
+                  { exactly: "-" },
+                  { char: /\d/, repeat: 3 }, ]}
+                onChange={(formattedValue, raw) => { this.setState({dados:{...this.state.dados, cep: raw}}) }}
+                placeholder="Digite o CEP"
+                />
+                {/* <input ref={input => this.textCepInput = input} type="text" name="cep" placeholder="Digite o cep" /> */}
               </div>
             </div>
             <div className="form2">
               <div className="form-group-register">
                 <label htmlFor="cnpj">CNPJ</label>
-                <input ref={input => this.textCnpjInput = input} type="text" name="cnpj" placeholder="Digite o cnpj" />
+                <FormattedInput         
+                    className="formatted-input"
+                    format={[
+                      { char: /\d/, repeat: 2 },
+                      { exactly: "." },
+                      { char: /\d/, repeat: 3 },
+                      { exactly: "." },
+                      { char: /\d/, repeat: 3 },
+                      { exactly: "/" },
+                      { char: /\d/, repeat: 4 },
+                      { exactly: "-" },
+                      { char: /\d/, repeat: 2 } ]}
+                    onChange={(formattedValue, raw) => { this.setState({dados:{...this.state.dados, cnpj: raw}}) }}
+                    placeholder="Digite o CNPJ"
+                    />
               </div>
               <div className="form-group-register">
                 <label htmlFor="telefone">Telefone</label>
-                <input ref={input => this.textTelefoleInput = input} type="text" name="telefone" placeholder="Digite seu telefone" />
+                <Input placeholder="Digite o numero de telefone"  country="BR" onChange={ (value) => {this.setState({dados:{...this.state.dados, phoneNumber: value}})}} countryCallingCodeEditable={false}/>
               </div>
             </div>
           </div>

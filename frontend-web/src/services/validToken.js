@@ -24,7 +24,7 @@ export const validarToken = async() =>{
       }
     })
     .then((response) =>{
-      console.log("Validado!")
+      // console.log("Validado!")
       
       // if(window.location.href === 'http://localhost:3000/'){
       //    window.location.href = '/dashboard'

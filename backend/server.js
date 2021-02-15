@@ -17,7 +17,11 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
 
-mongoose.connect('mongodb://localhost:27018/deliveryapi',{ useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/deliveryapi',{ useUnifiedTopology: true })   // <-- localhost
+
+// mongoose.connect('mongodb+srv://mongodelivery:mongo123@cluster0.fogjv.mongodb.net/Cluster0?retryWrites=true&w=majority',{ useUnifiedTopology: true })
+
+//mongodb+srv://mongodelivery:<password>@cluster0.fogjv.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 requireDir('./src/models')
 
@@ -34,7 +38,7 @@ io.on('connection', socket => {
 
         socket.broadcast.emit(`${storeid}`,request)
     })
-})
+}) // docker run -v ~/docker --name mongodb -p 27017:27017 -e MONGO_INITDB_ROOT_USERNAME=balta -e MONGO_INITDB_ROOT_PASSWORD=e296cd9f mongo
 
 server.listen(3001) // socket
 app.listen(3002) // api
