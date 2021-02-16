@@ -10,6 +10,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import burgerImg  from '../../../img/hamburguer.svg'
 import {Link} from 'react-router-dom'
 import ReactLoading from 'react-loading';
+import ArrowSvg from '../../../img/arrow.svg'
 
 export default class Cardapio extends Component{
 
@@ -125,8 +126,9 @@ export default class Cardapio extends Component{
             <div className='page'>
                 <NavBar/>
                 <div className='conteudo-cardapio'>
+                        {console.log('--->' + this.state.categories.length)}
                             {this.state.categories && this.state.categories.map(category =>( 
-                            
+                                <>
                                 <div key={category._id} className='categoria'>
 
                                     <div className='product-list'>
@@ -189,7 +191,20 @@ export default class Cardapio extends Component{
                                     </div>
 
                                     </div>
+                                    
                                 </div>
+
+                                {this.state.categories.length == 1 && this.state.products.length <= 0 &&
+                                <div className='tutorial' style={{marginLeft: '-4.5%', marginTop: '7%'}}>
+                                    <div>
+                                        <img src={ArrowSvg}  style={{width: '50px', height: '50px',transform: 'rotate(180deg)', transform: 'scaleX(-1)'}}/>
+                                    </div>
+                                    <p> Clique aqui para adicionar</p>
+                                    <p> seu primeiro produto</p>
+                                </div>
+                            }
+                                
+                                </>
                             ))}
                         
                             <Link to={'/dashboard/adicionar-categoria'} className="btnAdicionarCategoria" style={{ textDecoration: 'none' }}>
@@ -200,6 +215,16 @@ export default class Cardapio extends Component{
                                 <p> Adicionar categoria</p>
                                 </div>
                             </Link>
+                            
+                            {this.state.categories.length <= 0 && 
+                                <div className='tutorial' style={{marginLeft: '2%', marginTop: '4%'}}>
+                                    <div>
+                                        <img src={ArrowSvg}  style={{width: '50px', height: '50px',transform: 'rotate(180deg)', transform: 'scaleX(-1)'}}/>
+                                    </div>
+                                    <p> Clique aqui para adicionar</p>
+                                    <p> sua primeira categoria</p>
+                                </div>
+                            }
                 </div>
             </div>
         )

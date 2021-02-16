@@ -104,7 +104,7 @@ export default class PaoDeFormaDashboard extends Component{
                                 <p><b>CNPJ: </b> {requests.cnpj}</p>
                                 <p><b>Rua: </b> {requests.address.rua} {requests.address.numero}</p>
                                 <p><b>Bairro: </b> {requests.address.bairro}</p>
-                                <p><b>Craido: </b> {requests.createdAt}</p>
+                                <p><b>Criado: </b> {requests.createdAt}</p>
                                 <p><b>Telefone: </b> {requests.phoneNumber}</p>
                             </div>
                             </>

@@ -5,6 +5,8 @@ import './styles.css'
 
 import NavBar from '../components/NavBar'
 import { Link } from 'react-router-dom'
+import Calendar from 'react-calendar';
+import './Calendario.css'
 
 export default class PedidosFinalizados extends Component{
 
@@ -116,7 +118,9 @@ export default class PedidosFinalizados extends Component{
 
                             </div>
                         ))} 
+                        <Calendar maxDate={new Date()} navigationAriaLabel={null}/> 
                     </div>  
+                    {/* <Calendar/>            https://www.npmjs.com/package/react-calendar*/} 
             </div>
         )
     }

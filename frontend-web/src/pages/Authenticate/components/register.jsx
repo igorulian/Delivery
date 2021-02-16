@@ -7,10 +7,12 @@ import PhoneInput, {isValidPhoneNumber}from 'react-phone-number-input'
 import Input from 'react-phone-number-input/input'
 import { FormattedInput } from "@buttercup/react-formatted-input";
 import AlertBox from '../../components/alertBox';
+import Axios from 'axios'
 
 export class Register extends React.Component {
   constructor(props) {
     super(props);
+    this.isCEPvalid('14955000')
   }
 
   state = { 
@@ -33,11 +35,17 @@ export class Register extends React.Component {
     return true
   }
 
-// de74446625d122e5d6281a478f3ca8136b84ba2d58dfcc8dcbe1a871a38ebac8
-
   isCEPvalid = async (cep) => {
+
+    // const apigeral = Axios.create({})
+
+    // const response = apigeral.get('https://brasilapi.com.br/api/cep/v1/14955000')
+    // console.log(response.data)
+
+
     return true
   }
+
 
   registrar = async () => {
     const name = this.textNameInput.value.trim()
@@ -55,25 +63,30 @@ export class Register extends React.Component {
 
     if(!(name && email && password && rua && numero && bairro && cnpj && cep)){
       this.alertar('Preencha todos os campos','É necessario preencher todos os campos para efetuar o cadastro corretamente')
+      this.setState({isLoading: false})
       return
     }
     if (!(password === confirmpassword)){
       this.alertar('Senhas não correspondem','É necessario digitar a mesma senha nos dois campos')
+      this.setState({isLoading: false})
       return
     }
 
     if(!isValidPhoneNumber(phoneNumber)){
       this.alertar('Numedo de telefone inválido','É necessario preencher o campo com um número de telefone válido')
+      this.setState({isLoading: false})
       return
   }
 
     if(!await this.isCEPvalid(cep)){
       this.alertar('CEP inválido', 'É Necessario preencher o campo com um CEP válido')
+      this.setState({isLoading: false})
       return
     }
 
     if(! await this.isCNPJvalid(cnpj)){
       this.alertar('CNPJ Inválido','É necessario preencher o campo com um CNPJ válido')
+      this.setState({isLoading: false})
       return
     }
 
@@ -161,7 +174,7 @@ export class Register extends React.Component {
                 <input ref={input => this.textPassInput = input} type="password" name="password" placeholder="Digite sua senha" />
               </div>
               <div className="form-group-register">
-                <label htmlFor="password">Repitir Senha</label>
+                <label htmlFor="password">Repetir Senha</label>
                 <input ref={input => this.textConfirmPassInput = input} type="password" name="password" placeholder="Digite sua senha" />
               </div>
             </div>
