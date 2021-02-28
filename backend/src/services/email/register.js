@@ -14,10 +14,6 @@ export function enviarEmailCadastro(remail){
     
     //     auth:{
     
-    //     user: 'igorulian@outlook.com',
-    
-    //     pass: 'N1br2u32003' 
-    //     }
     
     // });
 

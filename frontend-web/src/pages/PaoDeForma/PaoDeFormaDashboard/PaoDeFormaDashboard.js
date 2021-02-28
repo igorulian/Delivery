@@ -2,10 +2,8 @@
 import React, {Component} from 'react';
 import api from '../../../services/api'
 import {Link} from 'react-router-dom'
-import ReactLoading from 'react-loading';
 import Sidebar from './Sidebar'
 import * as GoContext from 'react-icons/go'
-import {IconContext} from 'react-icons'
 
 export default class PaoDeFormaDashboard extends Component{
 
@@ -39,7 +37,7 @@ export default class PaoDeFormaDashboard extends Component{
     loadRequests = async () => {
         const token = localStorage.getItem('admtoken')
 
-        const teste = await api.get(`/adm/store/list/tovalidate`,{
+        await api.get(`/adm/store/list/tovalidate`,{
             headers: {
             'Authorization': `Bearer ${token}` 
             }

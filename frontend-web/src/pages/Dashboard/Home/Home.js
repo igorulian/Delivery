@@ -7,15 +7,10 @@ import api from '../../../services/api'
 import ReactLoading from 'react-loading';
 //<ReactLoading type={'spin'} color={'#e3552f'} height={1000} width={100} />
 import * as MdIcons from 'react-icons/md'
-import * as FaIcons from 'react-icons/fa'
-import * as IoIcons from 'react-icons/io'
 import {IconContext} from 'react-icons'
+// import Grafico from './components/Grafico'
 
 export default class Dashboard extends Component {
-
-    constructor() {
-        super()
-    }
 
     state = {
         info: {
@@ -98,87 +93,6 @@ export default class Dashboard extends Component {
 
         this.loadInfo()
 
-    }
-
-    alterarHorarioFechamento = async (maisoumenos) => {
-        try{
-            if( maisoumenos >= 1 && this.state.info.autoClose >= 23) return
-            if( maisoumenos < 1 && this.state.info.autoClose <= 0) return
-
-            this.setState({info: {
-                autoClose: this.state.info.autoClose + maisoumenos,
-                deliveryFee: this.state.info.deliveryFee,
-                deliveryTime: this.state.info.deliveryTime,
-                isOpen: this.state.info.isOpen
-            }})
-
-        }catch{
-            alert('Erro ao abrir/fechar restaurante')
-        }
-    }
-// deliveryFee
-    alterarTaxaDeEntrega = async (maisoumenos) => {
-        try{
-
-            if(maisoumenos <= 0 && this.state.info.deliveryFee <= 0) return
-
-            this.setState({info: {
-                deliveryFee: this.state.info.deliveryFee + maisoumenos,
-                autoClose: this.state.info.autoClose,
-                deliveryTime: this.state.info.deliveryTime,
-                isOpen: this.state.info.isOpen
-            }})
-
-
-        }catch{
-            alert('Erro ao alterar a taxa de entrega restaurante')
-        }
-    }
-
-    alterarTempoDeEntrega = async (maisoumenos) => {
-        try{
-
-        if(maisoumenos <= 0 && this.state.info.deliveryTime <= 1) return
-
-        if(maisoumenos > 0 && this.state.info.deliveryTime >= 60) return
-
-        this.setState({info: {
-            deliveryFee: this.state.info.deliveryFee,
-            autoClose: this.state.info.autoClose,
-            deliveryTime: this.state.info.deliveryTime + maisoumenos,
-            isOpen: this.state.info.isOpen
-        }})
-
-        }catch{
-            alert('Erro ao alterar tempo de entrega ')
-        }
-
-    }
-
-    atualizarDados = async () => {
-        try{
-            const id = localStorage.getItem('id')
-            const token = localStorage.getItem('token')
-
-            const request = {
-                deliveryFee: this.state.info.deliveryFee,
-                autoClose: this.state.info.autoClose
-            }
-
-            await api.post(`/store/update/${id}`,request,{
-                headers: {
-                'Authorization': `Bearer ${token}` 
-                }
-            })
-
-            if(!window.confirm(`Deseja atulizar os dados do restaurante?`)) return
-
-
-        }catch{
-            alert('Erro ao ataulizar dados do restaurante')
-        }
-
-        this.loadInfo()
     }
 
 
@@ -276,97 +190,9 @@ export default class Dashboard extends Component {
                     </div>
                 </div>
             </div>
-            <div className='conteudo-home-graficos'>
-                <div className="container-home-grafico">
-                    <div style={{width: '100%', textAlign: 'center', marginBottom: '40px'}}>
-                        <h2> <IconContext.Provider value={{color: '#e3552f'}}> <FaIcons.FaTools/> Configurações <FaIcons.FaTools/> </IconContext.Provider> </h2> 
-                    </div>
-
-                    <div className="config-section">
-                        <p className="config-title"> Taxa de entrega: </p>
-                        <p className="config-cfg"> R${this.state.info.deliveryFee}.00</p>
-                        <div className="config-buttons">
-                            <button onClick={() => this.alterarTaxaDeEntrega(1)}> 
-                                <IconContext.Provider value={{color: '#e3552f ', size: 30}}> 
-                                    <IoIcons.IoMdArrowDropupCircle/> 
-                                </IconContext.Provider> 
-                            </button> 
-
-                            <button onClick={() => this.alterarTaxaDeEntrega(-1)}> 
-                                <IconContext.Provider value={{color: '#F0C910 ', size: 30}}> 
-                                    <IoIcons.IoMdArrowDropdownCircle/>  
-                                </IconContext.Provider>
-                            </button> 
-                        </div>
-                    </div>
-                    
-                    <div className="line">&nbsp;</div>
-
-                    <div className="config-section">
-                        <p className="config-title"> Fechamento automatico: </p>
-                        <p className="config-cfg"> {this.state.info.autoClose}:00h </p>
-                        <div className="config-buttons">
-                            <button onClick={() => this.alterarHorarioFechamento(1)}> 
-                                <IconContext.Provider value={{color: '#e3552f ', size: 30}}> 
-                                    <IoIcons.IoMdArrowDropupCircle/> 
-                                </IconContext.Provider> 
-                            </button> 
-
-                            <button onClick={() => this.alterarHorarioFechamento(-1)}> 
-                                <IconContext.Provider value={{color: '#F0C910 ', size: 30}}> 
-                                    <IoIcons.IoMdArrowDropdownCircle/>  
-                                </IconContext.Provider>
-                            </button> 
-                        </div>
-                    </div>
-
-                    <div className="line">&nbsp;</div>
-
-                    <div className="config-section">
-                        <p className="config-title"> Tempo de entrega: </p>
-                        <p className="config-cfg"> 00:{this.state.info.deliveryTime}m </p>
-                        <div className="config-buttons">
-                            <button onClick={() => this.alterarTempoDeEntrega(1)}> 
-                                <IconContext.Provider value={{color: '#e3552f ', size: 30}}> 
-                                    <IoIcons.IoMdArrowDropupCircle/> 
-                                </IconContext.Provider> 
-                            </button> 
-
-                            <button onClick={() => this.alterarTempoDeEntrega(-1)}> 
-                                <IconContext.Provider value={{color: '#F0C910 ', size: 30}}> 
-                                    <IoIcons.IoMdArrowDropdownCircle/>  
-                                </IconContext.Provider>
-                            </button> 
-                        </div>
-                    </div>
-
-                    <div className="line">&nbsp;</div>
-
-                    <div className="config-section">
-                        <p className="config-title"> Não tenho idéia: </p>
-                        <p className="config-cfg"> 00.00 </p>
-                        <div className="config-buttons">
-                            <button> 
-                                <IconContext.Provider value={{color: '#e3552f ', size: 30}}> 
-                                    <IoIcons.IoMdArrowDropupCircle/> 
-                                </IconContext.Provider> 
-                            </button> 
-
-                            <button> 
-                                <IconContext.Provider value={{color: '#F0C910 ', size: 30}}> 
-                                    <IoIcons.IoMdArrowDropdownCircle/>  
-                                </IconContext.Provider>
-                            </button> 
-                        </div>
-                    </div>
-
-                    <div className="div-btn-atualizar">
-                        <button onClick={() => this.atualizarDados()}> Atualizar </button>
-                    </div>
-                </div>
-                <div className="container-home-avaliacoes">
-                    <h3> Avaliações </h3>
-                </div>
+            
+            <div className="conteudo-home-infos">
+                {/* <Grafico/> */}
             </div>
         </div>
       );

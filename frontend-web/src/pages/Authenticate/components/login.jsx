@@ -1,9 +1,7 @@
 import React from "react";
 import loginImg from "../../../img/entrega-de-alimentos.svg";
 import api from '../../../services/api'
-import {useNavigate} from 'react-router-dom'
 import ReactLoading from 'react-loading';
-import ConfirBox, { ConfirmBox } from '../../components/confirmBox';
 import AlertBox from '../../components/alertBox';
 
 export class Login extends React.Component {
@@ -94,7 +92,7 @@ export class Login extends React.Component {
         <div className="headerLogin">Entrar</div>
         <div className="content">
           <div className="imageLogin">
-            <img src={loginImg} />
+            <img src={loginImg} alt="Imagem login" />
           </div>
           <div className="form">
             <div className="form-group-login">

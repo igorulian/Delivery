@@ -12,16 +12,12 @@ app.use(cors())
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
 
+
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useFindAndModify', false);
 
-
 mongoose.connect('mongodb://localhost:27017/deliveryapi',{ useUnifiedTopology: true })   // <-- localhost
-
-// mongoose.connect('mongodb+srv://mongodelivery:mongo123@cluster0.fogjv.mongodb.net/Cluster0?retryWrites=true&w=majority',{ useUnifiedTopology: true })
-
-//mongodb+srv://mongodelivery:<password>@cluster0.fogjv.mongodb.net/<dbname>?retryWrites=true&w=majority
 
 requireDir('./src/models')
 

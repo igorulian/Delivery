@@ -2,9 +2,7 @@ import React , {Component} from 'react'
 import './styles.css'
 import NavBar from '../../components/NavBar'
 import {IconContext} from 'react-icons'
-import * as IoIcons from 'react-icons/io'
 import * as AiIcons from 'react-icons/ai'
-import {Link} from 'react-router-dom'
 import api from '../../../../services/api'
 
 export default class AddCategoria extends Component{

@@ -58,7 +58,7 @@ export default class AddProduto extends Component{
         const name = this.textNameInput.value
         const cost = this.textCostInput.value
 
-        if(this.state.isUploadingImage && this.state.imageUploaded == false){
+        if(this.state.isUploadingImage && this.state.imageUploaded === false){
             alert('Aguarded o upload da imagem completar')
             return
         }
@@ -209,7 +209,7 @@ export default class AddProduto extends Component{
             const token = localStorage.getItem('token')
             const id = localStorage.getItem('id')
 
-            if(this.state.isUploadingImage == true && this.state.imageUploaded == true){
+            if(this.state.isUploadingImage === true && this.state.imageUploaded === true){
 
                 const imageid = this.state.uploadedFile.key
 
@@ -253,7 +253,7 @@ export default class AddProduto extends Component{
                             <Switch onChange={() => this.swichPizzaChange() } onColor={'#e3552f'} width={40} height={20} checked={this.state.modoPizza} activeBoxShadow={null} />
                         </div>
                         <div className="form">
-                                {this.state.isUploadingImage == false &&
+                                {this.state.isUploadingImage === false &&
                                     
                                     <Dropzone accept="image/*" onDropAccepted={(file) => this.enviarImagem(file)}>
                                         { ({getRootProps, getInputProps, isDragActive, isDragReject}) => (
@@ -271,14 +271,14 @@ export default class AddProduto extends Component{
                                     </Dropzone>
                                 }
 
-                            {this.state.isUploadingImage == true  &&
+                            {this.state.isUploadingImage === true  &&
                             <div style={{width: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
-                                <img style={{width: '140px', height: '140px', marginBottom: '10px', opacity: this.state.imageUploaded ? '100%' : '50%'}} src={URL.createObjectURL(this.state.uploadingFile)}></img>
+                                <img alt="Imagem enviada" style={{width: '140px', height: '140px', marginBottom: '10px', opacity: this.state.imageUploaded ? '100%' : '50%'}} src={URL.createObjectURL(this.state.uploadingFile)}></img>
                                 <button onClick={() => this.cancelarEnvioDaImagem()} style={{position: 'absolute',width: '20px', height: '20px', borderStyle: 'none', color: '#fff', backgroundColor: '#cf4a4a', borderRadius: '30px', cursor: 'pointer' , marginBottom: '160px', marginLeft: '140px'}}> X </button>
                             </div>
                             }
 
-                            {this.state.imageUploaded == false && this.state.isUploadingImage == true &&
+                            {this.state.imageUploaded === false && this.state.isUploadingImage === true &&
                             <div style={{position: 'absolute', marginTop: '70px'}}>
                                 <ReactLoading type={'bars'} color={'#e3552f'} height={30} width={30} />
                              </div>
@@ -301,7 +301,7 @@ export default class AddProduto extends Component{
 
                             </div>
 
-                            {this.state.ativarIngrediente == true &&
+                            {this.state.ativarIngrediente === true &&
                             <div className="form-group-ingredientes">
                                 {this.state.ingredientes.map(ingrediente =>(
 
@@ -313,7 +313,7 @@ export default class AddProduto extends Component{
                             }
                             
 
-                            {this.state.ativarIngrediente == true && 
+                            {this.state.ativarIngrediente === true && 
                             <>
 
                             <button onClick={() => this.adicionarIngrediente()} className="btnAdicionarIngredienete">

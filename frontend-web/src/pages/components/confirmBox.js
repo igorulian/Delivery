@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,13 +8,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function ConfirmBox(props) {
 
-    const {title, isOpen, message, onClick} = props
+    const {title, open: openProps, message, onClick} = props
 
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(openProps);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-      };
     
       const handleClose = () => {
         setOpen(false);
@@ -27,7 +24,7 @@ export default function ConfirmBox(props) {
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
-      >
+        >
         <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
@@ -35,10 +32,10 @@ export default function ConfirmBox(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose} color="#e3552f">
+          <Button onClick={onClick(false)} color="#e3552f">
             Cancelar
           </Button>
-          <Button onClick={handleClose} style={{color: '#333'}} autoFocus>
+          <Button onClick={onClick(true)} style={{color: '#333'}} autoFocus>
             Confirmar
           </Button>
         </DialogActions>

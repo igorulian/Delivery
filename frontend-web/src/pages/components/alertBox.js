@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -8,7 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function AlertBox(props) {
 
-    const {title, message, open : openProps, onClick} = props
+    const {title='Título Pdrao', message='msg padrao', open : openProps=true, onClick=() => {} } = props
 
     const [open, setOpen] = React.useState(openProps);
 
@@ -16,11 +16,6 @@ export default function AlertBox(props) {
         setOpen(false);
       };
 
-    const teste = () => {
-      setOpen(false)
-      this.onClick()
-    }
-    
 
     return(
         <Dialog

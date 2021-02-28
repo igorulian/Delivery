@@ -11,12 +11,20 @@ import burgerImg  from '../../../img/hamburguer.svg'
 import {Link} from 'react-router-dom'
 import ReactLoading from 'react-loading';
 import ArrowSvg from '../../../img/arrow.svg'
+import AlertBox from '../../components/alertBox'
+import ConfirmBox from '../../components/confirmBox'
+import { Alert } from 'react-bootstrap'
 
 export default class Cardapio extends Component{
 
     state = {
         products: [],
-        categories: []
+        categories: [],
+        alert:{
+            open: false,
+            message: '',
+            title: ''
+          }
     }
 
     constructor() {
@@ -27,7 +35,7 @@ export default class Cardapio extends Component{
     async componentDidMount(){
         await this.loadCategories()
         await this.loadProducts()
-        this.setState({isLoading: false})
+        this.setState({...this.state, isLoading: false, alert:{open: false, message: '', title: ''}})
     }
 
     loadProducts = async () =>{
@@ -44,8 +52,12 @@ export default class Cardapio extends Component{
         }catch{
             console.log("Erro ao carregar produtos")
             localStorage.setItem('token', '')
-            alert("Erro ao carregar produtos")
+            this.alertar('Erro', 'Tivemos um erro ao tentar carregar os produtos, por favor tente novamente mais tarde :)')
         }
+    }
+
+    alertar = (title, message) => {
+        this.setState({alert:{open: true, title, message}})
     }
 
     loadCategories = async () =>{
@@ -62,7 +74,7 @@ export default class Cardapio extends Component{
         }catch{
             console.log("Erro ao carregar categorias")
             localStorage.setItem('token', '')
-            alert("Erro ao carregar categorias")
+            this.alertar('Erro', 'Tivemos um erro ao tentar carregar as categorias, por favor tente novamente mais tarde :)')
         }
     }
 
@@ -124,7 +136,11 @@ export default class Cardapio extends Component{
 
         return (
             <div className='page'>
+
+                {this.state.alert.open && <AlertBox title={this.state.alert.title} message={this.state.alert.message} open={true} onClick={ () => { this.setState({alert: {open: false}})}}/>}
+                
                 <NavBar/>
+                
                 <div className='conteudo-cardapio'>
                         {console.log('--->' + this.state.categories.length)}
                             {this.state.categories && this.state.categories.map(category =>( 
@@ -194,7 +210,7 @@ export default class Cardapio extends Component{
                                     
                                 </div>
 
-                                {this.state.categories.length == 1 && this.state.products.length <= 0 &&
+                                {this.state.categories.length === 1 && this.state.products.length <= 0 &&
                                 <div className='tutorial' style={{marginLeft: '-4.5%', marginTop: '7%'}}>
                                     <div>
                                         <img src={ArrowSvg}  style={{width: '50px', height: '50px',transform: 'rotate(180deg)', transform: 'scaleX(-1)'}}/>
@@ -207,7 +223,7 @@ export default class Cardapio extends Component{
                                 </>
                             ))}
                         
-                            <Link to={'/dashboard/adicionar-categoria'} className="btnAdicionarCategoria" style={{ textDecoration: 'none' }}>
+                            <Link to={'/dashboard/adicionar-categoria'} className="btnAdicionarCategoria" style={this.state.products.length <= 0 && this.state.categories.length >= 1 ? {backgroundColor: '#f9f9f9', textDecoration: 'none'} : {backgroundColor: '#fff', textDecoration: 'none' }}>
                                 <IconContext.Provider value={{color: '#008000 ', size: 25}}>
                                     <AiIcons.AiOutlinePlus/>
                                 </IconContext.Provider>
@@ -221,8 +237,10 @@ export default class Cardapio extends Component{
                                     <div>
                                         <img src={ArrowSvg}  style={{width: '50px', height: '50px',transform: 'rotate(180deg)', transform: 'scaleX(-1)'}}/>
                                     </div>
+                                    <div style={{backgroundColor: '#fff', borderRadius: '10px', padding: '5px'}}>
                                     <p> Clique aqui para adicionar</p>
                                     <p> sua primeira categoria</p>
+                                    </div>
                                 </div>
                             }
                 </div>

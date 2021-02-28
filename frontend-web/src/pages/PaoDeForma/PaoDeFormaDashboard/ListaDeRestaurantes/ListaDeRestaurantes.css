@@ -68,8 +68,8 @@
 .linha-horizontal {
     width: 90%;
     margin-left: 30px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+    margin-top: 1px;
+    margin-bottom: 1px;
     border: 1px solid #ddd; 
     /* margin-bottom: 10px; */
 }

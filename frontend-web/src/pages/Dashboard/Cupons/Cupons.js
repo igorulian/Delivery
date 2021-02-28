@@ -1,10 +1,8 @@
 import React, {Component} from 'react';
-import api from '../../../services/api'
 import NavBar from '../components/NavBar'
 import '../style.css'
 import '../page-style.css'
 import './Cupons.css'
-import {Link} from 'react-router-dom'
 import ReactLoading from 'react-loading';
 
 export default class Cupons extends Component{

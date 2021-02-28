@@ -21,7 +21,7 @@
     "react-phone-number-input": "^3.1.8",
     "react-router": "^6.0.0-beta.0",
     "react-router-dom": "^6.0.0-beta.0",
-    "react-scripts": "^3.4.4",
+    "react-scripts": "^4.0.3",
     "react-simple-timefield": "^3.2.3",
     "react-switch": "^5.0.1",
     "socket.io-client": "^2.3.1",

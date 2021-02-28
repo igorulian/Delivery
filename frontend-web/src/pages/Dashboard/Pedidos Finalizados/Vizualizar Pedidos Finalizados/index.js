@@ -8,9 +8,6 @@ import { Link } from 'react-router-dom'
 
 export default class VizualizarPedidosFinalizados extends Component {
 
-    constructor(props){
-        super(props);
-    }
 
     state = {
         finishedRequests: [],
@@ -134,7 +131,7 @@ export default class VizualizarPedidosFinalizados extends Component {
                         {total = total + request.cost}
                         return(
                         <>
-                        <div key={request._id} className="container-pedido">
+                        <div key={request._id} className="container-pedido" style={{width: '10%', height: '10%'}}>
 
                             <div className="container-conteudo-header">
                                 <h3> Pedido #0{t}</h3>
@@ -171,7 +168,7 @@ export default class VizualizarPedidosFinalizados extends Component {
                             
                             {request.paymentMethod != null && 
                             <div className="conteudo-pedido-obs">
-                                <p> <b>Pagamento: </b> {request.paymentMethod === 0 ? 'Cartão 💳' : "Dinheiro 💵"}</p>
+                                <p> <b>Pagamento: </b> {request.paymentMethod === 0 ? 'Cartão 💳' : request.paymentMethod > 0 ? "Dinheiro 💵" : "Picpay 💵"}</p>
                                 {request.paymentMethod > 0 && 
                                 <p> <b>Troco: </b> {"R$" + request.paymentMethod}</p>
                                 }

@@ -3,10 +3,8 @@ import React, {Component} from 'react';
 import api from '../../../../services/api'
 import './ListaDeRestaurantes.css'
 import {Link} from 'react-router-dom'
-import ReactLoading from 'react-loading';
 import Sidebar from '../Sidebar'
 import * as GoContext from 'react-icons/go'
-import {IconContext} from 'react-icons'
 
 export default class ListaDeRestaurantes extends Component{
 
@@ -40,7 +38,7 @@ export default class ListaDeRestaurantes extends Component{
     loadRequests = async () => {
         const token = localStorage.getItem('admtoken')
 
-        const teste = await api.get(`/adm/store/list/all`,{
+        await api.get(`/adm/store/list/all`,{
             headers: {
             'Authorization': `Bearer ${token}` 
             }
@@ -55,8 +53,9 @@ export default class ListaDeRestaurantes extends Component{
             <div className="conteudo-paodeforma-dashboard">
                 <Sidebar/>
                 <h3> Lista de restaurantes</h3>
+                <div classname="area" style={{width: '100%', height: '100%'}}>
                 <div className="container-restaurantes-para-checkar">
-                    {this.state.requests.map(requests => requests.isValid == true ? (
+                    {this.state.requests.map(requests => requests.isValid === true ? (
                         <>
                         
                         <div className="div-que-divide-no-meio">
@@ -85,6 +84,7 @@ export default class ListaDeRestaurantes extends Component{
 
                         </>
                     ) : <></>)}
+                </div>
                 </div>
             </div>
         )

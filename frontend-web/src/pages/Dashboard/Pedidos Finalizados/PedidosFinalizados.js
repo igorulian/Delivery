@@ -1,6 +1,5 @@
 import React , { Component }from 'react'
 import '../page-style.css'
-import validToken from '../../../services/validToken'
 import './styles.css'
 
 import NavBar from '../components/NavBar'

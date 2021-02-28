@@ -1,4 +1,4 @@
-import React, {Component, useState} from 'react'
+import React, {useState} from 'react'
 import * as FaIcons from 'react-icons/fa'
 import * as AiIcons from 'react-icons/ai'
 import {Link} from 'react-router-dom'
@@ -33,11 +33,11 @@ function NavBar(){
 
                     <div className="navmenu-header">
 
-                        <img src={localStorage.getItem('imageUrl') ? localStorage.getItem('imageUrl') : loginImg}/>
+                        <img  alt="Imagem de perfil do restaurante" src={localStorage.getItem('imageUrl') ? localStorage.getItem('imageUrl') : loginImg}/>
 
                         <h3>{localStorage.getItem('name')}</h3>
                         {/* {console.log(localStorage.getItem('isOpen'))} */}
-                        <p> {localStorage.getItem('isOpen') == 'true' ? 'Aberto' : 'Fechado'}</p>
+                        <p> {localStorage.getItem('isOpen') === 'true' ? 'Aberto' : 'Fechado'}</p>
                     </div>
 
                     {SideBarData.map((item, index) => {

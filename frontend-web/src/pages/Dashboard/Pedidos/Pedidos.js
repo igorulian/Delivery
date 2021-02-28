@@ -5,9 +5,7 @@ import ReactLoading from 'react-loading';
 import './styles.css'
 import openSocket from 'socket.io-client'; 
 import * as AiContext from 'react-icons/ai'
-import {IconContext} from 'react-icons'
 import not from '../../../audio/not.mp3'
-import loginImg from "../../../img/entrega-de-alimentos.svg";
 import semPedidosSvg from '../../../img/sem-junk-food.svg'
 
 export default class Pedidos extends Component{
@@ -15,12 +13,12 @@ export default class Pedidos extends Component{
     state = {
         requests: [],
         totalFinishedReqs: 0
-    }
+    } 
 
     constructor(){
         super()
         this.state = { isLoading: true }
-    }
+    } 
 
     async componentDidMount(){
         await this.loadRequests()
@@ -141,14 +139,14 @@ export default class Pedidos extends Component{
                     cep: "14955000",
                     bairro: "Centro"
                 },
-                obs: "Tirar o picles do X Salada essa é uma observação grande para ver como o trem se comporta :)",
+                // obs: "Tirar o picles do X Salada essa é uma observação grande para ver como o trem se comporta :)",
                 
                 progress: 0,
                 cost: 23,
-                paymentMethod: 20
+                paymentMethod: 1
             }
 
-            const response = await api.post(`/store/requests/add/${id}`,newRequest,{
+            await api.post(`/store/requests/add/${id}`,newRequest,{
                 headers: {
                 'Authorization': `Bearer ${token}` 
                 }
@@ -213,14 +211,14 @@ export default class Pedidos extends Component{
                         }
                         return(
                         <>
-                        <div key={request._id} className="container-pedido">
+                        <div key={request._id} className="container-pedido" style={{height: '10%', width: '10%'}}>
 
                             <div className="container-conteudo-header">
                                 <h3> Pedido #0{t + this.state.totalFinishedReqs}</h3>
                                 <p> {request.clientName} </p>
                             </div>
 
-                            <div className="container-conteudo-pedido">
+                            <div className="container-conteudo-pedido" >
                                 <div className="conteudo-pedido-produtos">
                                     {/* <p> {request.clientName} {this.state.requestsCount} </p>  */}
                                     <div>
@@ -252,7 +250,7 @@ export default class Pedidos extends Component{
 
                             {request.paymentMethod != null && 
                             <div className="conteudo-pedido-obs">
-                                <p> <b>Pagamento: </b> {request.paymentMethod === 0 ? 'Cartão 💳' : "Dinheiro 💵"}</p>
+                                <p> <b>Pagamento: </b> {request.paymentMethod === 0 ? 'Cartão 💳' : request.paymentMethod > 0 ? "Dinheiro 💵" : "Picpay 💵(Pago)"}</p>
                                 {request.paymentMethod > 0 && 
                                 <p> <b>Troco: </b> {"R$" + request.paymentMethod}</p>
                                 }
@@ -319,13 +317,13 @@ export default class Pedidos extends Component{
                     }
                     )}
                     
-                <button onClick={() => {this.efetuarPedido()}}> Efetuar Pedido </button>
+                {/* <button onClick={() => {this.efetuarPedido()}}> Efetuar Pedido </button> */}
                 </div>
                 : 
                 
                 <div style={{width: '100%', height: '100%', paddingLeft: '250px', textAlign: 'center'}}>
                     <h2 style={{marginTop: '15%'}}> Você não possui nenhum pedido em andamento :)</h2>
-                    <img style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '25%', height: '25%'}} src={semPedidosSvg} />
+                    <img  alt="Nenhum pedido em andamento" style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto', width: '25%', height: '25%'}} src={semPedidosSvg} />
                     <button onClick={() => {this.efetuarPedido()}}> Efetuar Pedido </button>
                 
                 </div>}

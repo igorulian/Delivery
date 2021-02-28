@@ -1,8 +1,5 @@
 import React from 'react'
-import {BrowserRouter as Router,Routes,Route,Link} from 'react-router-dom'
-import {Redirect} from 'react-router'
-
-import {validarToken} from './services/validToken'
+import {Routes,Route} from 'react-router-dom'
 
 import Dashboard from './pages/Dashboard/Home/Home'
 import Authenticate from './pages/Authenticate'
@@ -19,8 +16,6 @@ import Cupons from './pages/Dashboard/Cupons/Cupons'
 import PaoDeForma from './pages/PaoDeForma/PaoDeForma'
 import PaoDeFormaDashboard from './pages/PaoDeForma/PaoDeFormaDashboard/PaoDeFormaDashboard'
 import ListaDeRestaurantes from './pages/PaoDeForma/PaoDeFormaDashboard/ListaDeRestaurantes/ListaDeRestaurantes'
-import { Login } from './pages/Authenticate/components'
-
 
 const validToken = () => {
     if(localStorage.getItem('token')){

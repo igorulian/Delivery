@@ -1,19 +1,13 @@
 import React from "react";
-import loginImg from "../../../img/hamburguer.svg";
 import api from '../../../services/api'
 // import Popup from 'reactjs-popup';
 import ReactLoading from 'react-loading';
-import PhoneInput, {isValidPhoneNumber}from 'react-phone-number-input'
+import {isValidPhoneNumber}from 'react-phone-number-input'
 import Input from 'react-phone-number-input/input'
 import { FormattedInput } from "@buttercup/react-formatted-input";
 import AlertBox from '../../components/alertBox';
-import Axios from 'axios'
 
 export class Register extends React.Component {
-  constructor(props) {
-    super(props);
-    this.isCEPvalid('14955000')
-  }
 
   state = { 
     isLoading: false,
