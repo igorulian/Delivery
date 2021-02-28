@@ -6,14 +6,11 @@ import './styles.css'
 import * as IoIcons from 'react-icons/io'
 import * as AiIcons from 'react-icons/ai'
 import {IconContext} from 'react-icons'
-import CircularProgress from '@material-ui/core/CircularProgress';
 import burgerImg  from '../../../img/hamburguer.svg'
 import {Link} from 'react-router-dom'
 import ReactLoading from 'react-loading';
 import ArrowSvg from '../../../img/arrow.svg'
 import AlertBox from '../../components/alertBox'
-import ConfirmBox from '../../components/confirmBox'
-import { Alert } from 'react-bootstrap'
 
 export default class Cardapio extends Component{
 

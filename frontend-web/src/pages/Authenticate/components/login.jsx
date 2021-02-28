@@ -6,11 +6,6 @@ import AlertBox from '../../components/alertBox';
 
 export class Login extends React.Component {
 
-
-  constructor(props) {
-    super(props);
-  }
-
   state = {
     token: '',
     isLoading: false,
