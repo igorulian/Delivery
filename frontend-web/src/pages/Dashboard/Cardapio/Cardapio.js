@@ -139,7 +139,8 @@ export default class Cardapio extends Component{
                 <NavBar/>
                 
                 <div className='conteudo-cardapio'>
-                        {console.log('--->' + this.state.categories.length)}
+                        {/* {console.log('--->' + this.state.categories.length)} */}
+                        
                             {this.state.categories && this.state.categories.map(category =>( 
                                 <>
                                 <div key={category._id} className='categoria'>

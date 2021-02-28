@@ -16,6 +16,7 @@
     "react-calendar": "^3.3.1",
     "react-dom": "^16.13.1",
     "react-dropzone": "^11.2.4",
+    "react-google-charts": "^3.0.15",
     "react-icons": "^3.11.0",
     "react-loading": "^2.0.3",
     "react-phone-number-input": "^3.1.8",

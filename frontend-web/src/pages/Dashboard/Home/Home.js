@@ -8,7 +8,7 @@ import ReactLoading from 'react-loading';
 //<ReactLoading type={'spin'} color={'#e3552f'} height={1000} width={100} />
 import * as MdIcons from 'react-icons/md'
 import {IconContext} from 'react-icons'
-// import Grafico from './components/Grafico'
+import Grafico from './components/Grafico'
 
 export default class Dashboard extends Component {
 
@@ -46,7 +46,7 @@ export default class Dashboard extends Component {
             })
 
             this.setState({data: data.data})
-            console.log(data)
+            // console.log(data)
             
 
         }catch{
@@ -191,8 +191,15 @@ export default class Dashboard extends Component {
                 </div>
             </div>
             
-            <div className="conteudo-home-infos">
-                {/* <Grafico/> */}
+            <div className="conteudo-home-infos-graficos" style={{marginBottom: '10px', marginTop: '150px'}}>
+                <div className="div-do-grafico" style={{float: 'left', marginLeft: '50px'}}>
+                    <p> Vendas dos últimos 7 dias</p>
+                    <Grafico grafico="dia"/>
+                </div>
+                <div className="div-do-grafico" style={{float: 'right', marginRight: '50px'}}>
+                    <p> Vendas desse mês</p>
+                    <Grafico grafico="mes"/>
+                </div>
             </div>
         </div>
       );

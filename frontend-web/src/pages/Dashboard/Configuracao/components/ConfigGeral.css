@@ -1,17 +1,14 @@
 .container-home-config{
     background-color: #fff;
     border: 1px solid #DDD;
-    /* border-radius: 10px; */
-    margin-top: 10px;
     padding: 10px;
     width: 60%;
-    min-width: 300px;
+    min-width: 400px;
     height: fit-content;
     justify-content: center;
     float: left;
     box-shadow: 2px 2px 10px 3px #ccc;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin: 10px;
 }
 
 .config-section{

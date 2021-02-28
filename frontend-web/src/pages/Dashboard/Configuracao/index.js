@@ -7,6 +7,7 @@ import ConfigPerfil from './components/ConfigPerfil'
 import ConfigGeral from './components/ConfigGeral'
 import api from '../../../services/api'
 import ConfigPagamento from './components/ConfigPagamento';
+import './index.css'
 
 export default class Configuracao extends Component{
 
@@ -59,9 +60,11 @@ export default class Configuracao extends Component{
                 <>
                 <NavBar/>
                     <div className='conteudo'>
-                        <ConfigPerfil dados={this.state.dados} reloadInfo={() => {alert('teste')}}/>
-                        <ConfigGeral dados={this.state.dados}/>
-                        <ConfigPagamento dados={this.state.dados}/>
+                        <div className="container-geral-config">
+                            <ConfigPerfil dados={this.state.dados} reloadInfo={() => {alert('teste')}}/>
+                            <ConfigGeral dados={this.state.dados}/>
+                            <ConfigPagamento dados={this.state.dados}/>
+                        </div>
                     </div>
                 </>
             )

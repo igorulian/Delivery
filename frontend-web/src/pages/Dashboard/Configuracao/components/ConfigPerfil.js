@@ -179,6 +179,7 @@ export default class ConfigPeril extends Component{
     }
 
 
+
     render(){ 
         return(
             this.state.loading === true ? <></> : 
@@ -206,7 +207,8 @@ export default class ConfigPeril extends Component{
             {this.state.dados.imageUrl !== '' &&
                 <>
                     <div style={{width: '100%', justifyContent: 'center', alignItems: 'center', display: 'flex'}}>
-                        <img alt="Imagem perfil" style={{width: '140px', height: '140px', marginBottom: '10px', opacity: this.state.isUploadingFile === true ? '50%' : '100%'}} src={this.state.dados.imageUrl}></img>
+                        <img alt="Imagem perfil" style={{ 
+boxShadow: '1px 1px 15px 1px #ccc' ,width: '140px', height: '140px', marginBottom: '10px', opacity: this.state.isUploadingFile === true ? '50%' : '100%'}} src={this.state.dados.imageUrl}></img>
                         <button onClick={() => this.cancelarEnvioDaImagem()} style={{position: 'absolute',width: '20px', height: '20px', borderStyle: 'none', color: '#fff', backgroundColor: '#cf4a4a', borderRadius: '30px', cursor: 'pointer' , marginBottom: '160px', marginLeft: '140px'}}> X </button>
                     </div>
                 </>
@@ -216,7 +218,7 @@ export default class ConfigPeril extends Component{
 
                 <div className="form-group">
                     <label htmlFor="name">Nome do Restaurante</label>
-                    <input ref={input => this.nameInput = input} style={{minWidth: '16em'}} type="name" name="name" placeholder="Digite o nome do restaurante" defaultValue={this.state.dados.nome}/>
+                    <input ref={input => this.nameInput = input} style={{minWidth: '16em'}} type="name" name="name" placeholder="Digite o nome do restaurante" defaultValue={this.state.dados.name}/>
                 </div>
 
                 <div className="form-group">

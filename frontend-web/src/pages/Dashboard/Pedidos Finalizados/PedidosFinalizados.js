@@ -13,6 +13,8 @@ export default class PedidosFinalizados extends Component{
         meses: []
     }
 
+    // pegar data atual por API externa
+
     componentDidMount(){
         const meses = [
             {
@@ -89,8 +91,10 @@ export default class PedidosFinalizados extends Component{
                                 </div>
 
                                 <div className="container-mes-bottom">
-                                    {console.log('date now: ' + new Date().getMonth())}
-                                    {console.log('mes.number: ' + mes.number)}
+                                    
+                                    {/* {console.log('date now: ' + new Date().getMonth())}
+                                    {console.log('mes.number: ' + mes.number)} */}
+
                                     {mes.number <= new Date().getMonth()+1 &&
                                     <Link to={`/dashboard/pedidos-finalizados/vizualizar-pedidos?mes=${mes.number}`}>
                                         <button className="btnVizualizarPedidos">
@@ -117,7 +121,7 @@ export default class PedidosFinalizados extends Component{
 
                             </div>
                         ))} 
-                        <Calendar maxDate={new Date()} navigationAriaLabel={null}/> 
+                        {/* <Calendar maxDate={new Date()} navigationAriaLabel={null}/>  */}
                     </div>  
                     {/* <Calendar/>            https://www.npmjs.com/package/react-calendar*/} 
             </div>
