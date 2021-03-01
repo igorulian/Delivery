@@ -43,36 +43,54 @@ export default class Grafico extends Component{
         return(
             <>
             {this.props.grafico === 'dia' ?
-            <div style={{display: 'flex', marginLeft: '10px'}}>
-                <div>
-                    <p style={{marginRight: '40px', color: '#f0c910', width: '10px'}}><b>61</b></p>
-                    <p style={{fontSize: '15px'}}>Semana passada</p>
+            <div className="div-do-grafico" style={{float: 'left', marginLeft: '50px'}}>
+                <p> Vendas desse mês</p>
+
+                <div style={{display: 'flex', marginLeft: '10px'}}>
+                    <div>
+                        <p style={{marginRight: '40px', color: '#f0c910', width: '10px'}}><b>61</b></p>
+                        <p style={{fontSize: '15px'}}>Semana passada</p>
+                    </div>
+                    <div style={{marginLeft: '20px'}}>
+                        <p style={{marginRight: '50px', color: '#e3552f'}}><b>132</b></p>
+                        <p style={{fontSize: '15px'}}>Essa semana</p>
+                    </div>
                 </div>
-                <div style={{marginLeft: '20px'}}>
-                    <p style={{marginRight: '50px', color: '#e3552f'}}><b>132</b></p>
-                    <p style={{fontSize: '15px'}}>Essa semana</p>
-                </div>
-            </div>
-            : 
-            <div style={{display: 'flex', marginLeft: '10px'}}>
-                <div>
-                    <p style={{marginRight: '40px', color: '#f0c910', width: '10px'}}><b>456</b></p>
-                    <p style={{fontSize: '15px'}}>Mês passado</p>
-                </div>
-                <div style={{marginLeft: '20px'}}>
-                    <p style={{marginRight: '30px', color: '#e3552f'}}><b>978</b></p>
-                    <p style={{fontSize: '15px'}}>Esse mês</p>
-                </div>
-            </div>
-            }
-            
+
                 <Chart
                 chartType="Bar"
-                data={this.props.grafico === 'dia' ? data : data2}
+                data={data}
                 options={options}
                 width="525px"
                 height="300px"
                 />
+
+            </div>
+                : 
+                <div className="div-do-grafico" style={{float: 'left', marginLeft: '50px'}}>
+                    <p> Vendas desse mês</p>
+                    <div style={{display: 'flex', marginLeft: '10px'}}>
+                        <div>
+                            <p style={{marginRight: '40px', color: '#f0c910', width: '10px'}}><b>456</b></p>
+                            <p style={{fontSize: '15px'}}>Mês passado</p>
+                        </div>
+                        <div style={{marginLeft: '20px'}}>
+                            <p style={{marginRight: '30px', color: '#e3552f'}}><b>978</b></p>
+                            <p style={{fontSize: '15px'}}>Esse mês</p>
+                        </div>
+                    </div>
+
+                    
+                    <Chart
+                    chartType="Bar"
+                    data={data2}
+                    options={options}
+                    width="525px"
+                    height="300px"
+                    />
+                </div>
+            }
+            
             </>
         )
     }

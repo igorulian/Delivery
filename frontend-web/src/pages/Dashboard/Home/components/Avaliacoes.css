@@ -1,0 +1,15 @@
+.avaliacoes-container{
+    width: 100%;
+    max-width: 400px;
+    min-width: 200px;
+    height: 600px;
+    box-shadow: 2px 2px 10px 3px #ccc;
+    float: right;
+    margin-right: 50px;
+    text-align: center;
+}
+
+.avaliacoes-container p{
+    margin-top: 10px;
+    font-size: 20px;
+}

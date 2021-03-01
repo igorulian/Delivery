@@ -9,6 +9,7 @@ import ReactLoading from 'react-loading';
 import * as MdIcons from 'react-icons/md'
 import {IconContext} from 'react-icons'
 import Grafico from './components/Grafico'
+import Avaliacoes from './components/Avaliacoes'
 
 export default class Dashboard extends Component {
 
@@ -30,7 +31,6 @@ export default class Dashboard extends Component {
             })
 
             this.setState({info: response.data})
-            // console.log(response.data.isOpen)
             
             if(response.data.isOpen === true){
                 localStorage.setItem('isOpen', true)
@@ -157,18 +157,13 @@ export default class Dashboard extends Component {
             </div>
             
             <div className="conteudo-home-infos-graficos" style={{marginBottom: '10px', marginTop: '10px'}}>
-                <div className="div-do-grafico" style={{float: 'left', marginLeft: '50px'}}>
-                    <p> Vendas dos últimos 7 dias</p>
-                    <Grafico grafico="dia"/>
-                </div>
-                <div className="div-do-grafico" style={{float: 'left', marginLeft: '50px'}}>
-                    <p> Vendas desse mês</p>
-                    <Grafico grafico="mes"/>
-                </div>
 
-            </div>
-            <div className="conteudo-home-infos">
-                {this.containerInfo(4.5,'Produto mais vendido',<MdIcons.MdStar/>)}
+                <Grafico grafico="dia" dados={{}}/>
+
+                <Grafico grafico="mes" dados={{}}/>
+
+                <Avaliacoes/>
+
             </div>
         </div>
       );
