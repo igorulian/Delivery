@@ -95,6 +95,24 @@ export default class Dashboard extends Component {
 
     }
 
+    containerInfo = (valor,texto,icone) =>
+    (
+        <div className="container-home-infos">
+            <div style={{display: 'flex', height: '100%'}}>
+                <div style={{marginTop: '14px'}}>
+                    <IconContext.Provider value={{color: '#e3552f ', size: 80}}>
+                        {icone}
+                    </IconContext.Provider>
+                </div>
+                <div>
+                    <h3> {valor} </h3>
+                    <p> {texto} </p>
+                </div>
+
+            </div>
+        </div>
+    )
+
 
     render(){
         
@@ -115,65 +133,12 @@ export default class Dashboard extends Component {
         <div className='page'>
           <NavBar/>
             <div className='conteudo-home-infos'>
-                <div className="container-home-infos">
-                    <div style={{display: 'flex', height: '100%'}}>
-                        <div style={{marginTop: '14px'}}>
-                            <IconContext.Provider value={{color: '#e3552f ', size: 80}}>
-                                <MdIcons.MdAttachMoney/>  
-                            </IconContext.Provider>
-                        </div>
-                        <div>
-                            <h3> {this.state.data.vendaMes} </h3>
-                            <p> Vendas efetuadas esse mês</p>
-                        </div>
-
-                    </div>
-                    {/* Colocar um icone daora */}
-                </div>
-                <div className="container-home-infos">
-                    <div style={{display: 'flex', height: '100%'}}>
-                        <div style={{marginTop: '18px'}}>
-                            <IconContext.Provider value={{color: '#e3552f ', size: 70}}>
-                                <MdIcons.MdBlock/>  
-                            </IconContext.Provider>
-                        </div>
-                        <div>
-                            <h3> {this.state.data.vendaCanceladaMes} </h3>
-                            <p> Vendas Canceladas esse mês</p>
-                        </div>
-
-                    </div>
-
-                </div>
-                <div className="container-home-infos">
-                    <div style={{display: 'flex', height: '100%'}}>
-                        <div style={{marginTop: '18px'}}>
-                            <IconContext.Provider value={{color: '#e3552f ', size: 70}}>
-                                <MdIcons.MdAttachFile/>  
-                            </IconContext.Provider>
-                        </div>
-                        <div>
-                            <h3> {this.state.data.avaliacoesMes} </h3>
-                            <p> Novas avaliações esse mês</p>
-                        </div>
-
-                    </div>
-                </div>
-                <div className="container-home-infos">
-                <div style={{display: 'flex', height: '100%'}}>
-                        <div style={{marginTop: '18px'}}>
-                            <IconContext.Provider value={{color: '#e3552f ', size: 70}}>
-                                <MdIcons.MdStar/>  
-                            </IconContext.Provider>
-                        </div>
-                        <div>
-                            <h3> 4.5 </h3>
-                            <p> Pontuação média do restaurante</p>
-                        </div>
-
-                    </div>
-                </div>
+                {this.containerInfo(this.state.data.vendaMes,'Vendas efetuadas esse mês',<MdIcons.MdAttachMoney/> )}
+                {this.containerInfo(this.state.data.vendaCanceladaMes,'Vendas Canceladas esse mês',<MdIcons.MdBlock/>)}
+                {this.containerInfo(this.state.data.avaliacoesMes,'Novas avaliações esse mês',<MdIcons.MdAttachFile/>)}
+                {this.containerInfo(4.5,'Pontuação média do restaurante',<MdIcons.MdStar/>)}
             </div>
+
             <div className='conteudo-home-infos'>
                 <div className="container-home-infos" style={{textAlign: 'center'}}>
                     <div>
@@ -191,15 +156,19 @@ export default class Dashboard extends Component {
                 </div>
             </div>
             
-            <div className="conteudo-home-infos-graficos" style={{marginBottom: '10px', marginTop: '150px'}}>
+            <div className="conteudo-home-infos-graficos" style={{marginBottom: '10px', marginTop: '10px'}}>
                 <div className="div-do-grafico" style={{float: 'left', marginLeft: '50px'}}>
                     <p> Vendas dos últimos 7 dias</p>
                     <Grafico grafico="dia"/>
                 </div>
-                <div className="div-do-grafico" style={{float: 'right', marginRight: '50px'}}>
+                <div className="div-do-grafico" style={{float: 'left', marginLeft: '50px'}}>
                     <p> Vendas desse mês</p>
                     <Grafico grafico="mes"/>
                 </div>
+
+            </div>
+            <div className="conteudo-home-infos">
+                {this.containerInfo(4.5,'Produto mais vendido',<MdIcons.MdStar/>)}
             </div>
         </div>
       );
