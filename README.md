@@ -3,8 +3,8 @@
  
 # Cadastro
  Pagina de cadastro completo com sistema aprovação para que um administrador do app aprove e verifique manualmente a veracidade do restaurante, desse modo apenas os restaurantes com dados reais poderão se cadastrar na plataforma.
-
- <a href="https://ibb.co/PCXXRy9"><img src="https://i.ibb.co/nkddTyn/login.jpg" alt="login" border="0"></a><br /><a target='_blank' href='https://emoticoncentral.com/category/take-off'></a><br />
+ 
+<a href="https://imgbb.com/"><img src="https://i.ibb.co/KqG9b9x/login-gif.gif" alt="login-gif" border="0"></a>
 
 # Pagina Principal
 
@@ -28,6 +28,8 @@
  Cardápio 100% customizável com upload de imagens e seleção individual de ingredientes caso necessário (sistema de pizza em progresso).
 
  <a href="https://ibb.co/82f4mdG"><img src="https://i.ibb.co/5vSx1nC/Cardapio-Cheio.jpg" alt="Cardapio-Cheio" border="0"></a>
+ 
+<a href="https://ibb.co/LP9kbzk"><img src="https://i.ibb.co/cv2gMcg/Pagina-Adicionar-Lanche.jpg" alt="Pagina-Adicionar-Lanche" border="0"></a>
 
 # Configurações
  Página para configurar as informações mais essenciais do restaurente, como métodos de pagamento aceitos, nome do restaurante, numero etc...
