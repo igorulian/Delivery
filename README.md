@@ -35,7 +35,7 @@
  <a href="https://ibb.co/VjrVvz5"><img src="https://i.ibb.co/znjsSBD/Config.jpg" alt="Config" border="0"></a>
 
 # Projeto "Cancelado"
- Toda a parte do restaurante (back e front) está quase pronta (lógico que faltam algumas paradas, como os cupons e a pagina principal) porém toda a parte do usuário (aplicativo mobile) não comecei a fazer '-'.
+ Toda a parte do restaurante (back e front) está quase pronta (lógico que faltam algumas paradas, como os cupons e a pagina principal) porém toda a parte do usuário (aplicativo mobile) não comecei a fazer '-'. Esse projeto tinha intuito inicial de ser tornal algo comercial, porém acabei abandonando e agora está aqui no git :).
  
  
 
