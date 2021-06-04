@@ -1,7 +1,6 @@
 # Delivery
  Sistema de Delivery para restaurantes (quase) completo, com cadastro, informações de vendas, cardápio 100% customizável, pedidos em tempo real entre outras paradas ai :).
  
- (PS: Favor não reparar no cogido meio mal escrito (principalmente no front) pois na época que estava fazendo esse projeto estava ao mesmo tempo aprendedndo como fazia)
  
 # Cadastro
  Pagina de cadastro completo com sistema aprovação para que um administrador do app aprove e verifique manualmente a veracidade do restaurante, desse modo apenas os restaurantes com dados reais poderão se cadastrar na plataforma.
